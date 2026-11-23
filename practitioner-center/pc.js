@@ -1,0 +1,1622 @@
+/* Adventures In Astrology - Practitioner Center (pc-). No client data or library text lives in this file. */
+(function(){var st=document.getElementById("pc-style");if(!st){st=document.createElement("style");st.id="pc-style";st.textContent="@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap');\n#pc-root{--pc-scale:1;--cream:#fffaf1;--paper:#ffffff;--ink:#2b2135;--soft:#6b5f73;--line:#eadfcc;--teal:#0f9e94;--teal-l:#d9f4f1;--terra:#e0663f;--terra-l:#fde6dc;--gold:#e8a923;--gold-l:#fff1cc;--plum:#7b4fc9;--plum-l:#efe6ff;\n  font-family:'Lora',Georgia,serif;color:var(--ink);background:var(--cream);font-size:calc(16px * var(--pc-scale));line-height:1.55;border-radius:18px;overflow:hidden;box-shadow:0 2px 18px rgba(60,40,20,.08);max-width:1280px;margin:0 auto;text-align:left}\n#pc-root *{box-sizing:border-box}\n#pc-root h1,#pc-root h2,#pc-root h3,#pc-root h4{font-family:'Fraunces',Georgia,serif;color:var(--ink);margin:0 0 .4em;line-height:1.2;letter-spacing:0;text-transform:none}\n#pc-root p{margin:0 0 .7em;font-size:1em}\n#pc-root button,#pc-root input,#pc-root select,#pc-root textarea{font:inherit;color:inherit}\n#pc-root .pc-mono{font-family:'Space Mono',monospace}\n#pc-root .pc-muted{color:var(--soft);font-size:.92em}\n#pc-root .pc-hide{display:none!important}\n\n/* top bar */\n#pc-root .pc-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 20px;background:var(--paper);border-bottom:2px solid var(--line)}\n#pc-root .pc-brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.25em;margin-right:auto}\n#pc-root .pc-brand small{display:block;font-family:'Space Mono',monospace;font-size:.55em;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;font-weight:400}\n#pc-root .pc-steps{display:flex;gap:6px}\n#pc-root .pc-step{border:2px solid var(--line);background:var(--cream);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:600}\n#pc-root .pc-step b{display:inline-block;width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--line);margin-right:6px;font-family:'Space Mono',monospace;font-size:.85em}\n#pc-root .pc-step.is-on{border-color:var(--teal);background:var(--teal-l)}\n#pc-root .pc-step.is-on b{background:var(--teal);color:#fff}\n#pc-root .pc-step:disabled{opacity:.45;cursor:not-allowed}\n#pc-root .pc-tools{display:flex;gap:6px;align-items:center}\n#pc-root .pc-ic{border:2px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px;cursor:pointer;font-weight:700}\n\n/* buttons */\n#pc-root .pc-btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:12px;padding:11px 18px;font-weight:700;cursor:pointer;background:var(--teal);color:#fff;font-size:1em;text-decoration:none}\n#pc-root .pc-btn:hover{filter:brightness(1.06)}\n#pc-root .pc-btn.alt{background:var(--terra)}\n#pc-root .pc-btn.plum{background:var(--plum)}\n#pc-root .pc-btn.ghost{background:#fff;color:var(--ink);border:2px solid var(--line)}\n#pc-root .pc-btn.big{font-size:1.1em;padding:14px 22px}\n#pc-root .pc-btn.small{padding:6px 12px;font-size:.9em;border-radius:9px}\n#pc-root .pc-btn:disabled{opacity:.5;cursor:wait}\n#pc-root .pc-link{background:none;border:none;color:var(--teal);font-weight:700;cursor:pointer;padding:0;text-decoration:underline}\n\n/* layout */\n#pc-root .pc-screen{padding:22px}\n#pc-root .pc-two{display:grid;grid-template-columns:300px 1fr;gap:22px}\n#pc-root .pc-build{display:grid;grid-template-columns:330px 1fr;gap:22px}\n@media (max-width:900px){#pc-root .pc-two,#pc-root .pc-build{grid-template-columns:1fr}}\n#pc-root .pc-card{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:18px}\n#pc-root .pc-card+.pc-card{margin-top:16px}\n#pc-root .pc-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}\n#pc-root .pc-spacer{flex:1}\n\n/* forms */\n#pc-root label.pc-f{display:block;margin-bottom:12px;font-weight:600}\n#pc-root label.pc-f span{display:block;font-size:.9em;margin-bottom:4px}\n#pc-root .pc-in{width:100%;border:2px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}\n#pc-root .pc-in:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-l)}\n#pc-root textarea.pc-in{min-height:90px;resize:vertical}\n#pc-root .pc-time{display:flex;gap:6px}\n#pc-root .pc-time select{width:auto;flex:1}\n#pc-root .pc-check{display:flex;gap:8px;align-items:center;font-weight:600;cursor:pointer;margin:6px 0 12px}\n#pc-root .pc-check input{width:20px;height:20px;accent-color:var(--teal)}\n#pc-root .pc-sugg{border:2px solid var(--teal);border-radius:10px;background:#fff;margin-top:4px;overflow:hidden}\n#pc-root .pc-sugg button{display:block;width:100%;text-align:left;padding:9px 12px;border:none;background:#fff;cursor:pointer;border-bottom:1px solid var(--line)}\n#pc-root .pc-sugg button:hover{background:var(--teal-l)}\n#pc-root .pc-picked{background:var(--teal-l);border-radius:10px;padding:8px 12px;margin-top:6px;font-size:.92em}\n#pc-root .pc-err{background:var(--terra-l);color:#8a2c0c;border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:600}\n#pc-root .pc-ok{background:var(--teal-l);color:#075e57;border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:600}\n\n/* auth */\n#pc-root .pc-auth{max-width:440px;margin:30px auto}\n#pc-root .pc-auth h2{font-size:1.7em}\n#pc-root .pc-lock{display:inline-block;background:var(--plum-l);color:var(--plum);border-radius:999px;padding:4px 12px;font-family:'Space Mono',monospace;font-size:.75em;margin-bottom:10px}\n\n/* client list */\n#pc-root .pc-clist{max-height:520px;overflow:auto;margin-top:10px}\n#pc-root .pc-citem{display:block;width:100%;text-align:left;border:2px solid transparent;background:none;border-radius:12px;padding:10px 12px;cursor:pointer}\n#pc-root .pc-citem:hover{background:var(--cream)}\n#pc-root .pc-citem.is-on{border-color:var(--teal);background:var(--teal-l)}\n#pc-root .pc-citem b{display:block}\n#pc-root .pc-citem small{color:var(--soft)}\n#pc-root .pc-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0}\n#pc-root .pc-fact{background:var(--cream);border-radius:12px;padding:10px 12px}\n#pc-root .pc-fact small{display:block;font-family:'Space Mono',monospace;font-size:.72em;color:var(--soft);text-transform:uppercase;letter-spacing:.08em}\n#pc-root .pc-sess{border-left:4px solid var(--gold);background:var(--gold-l);border-radius:0 12px 12px 0;padding:10px 14px;margin-bottom:10px}\n#pc-root .pc-sess h4{margin:0}\n#pc-root .pc-rep{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}\n#pc-root .pc-empty{text-align:center;padding:40px 20px;color:var(--soft)}\n\n/* build */\n#pc-root .pc-themes{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}\n#pc-root .pc-theme{border:2px solid var(--plum);background:var(--plum-l);color:#4a2a8a;border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:700;animation:pcPop .45s cubic-bezier(.2,1.6,.4,1) both}\n#pc-root .pc-theme.is-in{background:var(--plum);color:#fff}\n@keyframes pcPop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}\n#pc-root .pc-pop{position:fixed;inset:0;background:rgba(43,33,53,.45);display:flex;align-items:center;justify-content:center;z-index:99999;padding:16px}\n#pc-root .pc-pop-box{background:#fff;border-radius:18px;max-width:560px;width:100%;max-height:85vh;overflow:auto;padding:22px;border-top:8px solid var(--plum)}\n#pc-root .pc-group{margin-bottom:14px}\n#pc-root .pc-group h4{font-size:.95em;margin-bottom:6px;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--soft)}\n#pc-root .pc-pick{display:flex;flex-wrap:wrap;gap:6px}\n#pc-root .pc-sec-btn{border:2px solid var(--line);background:#fff;border-radius:10px;padding:7px 11px;cursor:pointer;font-weight:600}\n#pc-root .pc-sec-btn.is-in{border-color:var(--teal);background:var(--teal);color:#fff}\n#pc-root .pc-sec-btn.is-off{opacity:.4;cursor:not-allowed;text-decoration:line-through}\n#pc-root .pc-switch{display:flex;background:var(--cream);border:2px solid var(--line);border-radius:12px;padding:3px;gap:3px}\n#pc-root .pc-switch button{border:none;background:none;padding:8px 12px;border-radius:9px;cursor:pointer;font-weight:700;color:var(--soft)}\n#pc-root .pc-switch button.is-on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}\n#pc-root .pc-switch.arch button.is-on{background:var(--plum);color:#fff}\n#pc-root .pc-preview{background:#fff;border:2px solid var(--line);border-radius:16px;padding:26px 30px;max-height:900px;overflow:auto}\n\n/* report */\n#pc-root .pc-r-sec,.pcr .pc-r-sec{padding:6px 0 18px;border-bottom:2px dashed var(--line);margin-bottom:18px}\n.pc-r-sec header{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px}\n.pc-r-sec h3{font-size:1.35em;margin:0}\n.pc-r-sec h3 small{display:block;font-family:'Space Mono',monospace;font-size:.55em;color:var(--soft);font-weight:400;margin-top:3px}\n.pc-r-sec h4{font-size:1.05em;margin:.6em 0 .3em}\n.pc-deg{font-family:'Space Mono',monospace;font-size:.8em;color:var(--teal)}\n.pc-flag{font-family:'Space Mono',monospace;font-size:.68em;border-radius:999px;padding:2px 9px;text-transform:uppercase;letter-spacing:.06em}\n.pc-flag-proof{background:var(--teal-l);color:#075e57}\n.pc-flag-time{background:var(--gold-l);color:#7a5200}\n.pc-r-lab{font-family:'Space Mono',monospace;font-size:.72em;text-transform:uppercase;letter-spacing:.08em;color:var(--terra);margin-top:6px}\n.pc-r-field p{margin:.15em 0 .55em}\n.pc-r-arch{background:var(--plum-l);border-left:4px solid var(--plum);border-radius:0 12px 12px 0;padding:10px 14px;margin:6px 0 10px}\n.pc-r-arch div{margin:2px 0}\n.pc-r-arch-q{font-size:1.08em;color:#4a2a8a}\n.pc-chips{margin-top:6px}\n.pc-chip{display:inline-block;background:#fff;border:1px solid var(--plum);color:#4a2a8a;border-radius:999px;padding:1px 9px;margin:2px 4px 2px 0;font-size:.82em}\n.pc-note{background:var(--gold-l);border-radius:10px;padding:8px 12px;font-size:.95em}\n.pc-orb{font-family:'Space Mono',monospace;font-size:.7em;color:var(--soft);font-weight:400}\n.pc-big3{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}\n.pc-big3-l{font-family:'Space Mono',monospace;font-size:.78em;text-transform:uppercase;color:var(--teal)}\n.pc-bars{margin:6px 0 12px}\n.pc-bar-row{display:grid;grid-template-columns:70px 1fr 30px;align-items:center;gap:8px;margin:4px 0}\n.pc-bar{height:14px;border-radius:7px;display:block}\n.pc-el-fire{background:var(--terra)}.pc-el-earth{background:#5a9a3c}.pc-el-air{background:var(--gold)}.pc-el-water{background:var(--teal)}\n.pc-cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}\n.pc-cast-card{background:var(--cream);border-radius:12px;padding:10px 12px;border:1px solid var(--line)}\n.pc-cast-card b{display:block;font-family:'Fraunces',serif}\n.pc-cast-card small{font-family:'Space Mono',monospace;font-size:.72em;color:var(--soft)}\n.pc-cast-card p{font-style:italic;font-size:.9em;margin:.3em 0 0}\n.pc-cast-g{font-size:1.4em;color:var(--plum);font-family:'Segoe UI Symbol','Apple Symbols',sans-serif}\n.pc-table{width:100%;border-collapse:collapse;font-size:.93em}\n.pc-table th,.pc-table td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}\n.pc-table th{font-family:'Space Mono',monospace;font-size:.75em;text-transform:uppercase;color:var(--soft)}\n.pc-num{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}\n.pc-num-n{flex:none;width:2.4em;height:2.4em;border-radius:50%;background:var(--gold);color:#fff;font-family:'Fraunces',serif;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.2em}\n.pc-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}\n.pc-kv div{background:var(--cream);border-radius:10px;padding:8px 10px}\n.pc-kv b{display:block;font-family:'Space Mono',monospace;font-size:.72em;text-transform:uppercase;color:var(--teal)}\n.pc-centers{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}\n.pc-center{border-radius:12px;padding:9px 11px;border:2px solid var(--line)}\n.pc-center span{font-family:'Space Mono',monospace;font-size:.7em;text-transform:uppercase}\n.pc-center small{display:block;color:var(--soft)}\n.pc-center p{font-size:.9em;margin:.3em 0 0}\n.pc-center.is-def{background:var(--gold-l);border-color:var(--gold)}\n.pc-tcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}\n.pc-tcard{border:2px solid var(--plum);border-radius:14px;padding:12px;text-align:center;background:linear-gradient(180deg,var(--plum-l),#fff)}\n.pc-tcard-n{font-family:'Fraunces',serif;font-size:1.6em;color:var(--plum);font-weight:700}\n.pc-tcard b{display:block;font-family:'Fraunces',serif}\n.pc-tcard small{display:block;font-family:'Space Mono',monospace;font-size:.7em;color:var(--soft)}\n.pc-tcard p{font-size:.9em;margin:.4em 0 0}\n.pc-r-asp,.pc-r-theme{margin-bottom:10px}\n#pc-root .pc-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px;z-index:99999;font-weight:600}\n.pc-tree-wrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:20px;align-items:start}\n@media (max-width:700px){.pc-tree-wrap{grid-template-columns:1fr}}\n.pc-tree-svg{width:100%;height:auto;display:block}\n.pc-lvl{font-family:'Space Mono',monospace;font-size:.62em;text-transform:uppercase;border-radius:999px;padding:2px 8px;vertical-align:middle;color:#fff}\n.pc-lvl-radiant{background:#c48a10}.pc-lvl-steady{background:var(--teal)}.pc-lvl-growing{background:var(--terra)}\n.pc-path{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;page-break-inside:avoid}\n.pc-path-n{flex:none;width:2.3em;height:2.3em;border-radius:12px;background:var(--plum-l);color:var(--plum);border:2px solid var(--plum);display:flex;align-items:center;justify-content:center;font-size:1.25em;font-weight:700}\n.pc-path h4{margin:0 0 .2em}\n";document.head.appendChild(st);}})();
+var PC_ARCH = {"CAST": {"Sun": {"archetype": "The Sovereign", "question": "Who am I becoming?", "domain": "identity, vitality, the thing you are here to shine", "light": "wholeness, warmth, the courage to be seen as yourself", "shadow": "performing a self instead of inhabiting one"}, "Moon": {"archetype": "The Keeper", "question": "What do I need in order to feel safe?", "domain": "instinct, memory, comfort, the private inner weather", "light": "deep attunement, the ability to hold and be held", "shadow": "mistaking familiarity for safety"}, "Mercury": {"archetype": "The Messenger", "question": "How do I make sense of things?", "domain": "mind, language, learning, exchange", "light": "clarity, curiosity, the gift of making things understandable", "shadow": "thinking about it as a substitute for living it"}, "Venus": {"archetype": "The Lover", "question": "What is worth having, and worth keeping?", "domain": "value, beauty, attraction, what you move toward", "light": "genuine delight, generous taste, real intimacy", "shadow": "earning affection instead of receiving it"}, "Mars": {"archetype": "The Warrior", "question": "What will I fight for?", "domain": "drive, courage, appetite, the will to act", "light": "clean effort, honest wanting, protective strength", "shadow": "force where patience was needed, or stillness where force was"}, "Jupiter": {"archetype": "The Explorer", "question": "How far can I go?", "domain": "expansion, meaning, faith, the appetite for more", "light": "generosity, perspective, contagious enthusiasm", "shadow": "more as an escape from enough"}, "Saturn": {"archetype": "The Architect", "question": "What am I responsible for?", "domain": "structure, limit, mastery, the long build", "light": "durable work, real authority, the patience to finish", "shadow": "the blueprint that never gets built because it isn't perfect"}, "Uranus": {"archetype": "The Rebel", "question": "What must be freed?", "domain": "awakening, disruption, the sudden turn", "light": "originality, honesty, the nerve to leave what doesn't fit", "shadow": "breaking things to feel free rather than to become free"}, "Neptune": {"archetype": "The Mystic", "question": "What am I longing toward?", "domain": "imagination, longing, dissolution, the unseen", "light": "compassion, artistry, access to what can't be measured", "shadow": "the fog that protects you from having to choose"}, "Pluto": {"archetype": "The Alchemist", "question": "What must end so that I can grow?", "domain": "power, depth, buried material, transformation", "light": "regenerative strength, the courage to look directly at it", "shadow": "control disguised as depth"}, "Chiron": {"archetype": "The Wounded Guide", "question": "Where does my pain become my gift?", "domain": "the tender place, and the teaching that grows from it", "light": "hard-won compassion, the ability to reach people others can't", "shadow": "tending everyone else's version of your own wound"}, "North Node": {"archetype": "The Frontier", "question": "Where am I being asked to go?", "domain": "the unfamiliar direction that grows you", "light": "expansion into what you are not yet fluent in", "shadow": "waiting to feel ready before you go"}, "South Node": {"archetype": "The Homeland", "question": "What am I already fluent in?", "domain": "the old skill, so practiced it feels like nothing", "light": "a genuine gift you can lean on and give away", "shadow": "retreating into what is easy and calling it your nature"}}, "SIGN_EPITHET": {"Aries": "Blazing", "Taurus": "Rooted", "Gemini": "Quicksilver", "Cancer": "Shell-Armored", "Leo": "Radiant", "Virgo": "Fine-Tuned", "Libra": "Even-Handed", "Scorpio": "Deepwater", "Sagittarius": "Far-Roaming", "Capricorn": "Summit-Bound", "Aquarius": "Signal-Sending", "Pisces": "Fog-Walking"}, "SIGN_STYLE": {"Aries": "directly, immediately, and without waiting for permission", "Taurus": "slowly, sensually, and only once it feels solid", "Gemini": "quickly, curiously, and in more than one direction at once", "Cancer": "protectively, indirectly, and through what it cares about", "Leo": "warmly, visibly, and with the whole heart on display", "Virgo": "precisely, usefully, and by refining the details", "Libra": "relationally, gracefully, and by weighing both sides", "Scorpio": "intensely, privately, and all the way to the bottom", "Sagittarius": "expansively, honestly, and by going further out", "Capricorn": "patiently, structurally, and with the long view in mind", "Aquarius": "unusually, independently, and with the whole group in view", "Pisces": "permeably, imaginatively, and without hard edges"}, "TERRAIN": {"Fire": {"name": "The Wildlands", "gift": "you generate your own heat and you move before you are certain", "void": "The Firekeeper Without Fire. Spontaneous combustion is not issued to you. You choose your spark deliberately \u2014 and you build the hearth that holds it for everyone else. Different job, arguably a better one."}, "Earth": {"name": "The Bedrock", "gift": "you want it real, usable, and able to hold weight", "void": "The Untethered. Form does not come naturally, so you get to invent your own. The invitation is not discipline for its own sake \u2014 it is finding the one container that actually fits you, rather than borrowing someone else's."}, "Air": {"name": "The Open Sky", "gift": "you think in connections and you need room to move between ideas", "void": "The One Who Knows Without Explaining. Understanding arrives whole rather than in sentences. Your growth edge is translation \u2014 trusting that putting it into words doesn't flatten it."}, "Water": {"name": "The Deep", "gift": "you read the room before anyone speaks and you feel your way forward", "void": "The Clear-Eyed. You are not swamped by atmosphere, which makes you steady when others are not. The practice is remembering that a feeling doesn't have to be justified to be real."}}, "PACE": {"Cardinal": ["The Starter", "you begin things; the opening move is yours"], "Fixed": ["The Holder", "you sustain things; you stay when others leave"], "Mutable": ["The Shapeshifter", "you adapt things; you change form to keep moving"]}, "HOUSE_STAGE": {"1": ["The Threshold", "how you arrive, and what people meet first"], "2": ["The Storehouse", "what you own, value, and can rely on"], "3": ["The Crossroads", "everyday talk, siblings, short journeys, learning"], "4": ["The Hearth", "home, lineage, the private root system"], "5": ["The Stage", "play, creation, romance, what you make for the joy of it"], "6": ["The Workshop", "daily craft, service, health, the repeating hours"], "7": ["The Mirror", "partnership, and who you become in close company"], "8": ["The Undercroft", "shared resources, intimacy, what is buried and shared"], "9": ["The Far Country", "belief, travel, higher study, the search for meaning"], "10": ["The Summit", "public life, vocation, what you are known for"], "11": ["The Gathering", "community, networks, the future you build with others"], "12": ["The Quiet Room", "solitude, the unconscious, retreat and release"]}, "DOMICILE": {"Sun": ["Leo"], "Moon": ["Cancer"], "Mercury": ["Gemini", "Virgo"], "Venus": ["Libra", "Taurus"], "Mars": ["Aries", "Scorpio"], "Jupiter": ["Pisces", "Sagittarius"], "Saturn": ["Aquarius", "Capricorn"], "Uranus": ["Aquarius"], "Neptune": ["Pisces"], "Pluto": ["Scorpio"]}, "EXALTATION": {"Sun": "Aries", "Moon": "Taurus", "Mercury": "Virgo", "Venus": "Pisces", "Mars": "Capricorn", "Jupiter": "Cancer", "Saturn": "Libra"}, "MODERN_RULER": {"Aries": "Mars", "Taurus": "Venus", "Gemini": "Mercury", "Cancer": "Moon", "Leo": "Sun", "Virgo": "Mercury", "Libra": "Venus", "Scorpio": "Pluto", "Sagittarius": "Jupiter", "Capricorn": "Saturn", "Aquarius": "Uranus", "Pisces": "Neptune"}};
+/* ===== pc reference data (ES5). Starter text for HD / tarot / transits written in AIA growth voice; edit freely. ===== */
+var PC_HD_ORDER = [41,19,13,49,30,55,37,63,22,36,25,17,21,51,42,3,27,24,2,23,8,20,16,35,45,12,15,52,39,53,62,56,31,33,7,4,29,59,40,64,47,6,46,18,48,57,32,50,28,44,1,43,14,34,9,5,26,11,10,58,38,54,61,60];
+var PC_HD_CENTERS = {
+  Head:[64,61,63], Ajna:[47,24,4,17,43,11], Throat:[62,23,56,35,12,45,33,8,31,20,16],
+  G:[7,1,13,25,46,2,15,10], Heart:[21,40,26,51], Sacral:[34,5,14,29,59,9,3,42,27],
+  'Solar Plexus':[36,22,37,6,49,55,30], Spleen:[48,57,44,50,32,28,18], Root:[53,60,52,19,39,41,58,38,54]
+};
+var PC_HD_CHANNELS = [[64,47],[61,24],[63,4],[17,62],[43,23],[11,56],[16,48],[20,57],[20,34],[20,10],[31,7],[8,1],[33,13],[45,21],[35,36],[12,22],[10,34],[10,57],[25,51],[46,29],[2,14],[15,5],[26,44],[40,37],[34,57],[59,6],[9,52],[3,60],[42,53],[27,50],[49,19],[55,39],[30,41],[32,54],[28,38],[18,58]];
+var PC_HD_TYPES = {
+  'Generator': {strategy:'Wait to respond', signature:'Satisfaction', notSelf:'Frustration',
+    text:'Generators carry steady, renewable life force. Your energy works best when something in your world sparks a gut-level "yes" first, rather than forcing a plan from your head. When you follow what genuinely lights you up, you build mastery and feel deeply satisfied at the end of the day.',
+    short:'You have steady, renewable energy. Let life bring you things to respond to, and follow your gut "yes."'},
+  'Manifesting Generator': {strategy:'Wait to respond, then inform', signature:'Satisfaction and peace', notSelf:'Frustration and anger',
+    text:'Manifesting Generators are multi-passionate and fast-moving. You often find shortcuts others miss, and skipping steps is part of your design. Respond to what lights you up, then let the people around you know what you are doing so your speed lands smoothly.',
+    short:'You are fast and multi-passionate. Respond to what excites you, and give people a heads-up before you move.'},
+  'Projector': {strategy:'Wait for the invitation', signature:'Success', notSelf:'Bitterness',
+    text:'Projectors are natural guides who see how people and systems work. Your gift is focused insight, not nonstop output. Your wisdom lands best when you are recognized and invited in, and rest is part of the job, not a reward you have to earn.',
+    short:'You are a natural guide. Your insight lands best when people invite it, and rest is part of your design.'},
+  'Manifestor': {strategy:'Inform before acting', signature:'Peace', notSelf:'Anger',
+    text:'Manifestors are initiators. You are built to start things and set change in motion. Telling the people affected before you act clears the path, reduces resistance, and leaves you with more freedom, not less.',
+    short:'You are an initiator. Let people know before you act, and doors open more easily.'},
+  'Reflector': {strategy:'Wait a lunar cycle for big decisions', signature:'Surprise', notSelf:'Disappointment',
+    text:'Reflectors are rare mirrors of their environment. You sample the energy around you and show a community how healthy it is. The right places and people matter enormously, and giving big decisions about a month lets your clarity arrive.',
+    short:'You mirror your surroundings. Choose your environment with care and give big decisions about a month.'}
+};
+var PC_HD_AUTH = {
+  'Emotional': 'Clarity comes over time. Ride your emotional wave and decide once you feel calm and steady, not at the peak or the dip. "Let me sleep on it" is wisdom for you.',
+  'Sacral': 'Your gut answers in the moment with an "uh-huh" or "uh-uh." Yes or no questions help you hear it. Trust the body\'s response over the mind\'s list of reasons.',
+  'Splenic': 'Your knowing is quiet and instant, a one-time intuitive hit about what is healthy or safe. It speaks once and softly, so honoring it in the moment matters.',
+  'Ego Manifested': 'Your willpower speaks through what you say. Listen to what comes out of your mouth about what you truly want and what you are willing to commit to.',
+  'Ego Projected': 'Ask yourself what is in it for you and whether your heart wants it. Talking it through with someone you trust helps you hear your own will.',
+  'Self-Projected': 'Talk it out. Hearing yourself speak to a trusted listener reveals your direction and what feels like a true expression of who you are.',
+  'Mental (Sounding Board)': 'Your clarity comes through conversation and environment. Talk decisions over with trusted people in places that feel right, and listen for what you keep returning to.',
+  'Lunar': 'Give important decisions a full Moon cycle (about 28 days). Notice how you feel about the choice across the month before you commit.'
+};
+var PC_HD_PROFILE_LINE = {
+  1:'Investigator: needs a solid foundation of knowledge to feel secure',
+  2:'Hermit: natural talent that flourishes with alone time until called out',
+  3:'Martyr: learns by trial and error, discovering what works by trying',
+  4:'Opportunist: thrives through friendships and its network',
+  5:'Heretic: others project hopes onto you; you offer practical solutions',
+  6:'Role Model: lives in three phases, maturing into wisdom by example'
+};
+var PC_HD_CENTER_TEXT = {
+  Head:['Inspiration and mental pressure','You have a steady way of being inspired and asking questions.','You take in lots of inspiration from others. Not every question is yours to answer.'],
+  Ajna:['Thinking and making sense of things','You process information in a consistent, reliable way.','Your mind is flexible and open. You do not have to be certain to be wise.'],
+  Throat:['Communication and action','Your voice has a consistent way of speaking and acting.','Your expression is versatile. Timing your words lets them land beautifully.'],
+  G:['Identity, love and direction','You have a steady sense of who you are and where you are headed.','Your identity is adaptable. The right places and people help you feel at home.'],
+  Heart:['Willpower and self-worth','You have consistent willpower and can keep promises you choose with care.','You have nothing to prove. Your worth is not measured by effort.'],
+  Sacral:['Life force and work energy','You carry sustainable energy for work you love.','You do not have endless energy. Knowing when enough is enough is your gift.'],
+  'Solar Plexus':['Emotions and feelings','You move through emotional waves. Patience brings clarity.','You feel others\' emotions deeply. Not every feeling in the room is yours.'],
+  Spleen:['Intuition, health and safety','You have a steady intuitive radar for what is healthy.','You may hold on to what feels familiar. Notice what you are ready to release.'],
+  Root:['Pressure and drive','You handle pressure in a consistent, steady way.','You feel outside pressure strongly. You do not have to rush to relieve it.']
+};
+
+var PC_TAROT = [
+  ['The Fool','Fresh starts, trust and the courage to leap into the unknown.'],
+  ['The Magician','Turning ideas into reality. You have the tools you need.'],
+  ['The High Priestess','Inner knowing, intuition and the wisdom of quiet listening.'],
+  ['The Empress','Creativity, abundance, nurturing and enjoying life through the senses.'],
+  ['The Emperor','Structure, leadership and building something stable that lasts.'],
+  ['The Hierophant','Learning, teaching, tradition and finding meaningful mentors.'],
+  ['The Lovers','Values-based choices, connection and alignment of heart and mind.'],
+  ['The Chariot','Willpower, focus and steering competing forces toward a goal.'],
+  ['Strength','Gentle courage, patience and the power of a soft, steady heart.'],
+  ['The Hermit','Inner guidance, reflection and the wisdom you find in solitude.'],
+  ['Wheel of Fortune','Cycles, turning points and learning to move with change.'],
+  ['Justice','Truth, fairness, accountability and clear, honest decisions.'],
+  ['The Hanged Man','New perspective, pause and surrender that unlocks insight.'],
+  ['Death','Endings that make room for beginnings. Transformation and renewal.'],
+  ['Temperance','Balance, patience, healing and blending opposites into harmony.'],
+  ['The Devil','Noticing what binds you so you can choose freedom.'],
+  ['The Tower','Sudden clarity that clears away what was not built to last.'],
+  ['The Star','Hope, healing and reconnecting with your sense of purpose.'],
+  ['The Moon','Dreams, intuition and finding your way through uncertainty.'],
+  ['The Sun','Joy, vitality, confidence and being seen as your true self.'],
+  ['Judgement','Awakening, a calling and rising into a new version of yourself.'],
+  ['The World','Completion, wholeness and celebrating how far you have come.']
+];
+var PC_SIGN_TAROT = {Aries:4,Taurus:5,Gemini:6,Cancer:7,Leo:8,Virgo:9,Libra:11,Scorpio:13,Sagittarius:14,Capricorn:15,Aquarius:17,Pisces:18};
+var PC_PLANET_TAROT = {Sun:19,Moon:2,Mercury:1,Venus:3,Mars:16,Jupiter:10,Saturn:21,Uranus:0,Neptune:12,Pluto:20};
+
+var PC_TRANSIT_THEME = {
+  Jupiter:'growth, opportunity and widening your world',
+  Saturn:'structure, responsibility and building something solid',
+  Uranus:'change, freedom and surprising new directions',
+  Neptune:'dreams, intuition and softening old boundaries',
+  Pluto:'deep transformation and reclaiming personal power'
+};
+var PC_ASPECT_PLAIN = {
+  conjunction:'joins forces with', sextile:'opens a door for', square:'challenges and motivates',
+  trine:'flows easily with', opposition:'asks for balance with'
+};
+var PC_NUMBER_WORD = {1:'leadership and independence',2:'partnership and sensitivity',3:'creativity and expression',4:'stability and hard work',5:'freedom and adventure',6:'care, home and responsibility',7:'wisdom, study and inner depth',8:'power, ambition and abundance',9:'compassion and completion',11:'intuition and inspiration',22:'master building and big vision',33:'master teaching and healing'};
+
+/* ===== pc astro engine (ES5) ===== */
+var PC_SIGNS = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+var PC_GLYPH = {Sun:'☉',Moon:'☽',Mercury:'☿',Venus:'♀',Mars:'♂',Jupiter:'♃',Saturn:'♄',Uranus:'♅',Neptune:'♆',Pluto:'♇','North Node':'☊','South Node':'☋',Lilith:'⚸',Chiron:'⚷',Ascendant:'AC',Midheaven:'MC'};
+var PC_BODIES = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
+
+function pcNorm(x){ x = x % 360; return x < 0 ? x + 360 : x; }
+function pcRad(d){ return d * Math.PI / 180; }
+function pcDeg(r){ return r * 180 / Math.PI; }
+function pcSignOf(lon){ return PC_SIGNS[Math.floor(pcNorm(lon) / 30)]; }
+function pcFmtDeg(lon){
+  var l = pcNorm(lon), inSign = l % 30, d = Math.floor(inSign), m = Math.floor((inSign - d) * 60);
+  return d + '°' + (m < 10 ? '0' : '') + m + '′ ' + pcSignOf(l);
+}
+function pcSep(a, b){ var d = Math.abs(pcNorm(a) - pcNorm(b)); return d > 180 ? 360 - d : d; }
+
+/* Wall-clock time in an IANA zone -> UTC Date. Iterates so DST edges resolve. */
+function pcZoneOffsetMin(tz, date){
+  try {
+    var f = new Intl.DateTimeFormat('en-US', {timeZone: tz, hour12: false, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'});
+    var parts = f.formatToParts(date), o = {};
+    for (var i = 0; i < parts.length; i++) o[parts[i].type] = parts[i].value;
+    var hr = +o.hour === 24 ? 0 : +o.hour;
+    var asUTC = Date.UTC(+o.year, +o.month - 1, +o.day, hr, +o.minute, +o.second);
+    return Math.round((asUTC - date.getTime()) / 60000);
+  } catch (e) { return null; }
+}
+function pcLocalToUTC(y, mo, d, h, mi, tz, fallbackOffsetMin){
+  var guess = new Date(Date.UTC(y, mo - 1, d, h, mi));
+  var off = pcZoneOffsetMin(tz, guess);
+  if (off === null) off = fallbackOffsetMin || 0;
+  var t = new Date(guess.getTime() - off * 60000);
+  var off2 = pcZoneOffsetMin(tz, t);
+  if (off2 !== null && off2 !== off) t = new Date(guess.getTime() - off2 * 60000);
+  return t;
+}
+
+function pcJulCent(date){ return (date.getTime() / 86400000 + 2440587.5 - 2451545.0) / 36525; }
+function pcObliquity(date){ var T = pcJulCent(date); return 23.439291 - 0.0130042 * T - 1.64e-7 * T * T + 5.04e-7 * T * T * T; }
+
+function pcBodyLon(name, date){
+  var A = window.Astronomy;
+  if (name === 'Moon') return pcNorm(A.EclipticGeoMoon(date).lon);
+  if (name === 'Sun') return pcNorm(A.SunPosition(date).elon);
+  return pcNorm(A.Ecliptic(A.GeoVector(A.Body[name], date, true)).elon);
+}
+function pcLunarArgs(date){
+  var T = pcJulCent(date);
+  return {
+    T: T,
+    D: pcNorm(297.8501921 + 445267.1114034 * T),
+    M: pcNorm(357.5291092 + 35999.0502909 * T),
+    Mp: pcNorm(134.9633964 + 477198.8675055 * T),
+    F: pcNorm(93.2720950 + 483202.0175233 * T)
+  };
+}
+function pcTrueNode(date){
+  var a = pcLunarArgs(date), T = a.T;
+  var om = 125.04452 - 1934.136261 * T + 0.0020708 * T * T + T * T * T / 450000;
+  om += -1.4979 * Math.sin(pcRad(2 * (a.D - a.F))) - 0.15 * Math.sin(pcRad(a.M)) + 0.1226 * Math.sin(pcRad(2 * a.D)) + 0.1176 * Math.sin(pcRad(2 * a.F)) - 0.0801 * Math.sin(pcRad(2 * (a.Mp - a.F)));
+  return pcNorm(om);
+}
+function pcLilith(date){
+  var T = pcJulCent(date);
+  return pcNorm(83.3532465 + 4069.0137287 * T - 0.01032 * T * T - T * T * T / 80053 + 180);
+}
+
+function pcAngles(date, lat, lon){
+  var A = window.Astronomy;
+  var lst = pcNorm(A.SiderealTime(date) * 15 + lon);
+  var eps = pcRad(pcObliquity(date)), ramc = pcRad(lst), phi = pcRad(lat);
+  var mc = pcNorm(pcDeg(Math.atan2(Math.sin(ramc), Math.cos(ramc) * Math.cos(eps))));
+  var asc = pcNorm(pcDeg(Math.atan2(Math.cos(ramc), -(Math.sin(ramc) * Math.cos(eps) + Math.tan(phi) * Math.sin(eps)))));
+  return {asc: asc, mc: mc, ramc: lst, eps: pcObliquity(date)};
+}
+function pcRaToLon(raDeg, epsDeg){
+  var ra = pcRad(raDeg), e = pcRad(epsDeg);
+  return pcNorm(pcDeg(Math.atan2(Math.sin(ra), Math.cos(ra) * Math.cos(e))));
+}
+function pcPlacidus(ang, lat){
+  if (Math.abs(lat) > 66) return null;
+  var eps = ang.eps, phi = pcRad(lat);
+  function cusp(f, below){
+    var ra = ang.ramc + (below ? 180 : 0), lonE, dec, sda, i;
+    for (i = 0; i < 40; i++) {
+      lonE = pcRaToLon(ra, eps);
+      dec = Math.asin(Math.sin(pcRad(eps)) * Math.sin(pcRad(lonE)));
+      var x = -Math.tan(phi) * Math.tan(dec);
+      if (x < -1 || x > 1) return null;
+      sda = pcDeg(Math.acos(x));
+      var next = below ? ang.ramc + 180 - f * (180 - sda) : ang.ramc + f * sda;
+      if (Math.abs(pcNorm(next - ra + 180) - 180) < 1e-7) { ra = next; break; }
+      ra = next;
+    }
+    return pcRaToLon(ra, eps);
+  }
+  var c11 = cusp(1/3, false), c12 = cusp(2/3, false), c2 = cusp(2/3, true), c3 = cusp(1/3, true);
+  if (c11 === null || c12 === null || c2 === null || c3 === null) return null;
+  var c = [ang.asc, c2, c3, pcNorm(ang.mc + 180), pcNorm(c11 + 180), pcNorm(c12 + 180), pcNorm(ang.asc + 180), pcNorm(c2 + 180), pcNorm(c3 + 180), ang.mc, c11, c12];
+  return c;
+}
+function pcCusps(ang, lat, system){
+  var c = [], i;
+  if (system === 'P') { var p = pcPlacidus(ang, lat); if (p) return {cusps: p, system: 'P'}; system = 'E'; }
+  if (system === 'W') { var s = Math.floor(ang.asc / 30) * 30; for (i = 0; i < 12; i++) c.push(pcNorm(s + 30 * i)); return {cusps: c, system: 'W'}; }
+  for (i = 0; i < 12; i++) c.push(pcNorm(ang.asc + 30 * i));
+  return {cusps: c, system: 'E'};
+}
+function pcHouseOf(lon, cusps){
+  for (var i = 0; i < 12; i++) {
+    var a = cusps[i], b = cusps[(i + 1) % 12], span = pcNorm(b - a), d = pcNorm(lon - a);
+    if (d < span) return i + 1;
+  }
+  return 1;
+}
+
+var PC_ASPECTS = [
+  {key:'conjunction', name:'Conjunction', angle:0, orb:8},
+  {key:'sextile', name:'Sextile', angle:60, orb:5},
+  {key:'square', name:'Square', angle:90, orb:7},
+  {key:'trine', name:'Trine', angle:120, orb:7},
+  {key:'opposition', name:'Opposition', angle:180, orb:8}
+];
+
+/* input: {y,mo,d,h,mi,timeKnown,lat,lon,tz,house:'E'|'W'|'P'} */
+function pcCalcChart(inp){
+  var known = !!inp.timeKnown;
+  var h = known ? inp.h : 12, mi = known ? inp.mi : 0;
+  var date = pcLocalToUTC(inp.y, inp.mo, inp.d, h, mi, inp.tz, inp.offsetMin);
+  var chart = {date: date, timeKnown: known, bodies: {}, list: [], input: inp};
+  var later = new Date(date.getTime() + 86400000);
+  for (var i = 0; i < PC_BODIES.length; i++) {
+    var n = PC_BODIES[i], lon = pcBodyLon(n, date), lon2 = pcBodyLon(n, later);
+    var speed = pcNorm(lon2 - lon + 180) - 180;
+    chart.bodies[n] = {name: n, lon: lon, sign: pcSignOf(lon), retro: n !== 'Sun' && n !== 'Moon' && speed < 0, speed: speed};
+  }
+  var nn = pcTrueNode(date);
+  chart.bodies['North Node'] = {name:'North Node', lon: nn, sign: pcSignOf(nn)};
+  chart.bodies['South Node'] = {name:'South Node', lon: pcNorm(nn + 180), sign: pcSignOf(nn + 180)};
+  var li = pcLilith(date);
+  chart.bodies.Lilith = {name:'Lilith', lon: li, sign: pcSignOf(li)};
+  if (inp.chironLon !== undefined && inp.chironLon !== null) chart.bodies.Chiron = {name:'Chiron', lon: inp.chironLon, sign: pcSignOf(inp.chironLon)};
+
+  if (!known) {
+    /* Moon range across the whole birth day (local midnight to 23:59) */
+    var d0 = pcLocalToUTC(inp.y, inp.mo, inp.d, 0, 0, inp.tz, inp.offsetMin), d1 = new Date(d0.getTime() + 86340000);
+    var m0 = pcBodyLon('Moon', d0), m1 = pcBodyLon('Moon', d1);
+    chart.moonRange = {from: m0, to: m1, fromSign: pcSignOf(m0), toSign: pcSignOf(m1), changes: pcSignOf(m0) !== pcSignOf(m1)};
+  } else {
+    var ang = pcAngles(date, inp.lat, inp.lon);
+    var hs = pcCusps(ang, inp.lat, inp.house || 'E');
+    chart.angles = ang; chart.cusps = hs.cusps; chart.houseSystem = hs.system;
+    chart.bodies.Ascendant = {name:'Ascendant', lon: ang.asc, sign: pcSignOf(ang.asc)};
+    chart.bodies.Midheaven = {name:'Midheaven', lon: ang.mc, sign: pcSignOf(ang.mc)};
+    for (var k in chart.bodies) if (chart.bodies.hasOwnProperty(k)) chart.bodies[k].house = pcHouseOf(chart.bodies[k].lon, hs.cusps);
+  }
+  for (var k2 in chart.bodies) if (chart.bodies.hasOwnProperty(k2)) chart.list.push(chart.bodies[k2]);
+  chart.aspects = pcFindAspects(chart);
+  return chart;
+}
+
+function pcFindAspects(chart){
+  var names = PC_BODIES.slice(0);
+  if (chart.bodies.Chiron) names.push('Chiron');
+  names.push('North Node');
+  if (chart.timeKnown) { names.push('Ascendant'); names.push('Midheaven'); }
+  var out = [];
+  for (var i = 0; i < names.length; i++) for (var j = i + 1; j < names.length; j++) {
+    var a = chart.bodies[names[i]], b = chart.bodies[names[j]];
+    if ((a.name === 'Ascendant' && b.name === 'Midheaven')) continue;
+    var sep = pcSep(a.lon, b.lon);
+    for (var k = 0; k < PC_ASPECTS.length; k++) {
+      var as = PC_ASPECTS[k], orb = as.orb;
+      if (a.name === 'North Node' || b.name === 'North Node') orb = 3;
+      if (!chart.timeKnown && (a.name === 'Moon' || b.name === 'Moon')) orb = Math.min(orb, 4);
+      var diff = Math.abs(sep - as.angle);
+      if (diff <= orb) out.push({a: a.name, b: b.name, key: as.key, name: as.name, orb: diff});
+    }
+  }
+  out.sort(function(x, y){ return x.orb - y.orb; });
+  return out;
+}
+
+/* Sun-arc search: the moment the Sun was `back` degrees behind its natal place (Human Design uses 88). */
+function pcSunArcBack(date, back){
+  var target = pcNorm(pcBodyLon('Sun', date) - back);
+  var lo = date.getTime() - 100 * 86400000, hi = date.getTime() - 80 * 86400000;
+  for (var i = 0; i < 60; i++) {
+    var mid = (lo + hi) / 2, l = pcBodyLon('Sun', new Date(mid));
+    if (pcNorm(l - target + 180) - 180 < 0) lo = mid; else hi = mid;
+  }
+  return new Date((lo + hi) / 2);
+}
+
+/* ===== pc systems: numerology, human design, tarot, transits, themes (ES5) ===== */
+function pcDigitSum(n){ var s = 0; n = Math.abs(n); while (n > 0) { s += n % 10; n = Math.floor(n / 10); } return s; }
+function pcReduce(n, keepMaster){
+  while (n > 9) { if (keepMaster && (n === 11 || n === 22 || n === 33)) return n; n = pcDigitSum(n); }
+  return n;
+}
+
+/* ---------- Numerology ---------- */
+var PC_PYTH = {a:1,j:1,s:1,b:2,k:2,t:2,c:3,l:3,u:3,d:4,m:4,v:4,e:5,n:5,w:5,f:6,o:6,x:6,g:7,p:7,y:7,h:8,q:8,z:8,i:9,r:9};
+function pcNumerology(c, today){
+  var lp = pcReduce(pcReduce(c.mo, true) + pcReduce(c.d, true) + pcReduce(c.y, true), true);
+  var yr = (today || new Date()).getFullYear();
+  var py = pcReduce(pcReduce(c.mo, false) + pcReduce(c.d, false) + pcReduce(yr, false), false);
+  var name = (c.name || '').toLowerCase().replace(/[^a-z]/g, ''), all = 0, vow = 0, con = 0;
+  for (var i = 0; i < name.length; i++) {
+    var ch = name.charAt(i), v = PC_PYTH[ch] || 0; all += v;
+    if ('aeiou'.indexOf(ch) >= 0) vow += v; else con += v;
+  }
+  return {lifePath: lp, personalYear: py, year: yr, birthday: pcReduce(c.d, true),
+    expression: name ? pcReduce(all, true) : null, soulUrge: name ? pcReduce(vow, true) : null, personality: name ? pcReduce(con, true) : null};
+}
+
+/* ---------- Human Design ---------- */
+function pcGateLine(lon){
+  var off = pcNorm(lon - 302), idx = Math.floor(off / 5.625);
+  return {gate: PC_HD_ORDER[idx], line: Math.floor((off % 5.625) / 0.9375) + 1};
+}
+function pcHDActivations(date){
+  var out = {}, sun = pcBodyLon('Sun', date), nn = pcTrueNode(date);
+  out.Sun = pcGateLine(sun); out.Earth = pcGateLine(sun + 180);
+  out['North Node'] = pcGateLine(nn); out['South Node'] = pcGateLine(nn + 180);
+  var list = ['Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
+  for (var i = 0; i < list.length; i++) out[list[i]] = pcGateLine(pcBodyLon(list[i], date));
+  return out;
+}
+function pcCenterOf(g){ for (var c in PC_HD_CENTERS) if (PC_HD_CENTERS[c].indexOf(g) >= 0) return c; return null; }
+function pcHumanDesign(chart){
+  var pDate = chart.date, dDate = pcSunArcBack(pDate, 88);
+  var pers = pcHDActivations(pDate), des = pcHDActivations(dDate), gates = {}, k;
+  for (k in pers) gates[pers[k].gate] = true;
+  for (k in des) gates[des[k].gate] = true;
+  var channels = [], defined = {}, adj = {};
+  for (var i = 0; i < PC_HD_CHANNELS.length; i++) {
+    var ch = PC_HD_CHANNELS[i];
+    if (gates[ch[0]] && gates[ch[1]]) {
+      var a = pcCenterOf(ch[0]), b = pcCenterOf(ch[1]);
+      channels.push({gates: ch, centers: [a, b]});
+      defined[a] = defined[b] = true;
+      (adj[a] = adj[a] || []).push(b); (adj[b] = adj[b] || []).push(a);
+    }
+  }
+  function connected(from, to){
+    if (!defined[from] || !defined[to]) return false;
+    var seen = {}, stack = [from];
+    while (stack.length) { var c = stack.pop(); if (c === to) return true; if (seen[c]) continue; seen[c] = 1; var n = adj[c] || []; for (var j = 0; j < n.length; j++) stack.push(n[j]); }
+    return false;
+  }
+  var motorToThroat = connected('Heart','Throat') || connected('Solar Plexus','Throat') || connected('Root','Throat') || connected('Sacral','Throat');
+  var type;
+  if (!channels.length) type = 'Reflector';
+  else if (defined.Sacral) type = motorToThroat ? 'Manifesting Generator' : 'Generator';
+  else type = motorToThroat ? 'Manifestor' : 'Projector';
+  var auth;
+  if (type === 'Reflector') auth = 'Lunar';
+  else if (defined['Solar Plexus']) auth = 'Emotional';
+  else if (defined.Sacral) auth = 'Sacral';
+  else if (defined.Spleen) auth = 'Splenic';
+  else if (defined.Heart) auth = connected('Heart','Throat') ? 'Ego Manifested' : 'Ego Projected';
+  else if (defined.G && connected('G','Throat')) auth = 'Self-Projected';
+  else auth = 'Mental (Sounding Board)';
+  var centers = [];
+  for (var c in PC_HD_CENTERS) centers.push({name: c, defined: !!defined[c]});
+  return {type: type, authority: auth, profile: pers.Sun.line + '/' + des.Sun.line, profileLines: [pers.Sun.line, des.Sun.line],
+    personality: pers, design: des, designDate: dDate, channels: channels, centers: centers,
+    incarnationCross: [pers.Sun.gate, pers.Earth.gate, des.Sun.gate, des.Earth.gate]};
+}
+
+/* ---------- Tarot ---------- */
+function pcTarotCards(n){
+  var cards = [];
+  while (n > 22) n = pcDigitSum(n);
+  if (n === 22) return [0, 4];
+  cards.push(n);
+  while (n > 9) { n = pcDigitSum(n); cards.push(n); }
+  return cards;
+}
+function pcTarot(c, chart, today){
+  var yr = (today || new Date()).getFullYear();
+  var birth = pcTarotCards(pcDigitSum(c.mo + c.d + c.y));
+  var year = pcTarotCards(pcDigitSum(c.mo + c.d + yr));
+  var big = {Sun: PC_SIGN_TAROT[chart.bodies.Sun.sign]};
+  if (!chart.timeKnown && chart.moonRange && chart.moonRange.changes) big.Moon = null; else big.Moon = PC_SIGN_TAROT[chart.bodies.Moon.sign];
+  if (chart.timeKnown) big.Rising = PC_SIGN_TAROT[chart.bodies.Ascendant.sign];
+  return {birth: birth, year: year, yearNum: yr, big3: big};
+}
+
+/* ---------- Transits: next 12 months, Jupiter to Pluto onto personal points ---------- */
+function pcTransits(chart, startDate, days){
+  var movers = ['Jupiter','Saturn','Uranus','Neptune','Pluto'];
+  var targets = ['Sun','Moon','Mercury','Venus','Mars'];
+  if (chart.timeKnown) { targets.push('Ascendant'); targets.push('Midheaven'); }
+  var start = startDate || new Date(), hits = {}, i, j, k, d;
+  days = days || 365;
+  for (d = -30; d <= days; d += 2) {
+    var t = new Date(start.getTime() + d * 86400000);
+    for (i = 0; i < movers.length; i++) {
+      var tl = pcBodyLon(movers[i], t);
+      for (j = 0; j < targets.length; j++) {
+        if (targets[j] === 'Moon' && !chart.timeKnown) continue;
+        var nl = chart.bodies[targets[j]].lon, sep = pcSep(tl, nl);
+        for (k = 0; k < PC_ASPECTS.length; k++) {
+          var asp = PC_ASPECTS[k], orb = movers[i] === 'Jupiter' ? 2 : 1.5;
+          var diff = Math.abs(sep - asp.angle);
+          if (diff <= orb) {
+            var key = movers[i] + '|' + asp.key + '|' + targets[j];
+            var h = hits[key] || (hits[key] = {mover: movers[i], key: asp.key, name: asp.name, target: targets[j], start: t, end: t, best: diff, exact: t});
+            if (t < h.start) h.start = t;
+            if (t > h.end) h.end = t;
+            if (diff < h.best) { h.best = diff; h.exact = t; }
+          }
+        }
+      }
+    }
+  }
+  var out = [], now = start.getTime();
+  for (var key2 in hits) if (hits.hasOwnProperty(key2)) {
+    var x = hits[key2];
+    if (x.end.getTime() < now - 86400000 * 3) continue;
+    x.active = x.start.getTime() <= now && x.end.getTime() >= now;
+    out.push(x);
+  }
+  out.sort(function(a, b){ return a.start - b.start; });
+  return out;
+}
+
+/* ---------- Profection ---------- */
+function pcProfection(chart, c, today){
+  if (!chart.timeKnown) return null;
+  var now = today || new Date(), age = now.getFullYear() - c.y;
+  if (now.getMonth() + 1 < c.mo || (now.getMonth() + 1 === c.mo && now.getDate() < c.d)) age--;
+  var house = (age % 12) + 1, ascIdx = PC_SIGNS.indexOf(chart.bodies.Ascendant.sign);
+  var sign = PC_SIGNS[(ascIdx + age) % 12];
+  return {age: age, house: house, sign: sign};
+}
+
+/* ---------- Themes (pop-up patterns) ---------- */
+var PC_ELEM = {Aries:'Fire',Leo:'Fire',Sagittarius:'Fire',Taurus:'Earth',Virgo:'Earth',Capricorn:'Earth',Gemini:'Air',Libra:'Air',Aquarius:'Air',Cancer:'Water',Scorpio:'Water',Pisces:'Water'};
+var PC_MODE = {Aries:'Cardinal',Cancer:'Cardinal',Libra:'Cardinal',Capricorn:'Cardinal',Taurus:'Fixed',Leo:'Fixed',Scorpio:'Fixed',Aquarius:'Fixed',Gemini:'Mutable',Virgo:'Mutable',Sagittarius:'Mutable',Pisces:'Mutable'};
+function pcBalance(chart){
+  var el = {Fire:0,Earth:0,Air:0,Water:0}, mo = {Cardinal:0,Fixed:0,Mutable:0};
+  for (var i = 0; i < PC_BODIES.length; i++) { var s = chart.bodies[PC_BODIES[i]].sign; el[PC_ELEM[s]]++; mo[PC_MODE[s]]++; }
+  return {elements: el, modes: mo};
+}
+function pcThemes(chart){
+  var themes = [], b = chart.bodies, i, j, k;
+  var bal = pcBalance(chart);
+  var maxE = null, maxM = null;
+  for (var e in bal.elements) { if (bal.elements[e] >= 4 && (!maxE || bal.elements[e] > bal.elements[maxE])) maxE = e; if (bal.elements[e] === 0) themes.push({id:'void-' + e, kind:'void', title:'No ' + e + ': ' + PC_ARCH.TERRAIN[e].void.split('.')[0], element: e}); }
+  if (maxE) themes.push({id:'elem-' + maxE, kind:'element', title: maxE + ' leads: ' + PC_ARCH.TERRAIN[maxE].name, element: maxE, count: bal.elements[maxE]});
+  for (var m in bal.modes) if (bal.modes[m] >= 5 && (!maxM || bal.modes[m] > bal.modes[maxM])) maxM = m;
+  if (maxM) themes.push({id:'mode-' + maxM, kind:'mode', title: PC_ARCH.PACE[maxM][0] + ' (' + maxM + ' emphasis)', mode: maxM});
+  /* stelliums by sign (and house if known) */
+  var bySign = {}, byHouse = {};
+  for (i = 0; i < PC_BODIES.length; i++) {
+    var p = b[PC_BODIES[i]];
+    if (PC_BODIES[i] === 'Moon' && !chart.timeKnown && chart.moonRange && chart.moonRange.changes) continue;
+    (bySign[p.sign] = bySign[p.sign] || []).push(p.name);
+    if (chart.timeKnown) (byHouse[p.house] = byHouse[p.house] || []).push(p.name);
+  }
+  for (var s2 in bySign) if (bySign[s2].length >= 3) themes.push({id:'stel-' + s2, kind:'stellium', title:'Stellium in ' + s2, planets: bySign[s2], where: s2});
+  for (var h in byHouse) if (byHouse[h].length >= 3) themes.push({id:'stelh-' + h, kind:'stellium', title:'Stellium in the ' + pcOrd(+h) + ' house', planets: byHouse[h], where: pcOrd(+h) + ' house', timed: true});
+  /* aspect patterns */
+  var asp = chart.aspects, has = {};
+  for (i = 0; i < asp.length; i++) { has[asp[i].a + '|' + asp[i].b + '|' + asp[i].key] = 1; has[asp[i].b + '|' + asp[i].a + '|' + asp[i].key] = 1; }
+  var P = PC_BODIES.slice(0); if (b.Chiron) P.push('Chiron');
+  function A(x, y, kk){ return has[x + '|' + y + '|' + kk]; }
+  var seen = {};
+  for (i = 0; i < P.length; i++) for (j = i + 1; j < P.length; j++) for (k = 0; k < P.length; k++) {
+    if (k === i || k === j) continue;
+    var x = P[i], y = P[j], z = P[k], tag;
+    if (A(x, y, 'opposition') && A(x, z, 'square') && A(y, z, 'square')) {
+      tag = 'tsq' + [x, y, z].sort().join(); if (!seen[tag]) { seen[tag] = 1; themes.push({id: tag, kind:'tSquare', title:'T-Square with ' + z + ' at the apex', planets:[x, y, z], apex: z}); }
+    }
+    if (A(x, y, 'sextile') && pcNear(b[x].lon, b[z].lon, 150, 3) && pcNear(b[y].lon, b[z].lon, 150, 3)) {
+      tag = 'yod' + [x, y, z].sort().join(); if (!seen[tag]) { seen[tag] = 1; themes.push({id: tag, kind:'yod', title:'Yod pointing to ' + z, planets:[x, y, z], apex: z}); }
+    }
+    if (k > j && A(x, y, 'trine') && A(x, z, 'trine') && A(y, z, 'trine')) {
+      tag = 'gt' + [x, y, z].sort().join(); if (!seen[tag]) { seen[tag] = 1; themes.push({id: tag, kind:'grandTrine', title:'Grand Trine in ' + PC_ELEM[b[x].sign], planets:[x, y, z]}); }
+    }
+  }
+  /* angular spotlight + dignity + retrogrades */
+  if (chart.timeKnown) {
+    for (i = 0; i < PC_BODIES.length; i++) {
+      var q = b[PC_BODIES[i]];
+      if (pcSep(q.lon, b.Ascendant.lon) < 6 || pcSep(q.lon, b.Midheaven.lon) < 6) themes.push({id:'ang-' + q.name, kind:'angular', title: q.name + ' in the spotlight (on an angle)', planets:[q.name], timed: true});
+    }
+  }
+  for (i = 0; i < PC_BODIES.length; i++) {
+    var r = b[PC_BODIES[i]], dom = PC_ARCH.DOMICILE[r.name] || [];
+    if (dom.indexOf(r.sign) >= 0) themes.push({id:'dom-' + r.name, kind:'home', title: r.name + ' at home in ' + r.sign, planets:[r.name]});
+    else if (PC_ARCH.EXALTATION[r.name] === r.sign) themes.push({id:'ex-' + r.name, kind:'home', title: r.name + ' exalted in ' + r.sign, planets:[r.name]});
+  }
+  var retro = [];
+  for (i = 2; i < 7; i++) if (b[PC_BODIES[i]].retro) retro.push(PC_BODIES[i]);
+  if (retro.length >= 2) themes.push({id:'retro', kind:'retro', title:'Inner-planet retrogrades: ' + retro.join(', '), planets: retro});
+  return themes;
+}
+function pcNear(a, b, angle, orb){ return Math.abs(pcSep(a, b) - angle) <= orb; }
+function pcOrd(n){ var s = ['th','st','nd','rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+
+/* ===== pc Tree of Life (Golden Dawn / Hermetic Qabalah) calculator (ES5) ===== */
+var PC_SEPH = {
+  kether:   {n:1,  name:'Kether',    title:'The Crown',      x:150, y:40,  pillar:'middle',   planet:'Neptune', classic:'Primum Mobile', arch:'The Source',
+    text:'Kether is pure potential, the first spark of being before anything takes form. It is the quiet sense that your life is connected to something larger.',
+    gift:'a felt connection to purpose and the bigger picture', edge:'staying grounded while reaching for the highest ideal', practice:'Begin the day with one minute of stillness and ask, "What wants to come through me today?"'},
+  chokmah:  {n:2,  name:'Chokmah',   title:'Wisdom',         x:250, y:100, pillar:'mercy',    planet:'Uranus',  classic:'The Zodiac', arch:'The Visionary',
+    text:'Chokmah is the first flash of insight, raw creative force that has not yet taken shape. It is the lightning bolt of a new idea.',
+    gift:'original insight and the courage to begin something new', edge:'giving bright ideas enough form to last', practice:'Keep an idea notebook and choose one spark each month to give a real shape.'},
+  binah:    {n:3,  name:'Binah',     title:'Understanding',  x:50,  y:100, pillar:'severity', planet:'Saturn',  arch:'The Great Mother',
+    text:'Binah gives form to force. It is the patient, shaping intelligence that turns inspiration into something that can actually exist in time.',
+    gift:'depth, patience and the ability to build lasting structure', edge:'letting structure support you rather than confine you', practice:'Pick one commitment and give it a steady weekly rhythm.'},
+  daath:    {n:0,  name:'Daath',     title:'Knowledge',      x:150, y:155, pillar:'middle',   planet:'Pluto', hidden:true, arch:'The Threshold',
+    text:'Daath is the hidden sphere in the Abyss, the place where what you think you know is surrendered so true knowing can arrive.',
+    gift:'transformation through honest self-knowledge', edge:'releasing certainty and control', practice:'Journal on one belief you are ready to outgrow.'},
+  chesed:   {n:4,  name:'Chesed',    title:'Mercy',          x:250, y:210, pillar:'mercy',    planet:'Jupiter', arch:'The Generous Ruler',
+    text:'Chesed is loving-kindness and expansion. It is the part of you that builds, blesses, shares and makes room for others to grow.',
+    gift:'generosity, faith and the ability to grow what you touch', edge:'saying yes with limits, so kindness stays sustainable', practice:'Offer one act of generosity this week that also honors your own needs.'},
+  geburah:  {n:5,  name:'Geburah',   title:'Strength',       x:50,  y:210, pillar:'severity', planet:'Mars',    arch:'The Warrior-Judge',
+    text:'Geburah is healthy strength, discernment and the courage to cut away what no longer serves. It balances Chesed\'s kindness with clear boundaries.',
+    gift:'courage, focus and clean boundaries', edge:'using strength with care rather than force', practice:'Name one thing to release this month and release it kindly.'},
+  tiphareth:{n:6,  name:'Tiphareth', title:'Beauty',         x:150, y:270, pillar:'middle',   planet:'Sun',     arch:'The Radiant Heart',
+    text:'Tiphareth sits at the heart of the Tree. It is harmony, the Higher Self and the place where every part of you can meet in balance.',
+    gift:'a centered heart that brings the whole self into harmony', edge:'shining as yourself rather than as who others expect', practice:'Ask daily, "What would my most whole self choose here?"'},
+  netzach:  {n:7,  name:'Netzach',   title:'Victory',        x:250, y:370, pillar:'mercy',    planet:'Venus',   arch:'The Artist-Lover',
+    text:'Netzach is feeling, desire, art and the endurance of love. It is what moves you and keeps you going for what you value.',
+    gift:'creativity, devotion and emotional endurance', edge:'feeling deeply without being carried away', practice:'Make something with your hands, just for the joy of it.'},
+  hod:      {n:8,  name:'Hod',       title:'Splendour',      x:50,  y:370, pillar:'severity', planet:'Mercury', arch:'The Magician-Scholar',
+    text:'Hod is the brilliant mind: language, learning, symbols and systems. It names and organizes what Netzach feels.',
+    gift:'clear thinking, teaching and the magic of words', edge:'letting the mind serve the heart, not replace it', practice:'Write one sentence each evening about what you learned today.'},
+  yesod:    {n:9,  name:'Yesod',     title:'Foundation',     x:150, y:430, pillar:'middle',   planet:'Moon',    arch:'The Dreamer',
+    text:'Yesod is the foundation beneath the surface: dreams, imagination, habits and the inner world that shapes what shows up outside.',
+    gift:'intuition, imagination and emotional memory', edge:'noticing which old patterns are running the show', practice:'Track your dreams or moods for one Moon cycle.'},
+  malkuth:  {n:10, name:'Malkuth',   title:'The Kingdom',    x:150, y:500, pillar:'middle',   planet:'Earth',   arch:'The Embodied Gardener',
+    text:'Malkuth is the physical world: the body, home, money and daily life. It is where everything above becomes real.',
+    gift:'groundedness and the power to make things real', edge:'treating everyday life as sacred, not separate from spirit', practice:'Tend one physical space or body ritual daily for a week.'}
+};
+var PC_SEPH_ORDER = ['kether','chokmah','binah','daath','chesed','geburah','tiphareth','netzach','hod','yesod','malkuth'];
+/* Golden Dawn paths: number, letter, hebrew, trump index (RWS numbering), attribution, from, to, meaning */
+var PC_PATHS = [
+  [11,'Aleph','א',0,'Air','kether','chokmah','trusting the leap into new life'],
+  [12,'Beth','ב',1,'Mercury','kether','binah','turning inspiration into skill and intention'],
+  [13,'Gimel','ג',2,'Moon','kether','tiphareth','listening to quiet inner knowing'],
+  [14,'Daleth','ד',3,'Venus','chokmah','binah','love that gives birth to form and abundance'],
+  [15,'Heh','ה',4,'Aries','chokmah','tiphareth','leading with vision and healthy authority'],
+  [16,'Vav','ו',5,'Taurus','chokmah','chesed','learning from teachers and becoming one'],
+  [17,'Zayin','ז',6,'Gemini','binah','tiphareth','choosing from the heart and uniting opposites'],
+  [18,'Cheth','ח',7,'Cancer','binah','geburah','steering with will while protecting what matters'],
+  [19,'Teth','ט',8,'Leo','chesed','geburah','gentle strength that tames big feelings'],
+  [20,'Yod','י',9,'Virgo','chesed','tiphareth','the inner light found through reflection'],
+  [21,'Kaph','כ',10,'Jupiter','chesed','netzach','moving gracefully with life\'s cycles'],
+  [22,'Lamed','ל',11,'Libra','geburah','tiphareth','balance, honesty and fair choices'],
+  [23,'Mem','מ',12,'Water','geburah','hod','a new view that comes from surrender'],
+  [24,'Nun','נ',13,'Scorpio','tiphareth','netzach','transformation that makes room for new growth'],
+  [25,'Samekh','ס',14,'Sagittarius','tiphareth','yesod','blending opposites into healing balance'],
+  [26,'Ayin','ע',15,'Capricorn','tiphareth','hod','seeing what binds you and choosing freedom'],
+  [27,'Pe','פ',16,'Mars','netzach','hod','breakthroughs that clear away what is false'],
+  [28,'Tzaddi','צ',17,'Aquarius','netzach','yesod','hope, healing and renewed purpose'],
+  [29,'Qoph','ק',18,'Pisces','netzach','malkuth','finding your way through dreams and the unknown'],
+  [30,'Resh','ר',19,'Sun','hod','yesod','joyful clarity and being seen'],
+  [31,'Shin','ש',20,'Fire','hod','malkuth','awakening to a calling'],
+  [32,'Tav','ת',21,'Saturn','yesod','malkuth','completing a cycle and bringing spirit fully into life']
+];
+var PC_SIGN_SEPH_RULER = {Aries:'Mars',Taurus:'Venus',Gemini:'Mercury',Cancer:'Moon',Leo:'Sun',Virgo:'Mercury',Libra:'Venus',Scorpio:'Mars',Sagittarius:'Jupiter',Capricorn:'Saturn',Aquarius:'Saturn',Pisces:'Jupiter'};
+var PC_FALL = {Sun:'Libra',Moon:'Scorpio',Mercury:'Pisces',Venus:'Virgo',Mars:'Cancer',Jupiter:'Capricorn',Saturn:'Aries'};
+
+function pcOpp(sign){ return PC_SIGNS[(PC_SIGNS.indexOf(sign) + 6) % 12]; }
+function pcDignity(planet, sign){
+  var dom = PC_ARCH.DOMICILE[planet] || [];
+  if (dom.indexOf(sign) >= 0) return {score: 2, label: 'at home in ' + sign};
+  if (PC_ARCH.EXALTATION[planet] === sign) return {score: 2, label: 'exalted in ' + sign};
+  for (var i = 0; i < dom.length; i++) if (pcOpp(dom[i]) === sign) return {score: -1, label: 'working outside its comfort zone in ' + sign};
+  if (PC_FALL[planet] === sign) return {score: -1, label: 'learning humility in ' + sign};
+  return {score: 0, label: 'in ' + sign};
+}
+function pcSephForNumber(n){ var k = n > 9 ? pcReduce(n, false) : n; for (var key in PC_SEPH) if (PC_SEPH[key].n === k) return key; return 'malkuth'; }
+
+function pcTree(ctx){
+  var ch = ctx.chart, b = ch.bodies, known = ch.timeKnown, bal = pcBalance(ch);
+  var moonUnsure = !known && ch.moonRange && ch.moonRange.changes;
+  var seph = {}, k, i;
+  for (k in PC_SEPH) {
+    var S = PC_SEPH[k], planet = S.planet, rec = {key: k, planet: planet, score: 0, notes: []};
+    if (planet === 'Earth') {
+      var earthSign = pcSignOf(b.Sun.lon + 180), ec = bal.elements.Earth;
+      rec.sign = earthSign; rec.score = ec >= 3 ? 2 : ec === 0 ? -1 : (ec >= 2 ? 1 : 0);
+      rec.notes.push(ec + ' planet' + (ec === 1 ? '' : 's') + ' in Earth signs');
+    } else {
+      var body = b[planet]; rec.sign = body.sign;
+      var dg = pcDignity(planet, body.sign); rec.score += dg.score; rec.notes.push(planet + ' ' + dg.label);
+      if (known && (pcSep(body.lon, b.Ascendant.lon) < 7 || pcSep(body.lon, b.Midheaven.lon) < 7)) { rec.score += 1; rec.notes.push('on an angle of the chart'); }
+      if (body.retro && (planet === 'Mercury' || planet === 'Venus' || planet === 'Mars')) rec.notes.push('retrograde, so it works inward first');
+      if (moonUnsure && planet === 'Moon') rec.unsure = true;
+    }
+    rec.level = rec.score >= 2 ? 'radiant' : rec.score < 0 ? 'growing' : 'steady';
+    seph[k] = rec;
+  }
+  /* rulers of the Big 3 strengthen the planetary paths */
+  var bigRulers = {}; bigRulers[PC_SIGN_SEPH_RULER[b.Sun.sign]] = 'your Sun sign';
+  if (!moonUnsure) bigRulers[PC_SIGN_SEPH_RULER[b.Moon.sign]] = bigRulers[PC_SIGN_SEPH_RULER[b.Moon.sign]] || 'your Moon sign';
+  if (known) bigRulers[PC_SIGN_SEPH_RULER[b.Ascendant.sign]] = 'your Rising sign (chart ruler)';
+  var elemOf = {Air:'Air', Water:'Water', Fire:'Fire'};
+  var paths = [];
+  for (i = 0; i < PC_PATHS.length; i++) {
+    var p = PC_PATHS[i], attr = p[4], score = 0, why = [];
+    if (PC_SIGNS.indexOf(attr) >= 0) {
+      var who = [];
+      for (var j = 0; j < PC_BODIES.length; j++) { var nm = PC_BODIES[j]; if (nm === 'Moon' && moonUnsure) continue; if (b[nm].sign === attr) who.push(nm); }
+      if (known && b.Ascendant.sign === attr) who.push('Rising');
+      score = who.length; if (who.length) why.push(who.join(', ') + ' in ' + attr);
+    } else if (elemOf[attr]) {
+      var c = bal.elements[attr]; if (c >= 3) { score = c - 1; why.push(c + ' planets in ' + attr + ' signs'); }
+    } else {
+      var pl = b[attr], d2 = pcDignity(attr, pl.sign);
+      if (d2.score > 0) { score += 1; why.push(attr + ' ' + d2.label); }
+      if (bigRulers[attr]) { score += 1; why.push(attr + ' rules ' + bigRulers[attr]); }
+      if (known && (pcSep(pl.lon, b.Ascendant.lon) < 7 || pcSep(pl.lon, b.Midheaven.lon) < 7)) { score += 1; why.push(attr + ' on an angle'); }
+      if (attr === 'Saturn' && bal.elements.Earth >= 3) { score += 1; why.push('strong Earth (Tav is also the path of Earth)'); }
+    }
+    paths.push({num: p[0], letter: p[1], hebrew: p[2], trump: p[3], attr: attr, from: p[5], to: p[6], meaning: p[7], score: score, why: why});
+  }
+  /* pillars */
+  var pill = {mercy: 0, severity: 0, middle: 0};
+  for (k in seph) if (k !== 'daath') pill[PC_SEPH[k].pillar] += seph[k].score + 1;
+  var lead = 'middle';
+  if (pill.mercy > pill.severity + 1 && pill.mercy >= pill.middle - 1) lead = 'mercy';
+  else if (pill.severity > pill.mercy + 1 && pill.severity >= pill.middle - 1) lead = 'severity';
+  /* numerology + tarot ties */
+  var N = ctx.num, T = ctx.tarot;
+  var birthPaths = [];
+  for (i = 0; i < T.birth.length; i++) birthPaths.push(paths[T.birth[i]]);
+  return {seph: seph, paths: paths, pillars: pill, leadPillar: lead,
+    soul: {key: pcSephForNumber(N.lifePath), num: N.lifePath}, year: {key: pcSephForNumber(N.personalYear), num: N.personalYear, yr: N.year},
+    birthPaths: birthPaths, yearPath: paths[T.year[0]]};
+}
+
+/* ---------- SVG tree ---------- */
+function pcTreeSVG(tree){
+  var col = {radiant: '#e8a923', steady: '#0f9e94', growing: '#e0663f'};
+  var out = '<svg class="pc-tree-svg" viewBox="0 0 300 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tree of Life map">';
+  out += '<rect x="0" y="0" width="300" height="560" rx="16" fill="#fffaf1"/>';
+  var i, p;
+  for (i = 0; i < tree.paths.length; i++) {
+    p = tree.paths[i]; var a = PC_SEPH[p.from], c = PC_SEPH[p.to], lit = p.score > 0;
+    out += '<line x1="' + a.x + '" y1="' + a.y + '" x2="' + c.x + '" y2="' + c.y + '" stroke="' + (lit ? '#7b4fc9' : '#e3d7c3') + '" stroke-width="' + (lit ? Math.min(2 + p.score * 1.6, 8) : 2) + '" stroke-linecap="round" opacity="' + (lit ? 0.85 : 1) + '"/>';
+  }
+  for (i = 0; i < tree.paths.length; i++) {
+    p = tree.paths[i]; if (p.score <= 0) continue;
+    var a2 = PC_SEPH[p.from], c2 = PC_SEPH[p.to], mx = (a2.x + c2.x) / 2, my = (a2.y + c2.y) / 2;
+    out += '<circle cx="' + mx + '" cy="' + my + '" r="9" fill="#fff" stroke="#7b4fc9" stroke-width="1.5"/><text x="' + mx + '" y="' + (my + 4) + '" text-anchor="middle" font-size="10" font-family="Space Mono,monospace" fill="#4a2a8a">' + p.num + '</text>';
+  }
+  for (var k in PC_SEPH) {
+    var S = PC_SEPH[k], r = tree.seph[k], fill = r.unsure ? '#ffffff' : col[r.level];
+    var glyph = S.planet === 'Earth' ? '⊕' : PC_GLYPH[S.planet];
+    if (S.hidden) out += '<circle cx="' + S.x + '" cy="' + S.y + '" r="20" fill="#fff" stroke="#6b5f73" stroke-width="1.5" stroke-dasharray="4 3"/>';
+    else out += '<circle cx="' + S.x + '" cy="' + S.y + '" r="25" fill="' + fill + '" stroke="#2b2135" stroke-width="' + (r.level === 'radiant' ? 3 : 1.5) + '"' + (r.unsure ? ' stroke-dasharray="4 3"' : '') + '/>';
+    out += '<text x="' + S.x + '" y="' + (S.y - 2) + '" text-anchor="middle" font-size="9.5" font-family="Fraunces,Georgia,serif" font-weight="700" fill="' + (S.hidden || r.unsure ? '#2b2135' : '#fff') + '">' + S.name + '</text>';
+    out += '<text x="' + S.x + '" y="' + (S.y + 12) + '" text-anchor="middle" font-size="12" fill="' + (S.hidden || r.unsure ? '#2b2135' : '#fff') + '">' + glyph + '</text>';
+  }
+  out += '<g font-family="Space Mono,monospace" font-size="9" fill="#6b5f73"><circle cx="18" cy="546" r="5" fill="#e8a923"/><text x="27" y="549">radiant</text><circle cx="88" cy="546" r="5" fill="#0f9e94"/><text x="97" y="549">steady</text><circle cx="152" cy="546" r="5" fill="#e0663f"/><text x="161" y="549">growth edge</text><line x1="226" y1="546" x2="242" y2="546" stroke="#7b4fc9" stroke-width="4"/><text x="246" y="549">lit path</text></g>';
+  return out + '</svg>';
+}
+
+/* ===== pc report sections (ES5). Every section renders in full / client-short, standard / archetype. ===== */
+function pcEsc(s){ return String(s === undefined || s === null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function pcSentences(s, n){
+  if (!s) return '';
+  var parts = String(s).match(/[^.!?]+[.!?]+(\s|$)/g);
+  if (!parts) return s;
+  return parts.slice(0, n).join('').trim();
+}
+function pcP(s){ return s ? '<p>' + pcEsc(s) + '</p>' : ''; }
+function pcLabel(label, s){ return s ? '<div class="pc-r-field"><div class="pc-r-lab">' + pcEsc(label) + '</div><p>' + pcEsc(s) + '</p></div>' : ''; }
+function pcFlag(timed){ return timed ? '<span class="pc-flag pc-flag-time">Birth-time sensitive</span>' : '<span class="pc-flag pc-flag-proof">Time-proof</span>'; }
+function pcLow(s){ return String(s || '').toLowerCase(); }
+
+function pcCharacter(planet, sign){
+  var cast = PC_ARCH.CAST[planet], epi = PC_ARCH.SIGN_EPITHET[sign];
+  if (!cast) return '';
+  return cast.archetype.replace('The ', 'The ' + (epi ? epi + ' ' : ''));
+}
+function pcArchBox(ctx, planet, sign, entry){
+  var cast = PC_ARCH.CAST[planet]; if (!cast) return '';
+  var chips = '';
+  if (entry && entry.archetypes) for (var i = 0; i < entry.archetypes.length; i++) chips += '<span class="pc-chip">' + pcEsc(entry.archetypes[i]) + '</span>';
+  if (ctx.opts.short) return '<div class="pc-r-arch"><b>' + pcEsc(pcCharacter(planet, sign)) + '</b> asks: <i>' + pcEsc(cast.question) + '</i></div>';
+  return '<div class="pc-r-arch"><div class="pc-r-arch-q"><i>' + pcEsc(cast.question) + '</i></div>' +
+    '<div><b>At its best:</b> ' + pcEsc(cast.light) + '.</div><div><b>Growth edge:</b> ' + pcEsc(cast.shadow) + '.</div>' +
+    (PC_ARCH.SIGN_STYLE[sign] ? '<div><b>How it moves:</b> ' + pcEsc(PC_ARCH.SIGN_STYLE[sign]) + '.</div>' : '') +
+    (chips ? '<div class="pc-chips">' + chips + '</div>' : '') + '</div>';
+}
+function pcHouseLine(ctx, body){
+  if (!ctx.chart.timeKnown || !body.house) return '';
+  var st = PC_ARCH.HOUSE_STAGE[String(body.house)], e = ctx.lib.houses && ctx.lib.houses.entries[String(body.house)];
+  var label = ctx.opts.archetype && st ? 'On the stage of ' + st[0] : 'Where it shows up: your ' + pcOrd(body.house) + ' house';
+  var txt = (st ? st[1].charAt(0).toUpperCase() + st[1].slice(1) + '. ' : '') + (e && !ctx.opts.short ? pcSentences(e.text, 2) : '');
+  return pcLabel(label, txt);
+}
+function pcPlacementTitle(ctx, body, fallbackTitle){
+  var base = body.name + ' in ' + body.sign;
+  if (ctx.opts.archetype && PC_ARCH.CAST[body.name]) return pcCharacter(body.name, body.sign) + '<small>' + pcEsc(base) + '</small>';
+  return pcEsc(fallbackTitle || base);
+}
+function pcPlacementBody(ctx, entry){
+  if (!entry) return '<p class="pc-muted">No library text for this placement yet.</p>';
+  if (ctx.opts.short) return pcP(pcSentences(entry.plainEnglish, 2)) + pcLabel('Try this', pcSentences(entry.whatHelps, 2));
+  return pcLabel('In plain English', entry.plainEnglish) + pcLabel('Your strength', entry.strength) +
+    pcLabel('Growth edge', entry.shadow || entry.growthPattern) + pcLabel('In real life', entry.realLife || entry.theGift) + pcLabel('What helps', entry.whatHelps);
+}
+
+function pcSecPlanet(name){
+  return function(ctx){
+    var b = ctx.chart.bodies[name], key = pcLow(name), D = ctx.lib, html = '', entry;
+    if (!b) return null;
+    var timed = name === 'Moon' && !ctx.chart.timeKnown && ctx.chart.moonRange && ctx.chart.moonRange.changes;
+    if (D[key] && D[key].signs) {
+      entry = D[key].signs[pcLow(b.sign)];
+      if (timed) {
+        var mr = ctx.chart.moonRange, e1 = D.moon.signs[pcLow(mr.fromSign)], e2 = D.moon.signs[pcLow(mr.toSign)];
+        html += '<p class="pc-note">Without a birth time, the Moon could be in <b>' + mr.fromSign + '</b> or <b>' + mr.toSign + '</b> (it changed signs that day). Both are shown; the one that feels most like home is usually it.</p>';
+        html += '<h4>If the Moon is in ' + mr.fromSign + '</h4>' + pcP(pcSentences(e1.plainEnglish, ctx.opts.short ? 2 : 4)) + pcLabel('Try this', pcSentences(e1.whatHelps, 2));
+        html += '<h4>If the Moon is in ' + mr.toSign + '</h4>' + pcP(pcSentences(e2.plainEnglish, ctx.opts.short ? 2 : 4)) + pcLabel('Try this', pcSentences(e2.whatHelps, 2));
+        return {title: 'Moon in ' + mr.fromSign + ' or ' + mr.toSign, flag: pcFlag(true), html: html};
+      }
+      if (ctx.opts.archetype) html += pcArchBox(ctx, name, b.sign, entry);
+      html += pcPlacementBody(ctx, entry);
+    } else if (D[key] && D[key].signsGenerational) {
+      if (ctx.opts.archetype) html += pcArchBox(ctx, name, b.sign, null);
+      var gen = D[key].signsGenerational[pcLow(b.sign)];
+      html += ctx.opts.short ? pcP(pcSentences(gen || D[key].intro, 2)) : pcP(D[key].intro) + pcLabel('Your generation', gen);
+      if (ctx.chart.timeKnown && D[key].houses && D[key].houses[String(b.house)]) {
+        html += pcLabel('Personally, in your ' + pcOrd(b.house) + ' house', ctx.opts.short ? pcSentences(D[key].houses[String(b.house)].text, 2) : D[key].houses[String(b.house)].text);
+      }
+    }
+    if (!(D[key] && D[key].houses)) html += pcHouseLine(ctx, b);
+    if (b.retro && !ctx.opts.short) html += '<p class="pc-note">' + name + ' was retrograde at birth: its energy tends to work inward first, reflecting and revisiting before it acts.</p>';
+    var timedFlag = name === 'Moon' && !ctx.chart.timeKnown;
+    return {title: pcPlacementTitle(ctx, b), deg: pcFmtDeg(b.lon) + (b.retro ? ' Rx' : '') + (ctx.chart.timeKnown ? ' · ' + pcOrd(b.house) + ' house' : ''), flag: pcFlag(timedFlag), html: html};
+  };
+}
+function pcSecRising(ctx){
+  if (!ctx.chart.timeKnown) return null;
+  var b = ctx.chart.bodies.Ascendant, e = ctx.lib.rising.signs[pcLow(b.sign)], html = '';
+  if (ctx.opts.archetype) html += '<div class="pc-r-arch"><b>' + pcEsc(e.primaryArchetype) + '</b> at the threshold: how you arrive and what people meet first.</div>';
+  html += pcPlacementBody(ctx, e);
+  if (e.chartRuler && !ctx.opts.short) html += pcLabel('Your chart ruler', e.chartRuler);
+  return {title: ctx.opts.archetype ? pcEsc(e.primaryArchetype) + '<small>Rising in ' + b.sign + '</small>' : 'Rising in ' + b.sign, deg: pcFmtDeg(b.lon), flag: pcFlag(true), html: html};
+}
+function pcSecBig3(ctx){
+  var B = ctx.chart.bodies, D = ctx.lib, rows = '';
+  function row(label, planetKey, sign, note){
+    var e = D[planetKey].signs[pcLow(sign)];
+    var who = ctx.opts.archetype ? (e.primaryArchetype || '') : '';
+    return '<div class="pc-big3"><div class="pc-big3-l">' + label + '</div><div><b>' + sign + (who ? ' · ' + pcEsc(who) : '') + '</b>' + (note || '') + '<p>' + pcEsc(pcSentences(e.plainEnglish, 2)) + '</p></div></div>';
+  }
+  rows += row('Sun · your core', 'sun', B.Sun.sign);
+  if (!ctx.chart.timeKnown && ctx.chart.moonRange.changes) rows += '<div class="pc-big3"><div class="pc-big3-l">Moon · your needs</div><div><b>' + ctx.chart.moonRange.fromSign + ' or ' + ctx.chart.moonRange.toSign + '</b><p>Birth time unknown, so the Moon could be in either sign. See the Moon page for both.</p></div></div>';
+  else rows += row('Moon · your needs', 'moon', B.Moon.sign);
+  if (ctx.chart.timeKnown) rows += row('Rising · how you arrive', 'rising', B.Ascendant.sign);
+  else rows += '<div class="pc-big3"><div class="pc-big3-l">Rising</div><div><b>Needs a birth time</b><p>The rising sign changes about every two hours. Add a birth time later to unlock it.</p></div></div>';
+  return {title: ctx.opts.archetype ? 'Your Three Core Characters' : 'Your Big 3', html: rows};
+}
+function pcSecIntro(ctx){
+  var t = ctx.lib.templates && ctx.lib.templates.intro, ps = t ? t.paragraphs : [], html = '';
+  var arr = []; for (var k in ps) if (ps.hasOwnProperty(k)) arr.push(ps[k]);
+  html += ctx.opts.short ? pcP(pcSentences(arr[0], 3)) : arr.map(pcP).join('');
+  if (!ctx.chart.timeKnown) html += '<p class="pc-note">This reading was made without a birth time. Everything marked <b>Time-proof</b> holds no matter when you were born. Rising sign, houses and house-based timing need a birth time and are left out.</p>';
+  return {title: 'Welcome', html: html};
+}
+function pcSecNodes(ctx){
+  var n = ctx.chart.bodies['North Node'], e = ctx.lib.nodes.axisPairs[pcLow(n.sign)], html = '';
+  if (!e) return null;
+  if (ctx.opts.archetype && e.archetypeOfGrowth) html += '<div class="pc-r-arch">Growing toward <b>' + pcEsc(e.archetypeOfGrowth[0]) + '</b>. ' + pcEsc(PC_ARCH.CAST['North Node'].question) + '</div>';
+  html += ctx.opts.short ? pcP(pcSentences(e.plainEnglish, 2)) + pcLabel('Try this', pcSentences(e.whatHelps, 2)) :
+    pcP(pcSentences(ctx.lib.nodes.intro, 2)) + pcLabel('Your axis', e.plainEnglish) + pcLabel('The growth arc', e.growthArc) + pcLabel('What helps', e.whatHelps);
+  return {title: 'North Node in ' + n.sign + ' · South Node in ' + ctx.chart.bodies['South Node'].sign, deg: pcFmtDeg(n.lon), flag: pcFlag(false), html: html};
+}
+function pcSecSimpleSigns(libKey, name){
+  return function(ctx){
+    var b = ctx.chart.bodies[name]; if (!b || !ctx.lib[libKey]) return null;
+    var e = ctx.lib[libKey].signs[pcLow(b.sign)], html = '';
+    if (ctx.opts.archetype) html += '<div class="pc-r-arch"><b>' + pcEsc(e.primaryArchetype) + '</b>' + (PC_ARCH.CAST[name] ? ' asks: <i>' + pcEsc(PC_ARCH.CAST[name].question) + '</i>' : '') + '</div>';
+    html += pcPlacementBody(ctx, e) + pcHouseLine(ctx, b);
+    return {title: name + ' in ' + b.sign, deg: pcFmtDeg(b.lon), flag: pcFlag(false), html: html};
+  };
+}
+function pcAspectText(ctx, a){
+  var D = ctx.lib, tbls = ['Sun','Moon','Venus','Mars'], t, i;
+  for (i = 0; i < tbls.length; i++) {
+    if (a.a === tbls[i] && D['aspects' + tbls[i]] && D['aspects' + tbls[i]][pcLow(a.b)]) return D['aspects' + tbls[i]][pcLow(a.b)][a.key];
+    if (a.b === tbls[i] && D['aspects' + tbls[i]] && D['aspects' + tbls[i]][pcLow(a.a)]) return D['aspects' + tbls[i]][pcLow(a.a)][a.key];
+  }
+  t = D.aspectsSaturnStructural;
+  if (a.a === 'Saturn' && t[pcLow(a.b)]) return t[pcLow(a.b)][a.key];
+  if (a.b === 'Saturn' && t[pcLow(a.a)]) return t[pcLow(a.a)][a.key];
+  return null;
+}
+function pcSecAspects(ctx){
+  var list = ctx.chart.aspects, html = '', n = 0, max = ctx.opts.short ? 5 : 12;
+  for (var i = 0; i < list.length && n < max; i++) {
+    var a = list[i], txt = pcAspectText(ctx, a), def = ctx.lib.aspectDefinitions[a.key];
+    if (!ctx.chart.timeKnown && (a.a === 'Moon' || a.b === 'Moon') && ctx.chart.moonRange.changes) continue;
+    if (!txt && a.orb > 4) continue;
+    if (!txt) {
+      var ca = PC_ARCH.CAST[a.a], cb = PC_ARCH.CAST[a.b];
+      if (!ca || !cb) continue;
+      txt = ca.archetype + ' (' + ca.domain + ') ' + PC_ASPECT_PLAIN[a.key] + ' ' + cb.archetype + ' (' + cb.domain + '). ' + (def ? pcSentences(def.howItFeels, 1) : '');
+    }
+    var head = ctx.opts.archetype && PC_ARCH.CAST[a.a] && PC_ARCH.CAST[a.b] ? PC_ARCH.CAST[a.a].archetype + ' ' + PC_ASPECT_PLAIN[a.key] + ' ' + PC_ARCH.CAST[a.b].archetype : a.a + ' ' + a.name + ' ' + a.b;
+    html += '<div class="pc-r-asp"><h4>' + pcEsc(head) + ' <span class="pc-orb">' + a.orb.toFixed(1) + '°</span></h4>' + pcP(ctx.opts.short ? pcSentences(txt, 2) : txt) + '</div>';
+    n++;
+  }
+  if (!html) return null;
+  return {title: ctx.opts.archetype ? 'Conversations Between Your Characters' : 'Your Major Aspects', html: (ctx.opts.short ? '' : pcP(pcSentences(ctx.lib.aspectDefinitions.intro, 2))) + html};
+}
+function pcSecBalance(ctx){
+  var bal = pcBalance(ctx.chart), html = '<div class="pc-bars">', e;
+  for (e in bal.elements) html += '<div class="pc-bar-row"><span>' + e + '</span><span class="pc-bar pc-el-' + pcLow(e) + '" style="width:' + (bal.elements[e] * 10 + 2) + '%"></span><b>' + bal.elements[e] + '</b></div>';
+  html += '</div>';
+  var top = null; for (e in bal.elements) if (!top || bal.elements[e] > bal.elements[top]) top = e;
+  var T = PC_ARCH.TERRAIN[top];
+  html += pcP((ctx.opts.archetype ? 'Your home terrain is ' + T.name + ': ' : 'Your strongest element is ' + top + ': ') + T.gift + '.');
+  for (e in bal.elements) if (bal.elements[e] === 0) html += pcLabel('Missing ' + e, ctx.opts.short ? pcSentences(PC_ARCH.TERRAIN[e].void, 2) : PC_ARCH.TERRAIN[e].void);
+  var topM = null; for (var m in bal.modes) if (!topM || bal.modes[m] > bal.modes[topM]) topM = m;
+  html += pcP((ctx.opts.archetype ? PC_ARCH.PACE[topM][0] + ': ' : 'Your pace is mostly ' + topM + ': ') + PC_ARCH.PACE[topM][1] + '.');
+  return {title: ctx.opts.archetype ? 'Your Terrain and Pace' : 'Elements and Pace', html: html};
+}
+function pcThemeHTML(ctx, t){
+  var P = ctx.lib.patterns, txt = '';
+  if (t.kind === 'stellium' || t.kind === 'tSquare' || t.kind === 'grandTrine' || t.kind === 'yod') {
+    var p = P[t.kind];
+    txt = '<p class="pc-muted">' + pcEsc(t.planets.join(', ')) + '</p>';
+    txt += ctx.opts.short ? pcP(pcSentences(p.howItFeels, 2)) + pcLabel('The gift', pcSentences(p.theGift, 1)) :
+      pcLabel('What it is', p.whatItIs) + pcLabel('How it feels', p.howItFeels) + pcLabel('The gift', p.theGift) + pcLabel('The work', p.theWork) + pcLabel('What helps', p.whatHelps);
+  } else if (t.kind === 'void') txt = pcP(PC_ARCH.TERRAIN[t.element].void);
+  else if (t.kind === 'element') txt = pcP('With ' + t.count + ' planets in ' + t.element + ', ' + PC_ARCH.TERRAIN[t.element].gift + '.');
+  else if (t.kind === 'mode') txt = pcP(PC_ARCH.PACE[t.mode][1].charAt(0).toUpperCase() + PC_ARCH.PACE[t.mode][1].slice(1) + '.');
+  else if (t.kind === 'home') { var c = PC_ARCH.CAST[t.planets[0]]; txt = pcP('This planet works in its most natural setting, so ' + (c ? c.domain : 'its themes') + ' come through clearly and with ease. At its best: ' + (c ? c.light : '') + '.'); }
+  else if (t.kind === 'angular') { var c2 = PC_ARCH.CAST[t.planets[0]]; txt = pcP('Planets on the angles are loud. ' + (c2 ? c2.archetype + ' is one of the main voices in this chart, so ' + c2.domain + ' becomes a defining theme.' : '')); }
+  else if (t.kind === 'retro') txt = pcP('Several personal planets were retrograde at birth. These parts of you tend to process inward first, revisit, and refine. A slower, reflective rhythm is a strength, not a delay.');
+  return txt;
+}
+function pcSecThemes(ctx){
+  var picked = ctx.pickedThemes || [], html = '';
+  for (var i = 0; i < ctx.themes.length; i++) {
+    var t = ctx.themes[i];
+    if (picked.length && picked.indexOf(t.id) < 0) continue;
+    if (t.timed && !ctx.chart.timeKnown) continue;
+    html += '<div class="pc-r-theme"><h4>' + pcEsc(t.title) + '</h4>' + pcThemeHTML(ctx, t) + '</div>';
+  }
+  if (!html) return null;
+  return {title: ctx.opts.archetype ? 'The Big Themes in Your Story' : 'Chart Themes', html: html};
+}
+function pcSecCast(ctx){
+  var html = '<div class="pc-cast">', list = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
+  for (var i = 0; i < list.length; i++) {
+    var b = ctx.chart.bodies[list[i]], c = PC_ARCH.CAST[list[i]];
+    var sign = (list[i] === 'Moon' && !ctx.chart.timeKnown && ctx.chart.moonRange.changes) ? null : b.sign;
+    html += '<div class="pc-cast-card"><div class="pc-cast-g">' + PC_GLYPH[list[i]] + '</div><b>' + pcEsc(sign ? pcCharacter(list[i], sign) : c.archetype) + '</b><small>' + list[i] + (sign ? ' in ' + sign : '') + '</small><p>' + pcEsc(c.question) + '</p></div>';
+  }
+  return {title: 'Meet Your Cast of Characters', html: '<p>Each planet is a character in your story. The sign is the costume it wears.</p>' + html + '</div>'};
+}
+function pcSecHouses(ctx){
+  if (!ctx.chart.timeKnown) return null;
+  var html = '<table class="pc-table"><tr><th>House</th><th>Sign</th><th>Planets</th><th>Life area</th></tr>';
+  for (var h = 1; h <= 12; h++) {
+    var ps = [];
+    for (var i = 0; i < ctx.chart.list.length; i++) { var b = ctx.chart.list[i]; if (b.house === h && b.name !== 'Ascendant' && b.name !== 'Midheaven' && b.name !== 'South Node') ps.push(b.name); }
+    var st = PC_ARCH.HOUSE_STAGE[String(h)], e = ctx.lib.houses.entries[String(h)];
+    html += '<tr><td>' + (ctx.opts.archetype ? st[0] : pcOrd(h)) + '</td><td>' + pcSignOf(ctx.chart.cusps[h - 1]) + '</td><td>' + (ps.join(', ') || '—') + '</td><td>' + pcEsc(e ? e.lifeAreas : st[1]) + '</td></tr>';
+  }
+  var sys = {E:'Equal', W:'Whole Sign', P:'Placidus'}[ctx.chart.houseSystem];
+  return {title: ctx.opts.archetype ? 'The Stages of Your Life' : 'Your Houses', flag: pcFlag(true), html: '<p class="pc-muted">House system: ' + sys + '</p>' + html + '</table>'};
+}
+function pcSecNumLP(ctx){
+  var N = ctx.num, L = ctx.lib.numerology, e = L.lifePaths[String(N.lifePath)], html = '';
+  if (!ctx.opts.short) html += pcP(pcSentences(L.standardFraming, 2));
+  html += ctx.opts.short ? pcP(pcSentences(e.theme, 2)) + pcLabel('Your life task', e.lifeTask) :
+    pcLabel('The theme', e.theme) + pcLabel('Gifts', e.gifts) + pcLabel('Growth edges', e.challenges) + pcLabel('Life task', e.lifeTask);
+  return {title: 'Life Path ' + N.lifePath, flag: pcFlag(false), html: html};
+}
+function pcSecNumYear(ctx){
+  var N = ctx.num, e = ctx.lib.numerology.personalYears[String(N.personalYear)];
+  return {title: 'Personal Year ' + N.personalYear + ' (' + N.year + ')', flag: pcFlag(false), html: pcLabel('This year', ctx.opts.short ? pcSentences(e.theme, 2) : e.theme) + pcLabel('What helps', ctx.opts.short ? pcSentences(e.whatHelps, 2) : e.whatHelps)};
+}
+function pcSecNumName(ctx){
+  var N = ctx.num; if (!N.expression) return null;
+  function row(label, n, what){ var e = ctx.lib.numerology.lifePaths[String(n)]; return '<div class="pc-num"><div class="pc-num-n">' + n + '</div><div><b>' + label + '</b> <span class="pc-muted">' + what + '</span><p>The energy of ' + PC_NUMBER_WORD[n] + '. ' + pcEsc(ctx.opts.short ? '' : pcSentences(e.theme, 1)) + '</p></div></div>'; }
+  return {title: 'Your Name Numbers', html: row('Expression', N.expression, 'your natural talents') + row('Soul Urge', N.soulUrge, 'what your heart wants') + row('Personality', N.personality, 'how others first see you') + row('Birthday', N.birthday, 'a special gift you carry')};
+}
+function pcSecHDType(ctx){
+  var H = ctx.hd, T = PC_HD_TYPES[H.type];
+  var html = ctx.opts.short ? pcP(T.short) : pcP(T.text) + '<div class="pc-kv"><div><b>Strategy</b>' + T.strategy + '</div><div><b>When aligned you feel</b>' + T.signature + '</div><div><b>Signal to slow down</b>' + T.notSelf + '</div></div>';
+  return {title: 'Human Design: ' + H.type, flag: ctx.chart.timeKnown ? '' : '<span class="pc-flag pc-flag-time">Best with birth time</span>', html: html};
+}
+function pcSecHDAuth(ctx){ return {title: 'Your Decision Style: ' + ctx.hd.authority + ' Authority', html: pcP(PC_HD_AUTH[ctx.hd.authority])}; }
+function pcSecHDProfile(ctx){
+  var l = ctx.hd.profileLines;
+  return {title: 'Profile ' + ctx.hd.profile, html: pcLabel('Conscious line ' + l[0], PC_HD_PROFILE_LINE[l[0]]) + pcLabel('Unconscious line ' + l[1], PC_HD_PROFILE_LINE[l[1]])};
+}
+function pcSecHDCenters(ctx){
+  var html = '<div class="pc-centers">';
+  for (var i = 0; i < ctx.hd.centers.length; i++) {
+    var c = ctx.hd.centers[i], t = PC_HD_CENTER_TEXT[c.name];
+    html += '<div class="pc-center ' + (c.defined ? 'is-def' : 'is-open') + '"><b>' + c.name + '</b> <span>' + (c.defined ? 'Defined' : 'Open') + '</span><small>' + t[0] + '</small>' + (ctx.opts.short ? '' : '<p>' + pcEsc(c.defined ? t[1] : t[2]) + '</p>') + '</div>';
+  }
+  var ch = ctx.hd.channels.map(function(x){ return x.gates.join('-') + ' (' + x.centers.join(' to ') + ')'; }).join('; ');
+  return {title: 'Your Energy Centers', html: html + '</div>' + (ch ? '<p class="pc-muted">Defined channels: ' + ch + '</p>' : '')};
+}
+function pcCardHTML(n, label){ var c = PC_TAROT[n]; return '<div class="pc-tcard"><div class="pc-tcard-n">' + (n === 0 ? '0' : n) + '</div><b>' + c[0] + '</b>' + (label ? '<small>' + label + '</small>' : '') + '<p>' + c[1] + '</p></div>'; }
+function pcSecTarotBirth(ctx){
+  var T = ctx.tarot, html = '<p>Your birth cards are the Major Arcana that walk with you for life' + (T.birth.length > 1 ? ': a pair (or trio) that work as a team.' : '.') + '</p><div class="pc-tcards">';
+  for (var i = 0; i < T.birth.length; i++) html += pcCardHTML(T.birth[i], i === 0 ? 'Soul card' : 'Personality card');
+  return {title: 'Tarot Birth Cards', flag: pcFlag(false), html: html + '</div>'};
+}
+function pcSecTarotYear(ctx){
+  var T = ctx.tarot, html = '<div class="pc-tcards">';
+  for (var i = 0; i < T.year.length; i++) html += pcCardHTML(T.year[i], T.yearNum);
+  return {title: 'Your ' + T.yearNum + ' Year Card', html: html + '</div>'};
+}
+function pcSecTarotBig3(ctx){
+  var B = ctx.tarot.big3, html = '<div class="pc-tcards">';
+  html += pcCardHTML(B.Sun, 'Sun in ' + ctx.chart.bodies.Sun.sign);
+  if (B.Moon !== null && B.Moon !== undefined) html += pcCardHTML(B.Moon, 'Moon in ' + ctx.chart.bodies.Moon.sign);
+  if (B.Rising !== undefined) html += pcCardHTML(B.Rising, 'Rising in ' + ctx.chart.bodies.Ascendant.sign);
+  return {title: 'Your Big 3 in the Tarot', html: html + '</div>'};
+}
+function pcFmtDate(d){ return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
+function pcTransitHTML(ctx, t){
+  var mc = PC_ARCH.CAST[t.mover], tc = PC_ARCH.CAST[t.target];
+  var head = ctx.opts.archetype && tc ? mc.archetype + ' ' + PC_ASPECT_PLAIN[t.key] + ' your ' + (t.target === 'Ascendant' || t.target === 'Midheaven' ? t.target : pcCharacter(t.target, ctx.chart.bodies[t.target].sign)) : t.mover + ' ' + t.name + ' your ' + t.target;
+  var area = tc ? tc.domain : (t.target === 'Ascendant' ? 'how you show up and your personal direction' : 'career, reputation and public path');
+  var body = 'A season of ' + PC_TRANSIT_THEME[t.mover] + ', touching ' + area + '.';
+  var def = ctx.lib.aspectDefinitions[t.key];
+  if (!ctx.opts.short && def) body += ' ' + pcSentences(def.howItFeels, 1);
+  return '<div class="pc-r-asp"><h4>' + pcEsc(head) + '</h4><div class="pc-muted">' + pcFmtDate(t.start) + ' to ' + pcFmtDate(t.end) + ' · strongest around ' + pcFmtDate(t.exact) + '</div>' + pcP(body) + '</div>';
+}
+function pcSecTransitsNow(ctx){
+  var html = ''; for (var i = 0; i < ctx.transits.length; i++) if (ctx.transits[i].active) html += pcTransitHTML(ctx, ctx.transits[i]);
+  if (!html) html = pcP('No major outer-planet transits are exact to your personal planets right now. A quieter stretch is a good time to build.');
+  return {title: 'What Is Active Now', html: html};
+}
+function pcSecTransitsYear(ctx){
+  var html = '', n = 0; for (var i = 0; i < ctx.transits.length; i++) if (!ctx.transits[i].active && n < (ctx.opts.short ? 5 : 12)) { html += pcTransitHTML(ctx, ctx.transits[i]); n++; }
+  if (!html) return null;
+  return {title: 'The Year Ahead', html: html};
+}
+function pcSecProfection(ctx){
+  var P = ctx.prof; if (!P) return null;
+  var L = ctx.lib.profection, lordKey = L.rulers[pcLow(P.sign)].traditional, lord = lordKey.charAt(0).toUpperCase() + lordKey.slice(1);
+  var e = ctx.lib.houses.entries[String(P.house)], c = PC_ARCH.CAST[lord];
+  var html = (ctx.opts.short ? '' : pcP(L.standardFraming)) + pcLabel('Age ' + P.age + ': your ' + pcOrd(P.house) + ' house year (' + P.sign + ')', ctx.opts.short ? pcSentences(e.text, 1) : e.text) +
+    pcLabel('Your guide this year: ' + lord + (ctx.opts.archetype && c ? ', ' + c.archetype : ''), c ? 'Themes of ' + c.domain + ' come forward. ' + c.question : '');
+  return {title: 'Your Year Theme (Profection)', flag: pcFlag(true), html: html};
+}
+function pcSecClosing(ctx){
+  var note = ctx.note || '';
+  var html = note ? note.split(/\n\n+/).map(function(p){ return '<p>' + pcEsc(p).replace(/\n/g, '<br>') + '</p>'; }).join('') : pcP('Thank you for exploring your chart with me. Take what resonates, leave what does not, and come back to these pages as you grow. Your chart is a map for learning, not a box.');
+  return {title: 'A Note From ' + pcEsc(ctx.practitionerName || 'Your Reader'), html: html};
+}
+
+
+/* ---------- Tree of Life sections ---------- */
+var PC_LEVEL_WORD = {radiant:'Radiant', steady:'Steady', growing:'Growth edge'};
+function pcSephName(ctx, k){ var S = PC_SEPH[k]; return ctx.opts.archetype ? S.arch + ' (' + S.name + ')' : S.name + ', ' + S.title; }
+function pcSecTreeMap(ctx){
+  var T = ctx.tree, lit = T.paths.filter(function(p){ return p.score > 0; }).length;
+  var html = '<div class="pc-tree-wrap">' + pcTreeSVG(T) + '<div>';
+  html += pcP('The Tree of Life is the master map of the Hermetic Qabalah: ten spheres (Sephiroth) joined by twenty-two paths. Each sphere holds a planet, and each path holds a Hebrew letter, a tarot trump and a sign, planet or element.');
+  if (!ctx.opts.short) html += pcP('Your birth chart lights this map up. A sphere glows gold when its planet is strong in your chart, teal when it is steady, and coral where it is a growth edge. Purple paths are the journeys your chart emphasizes.');
+  html += '<div class="pc-kv"><div><b>Lit paths</b>' + lit + ' of 22</div><div><b>Soul Sephira</b>' + PC_SEPH[T.soul.key].name + '</div><div><b>Leading pillar</b>' + {mercy:'Mercy', severity:'Severity', middle:'Balance'}[T.leadPillar] + '</div></div>';
+  if (!ctx.chart.timeKnown) html += '<p class="pc-note">Made without a birth time. The map is time-proof except for angle bonuses' + (ctx.chart.moonRange.changes ? ', and Yesod (the Moon) is drawn dotted because the Moon changed signs that day' : '') + '.</p>';
+  return {title: ctx.opts.archetype ? 'Your Tree of Life Map' : 'Tree of Life: Your Map', flag: pcFlag(false), html: html + '</div></div>'};
+}
+function pcSecTreeSeph(ctx){
+  var T = ctx.tree, html = '', order = ['radiant','steady','growing'];
+  for (var o = 0; o < order.length; o++) {
+    var group = '';
+    for (var i = 0; i < PC_SEPH_ORDER.length; i++) {
+      var k = PC_SEPH_ORDER[i], S = PC_SEPH[k], r = T.seph[k];
+      if (S.hidden || r.level !== order[o]) continue;
+      if (ctx.opts.short && order[o] === 'steady') continue;
+      var head = '<h4><span class="pc-lvl pc-lvl-' + r.level + '">' + PC_LEVEL_WORD[r.level] + '</span> ' + S.n + '. ' + pcEsc(pcSephName(ctx, k)) + ' <span class="pc-orb">' + (S.planet === 'Earth' ? 'Earth' : S.planet) + (r.sign ? ' in ' + r.sign : '') + '</span></h4>';
+      var body = ctx.opts.short ? pcP(pcSentences(S.text, 1) + ' ' + (r.level === 'growing' ? 'Your growth edge: ' + S.edge + '.' : 'Your gift: ' + S.gift + '.')) :
+        pcP(S.text) + (r.unsure ? '<p class="pc-note">The Moon changed signs on this birthday, so this sphere\'s strength is uncertain without a birth time.</p>' : '') +
+        '<p class="pc-muted">Why: ' + pcEsc(r.notes.join('; ')) + '</p>' + pcLabel('Your gift', S.gift.charAt(0).toUpperCase() + S.gift.slice(1) + '.') + pcLabel('Your growth edge', S.edge.charAt(0).toUpperCase() + S.edge.slice(1) + '.') + pcLabel('Try this', S.practice);
+      group += '<div class="pc-r-asp">' + head + body + '</div>';
+    }
+    html += group;
+  }
+  var dk = T.seph.daath;
+  if (!ctx.opts.short) html += '<div class="pc-r-asp"><h4>The hidden sphere: ' + (ctx.opts.archetype ? 'The Threshold (Daath)' : 'Daath, Knowledge') + ' <span class="pc-orb">Pluto in ' + dk.sign + '</span></h4>' + pcP(PC_SEPH.daath.text) + pcLabel('Try this', PC_SEPH.daath.practice) + '</div>';
+  return {title: ctx.opts.archetype ? 'The Spheres of Your Tree' : 'Your Sephiroth', html: (ctx.opts.short ? '' : pcP('Each sphere is a quality of life, carried by a planet. Uranus, Neptune and Pluto follow the modern placements (Chokmah, Kether and the hidden Daath); the seven classical planets follow the Golden Dawn.')) + html};
+}
+function pcPathHTML(ctx, p, extra){
+  var card = PC_TAROT[p.trump];
+  var head = 'Path ' + p.num + ' · ' + p.hebrew + ' ' + p.letter + ' · ' + card[0];
+  return '<div class="pc-path"><div class="pc-path-n">' + p.hebrew + '</div><div><h4>' + pcEsc(head) + ' <span class="pc-orb">' + p.attr + '</span></h4>' +
+    '<p>From ' + pcEsc(pcSephName(ctx, p.from)) + ' to ' + pcEsc(pcSephName(ctx, p.to)) + ': ' + pcEsc(p.meaning) + '.' + (ctx.opts.short ? '' : ' ' + pcEsc(card[1])) + '</p>' +
+    (extra ? '<p class="pc-muted">' + pcEsc(extra) + '</p>' : (p.why.length ? '<p class="pc-muted">Lit by: ' + pcEsc(p.why.join('; ')) + '</p>' : '')) + '</div></div>';
+}
+function pcSecTreePaths(ctx){
+  var list = ctx.tree.paths.filter(function(p){ return p.score > 0; }).sort(function(a, b){ return b.score - a.score || a.num - b.num; });
+  if (!list.length) return null;
+  var max = ctx.opts.short ? 4 : 12, html = '';
+  for (var i = 0; i < list.length && i < max; i++) html += pcPathHTML(ctx, list[i]);
+  return {title: ctx.opts.archetype ? 'The Journeys Your Chart Walks' : 'Your Lit Paths', html: (ctx.opts.short ? '' : pcP('The paths are the journeys between spheres. Your chart lights a path when planets sit in its sign, when its planet is strong, or when its element is emphasized. The brightest come first.')) + html};
+}
+function pcSecTreeSoul(ctx){
+  var T = ctx.tree, s = PC_SEPH[T.soul.key], y = PC_SEPH[T.year.key], html = '';
+  html += '<div class="pc-r-asp"><h4>Soul Sephira: ' + pcEsc(pcSephName(ctx, T.soul.key)) + ' <span class="pc-orb">Life Path ' + T.soul.num + '</span></h4>' + pcP(ctx.opts.short ? pcSentences(s.text, 1) + ' Your gift: ' + s.gift + '.' : s.text + ' Your Life Path number places your soul\'s home base here. Your gift: ' + s.gift + '.') + '</div>';
+  if (T.soul.num > 9) html += '<p class="pc-note">Master number ' + T.soul.num + ': it reduces to ' + pcSephName(ctx, T.soul.key) + ', carrying a higher octave of that sphere\'s work.</p>';
+  html += '<div class="pc-r-asp"><h4>This year\'s sphere: ' + pcEsc(pcSephName(ctx, T.year.key)) + ' <span class="pc-orb">Personal Year ' + T.year.num + ' (' + T.year.yr + ')</span></h4>' + pcP('This year invites you to practice ' + y.gift + '. ' + (ctx.opts.short ? '' : 'Try this: ' + y.practice)) + '</div>';
+  html += '<h4>Your birth card on the Tree</h4>';
+  for (var i = 0; i < T.birthPaths.length; i++) html += pcPathHTML(ctx, T.birthPaths[i], i === 0 ? 'Your soul card\'s path' : 'Your personality card\'s path');
+  if (!ctx.opts.short) html += pcPathHTML(ctx, T.yearPath, 'Your ' + T.year.yr + ' year card\'s path');
+  return {title: 'Your Soul Sphere and Birth-Card Paths', flag: pcFlag(false), html: html};
+}
+function pcSecTreePillars(ctx){
+  var P = ctx.tree.pillars, tot = P.mercy + P.severity + P.middle || 1, html = '<div class="pc-bars">';
+  var rows = [['Mercy','mercy','#0f9e94'],['Balance','middle','#e8a923'],['Severity','severity','#e0663f']];
+  for (var i = 0; i < rows.length; i++) html += '<div class="pc-bar-row"><span>' + rows[i][0] + '</span><span class="pc-bar" style="width:' + Math.round(P[rows[i][1]] / tot * 100) + '%;background:' + rows[i][2] + '"></span><b>' + Math.round(P[rows[i][1]] / tot * 100) + '%</b></div>';
+  html += '</div>';
+  var txt = {
+    mercy: 'The Pillar of Mercy (Chokmah, Chesed, Netzach) leads. You grow through expansion, generosity, inspiration and feeling. Your growth practice is adding gentle structure so all that energy has a shape to flow into.',
+    severity: 'The Pillar of Severity (Binah, Geburah, Hod) leads. You grow through focus, form, discernment and understanding. Your growth practice is softening into receiving, play and kindness toward yourself.',
+    middle: 'The Middle Pillar of Balance (Kether, Tiphareth, Yesod, Malkuth) leads, or your pillars are fairly even. You grow by staying centered and bringing spirit down into everyday life. Your growth practice is letting yourself lean fully into one side when life calls for it.'
+  }[ctx.tree.leadPillar];
+  return {title: 'Your Pillar Balance', html: html + pcP(ctx.opts.short ? pcSentences(txt, 2) : txt)};
+}
+
+var PC_SECTIONS = [
+  {group:'Start here', items:[['intro','Welcome', pcSecIntro],['big3','Big 3 summary', pcSecBig3],['cast','Archetype cast', pcSecCast]]},
+  {group:'Birth chart', items:[['sun','Sun', pcSecPlanet('Sun')],['moon','Moon', pcSecPlanet('Moon')],['rising','Rising', pcSecRising, 1],['mercury','Mercury', pcSecPlanet('Mercury')],['venus','Venus', pcSecPlanet('Venus')],['mars','Mars', pcSecPlanet('Mars')],['jupiter','Jupiter', pcSecPlanet('Jupiter')],['saturn','Saturn', pcSecPlanet('Saturn')],['uranus','Uranus', pcSecPlanet('Uranus')],['neptune','Neptune', pcSecPlanet('Neptune')],['pluto','Pluto', pcSecPlanet('Pluto')],['nodes','Nodes', pcSecNodes],['chiron','Chiron', pcSecSimpleSigns('chiron','Chiron')],['lilith','Lilith', pcSecSimpleSigns('lilith','Lilith')]]},
+  {group:'Chart patterns', items:[['balance','Elements and pace', pcSecBalance],['aspects','Major aspects', pcSecAspects],['themes','Themes', pcSecThemes],['houses','Houses', pcSecHouses, 1]]},
+  {group:'Numerology', items:[['lifepath','Life Path', pcSecNumLP],['peryear','Personal Year', pcSecNumYear],['namenums','Name numbers', pcSecNumName]]},
+  {group:'Human Design', items:[['hdtype','Type and strategy', pcSecHDType],['hdauth','Authority', pcSecHDAuth],['hdprofile','Profile', pcSecHDProfile],['hdcenters','Centers', pcSecHDCenters]]},
+  {group:'Tree of Life', items:[['tolmap','Tree map', pcSecTreeMap],['tolseph','Sephiroth', pcSecTreeSeph],['tolpaths','Lit paths', pcSecTreePaths],['tolsoul','Soul sphere', pcSecTreeSoul],['tolpillars','Pillars', pcSecTreePillars]]},
+  {group:'Tarot', items:[['tbirth','Birth cards', pcSecTarotBirth],['tyear','Year card', pcSecTarotYear],['tbig3','Big 3 cards', pcSecTarotBig3]]},
+  {group:'Timing', items:[['tnow','Active now', pcSecTransitsNow],['tyearahead','Year ahead', pcSecTransitsYear],['profection','Year theme', pcSecProfection, 1]]},
+  {group:'Finish', items:[['closing','Closing note', pcSecClosing]]}
+];
+var PC_SECTION_BY_ID = {};
+(function(){ for (var i = 0; i < PC_SECTIONS.length; i++) for (var j = 0; j < PC_SECTIONS[i].items.length; j++) { var it = PC_SECTIONS[i].items[j]; PC_SECTION_BY_ID[it[0]] = {id: it[0], label: it[1], fn: it[2], needsTime: !!it[3], group: PC_SECTIONS[i].group}; } })();
+var PC_PRESETS = {
+  quick: ['big3','sun','moon','rising','lifepath','hdtype','tnow','closing'],
+  full: ['intro','big3','sun','moon','rising','mercury','venus','mars','jupiter','saturn','nodes','balance','aspects','themes','houses','closing'],
+  tree: ['tolmap','tolseph','tolpaths','tolsoul','tolpillars','closing'],
+  everything: null
+};
+
+function pcBuildContext(client, lib, opts){
+  var inp = {y: client.y, mo: client.mo, d: client.d, h: client.h, mi: client.mi, timeKnown: client.timeKnown, lat: client.lat, lon: client.lon, tz: client.tz, house: opts.house || client.house || 'E', chironLon: client.chironLon};
+  var chart = pcCalcChart(inp), today = new Date();
+  var ctx = {client: client, chart: chart, lib: lib, opts: opts, themes: pcThemes(chart), num: pcNumerology(client, today),
+    hd: pcHumanDesign(chart), tarot: pcTarot(client, chart, today), transits: pcTransits(chart, today), prof: pcProfection(chart, client, today)};
+  ctx.tree = pcTree(ctx);
+  return ctx;
+}
+function pcRenderReport(ctx, ids){
+  var out = [], i;
+  for (i = 0; i < ids.length; i++) {
+    var s = PC_SECTION_BY_ID[ids[i]]; if (!s) continue;
+    if (s.needsTime && !ctx.chart.timeKnown) continue;
+    var r; try { r = s.fn(ctx); } catch (e) { r = {title: s.label, html: '<p class="pc-muted">This section could not be built (' + pcEsc(e.message) + ').</p>'}; }
+    if (!r) continue;
+    out.push('<section class="pc-r-sec" data-sec="' + s.id + '"><header><h3>' + r.title + '</h3>' + (r.deg ? '<span class="pc-deg">' + pcEsc(r.deg) + '</span>' : '') + (r.flag && !ctx.chart.timeKnown ? r.flag : '') + '</header>' + r.html + '</section>');
+  }
+  return out.join('');
+}
+
+/* ===== pc store: Supabase (live) or in-memory demo (ES5, Promise-based) ===== */
+function pcRowToClient(r){
+  var p = String(r.birth_date).split('-');
+  return {id: r.id, name: r.name, pronouns: r.pronouns || '', email: r.email || '', y: +p[0], mo: +p[1], d: +p[2],
+    h: r.birth_hour, mi: r.birth_minute, timeKnown: !!r.time_known, placeLabel: r.place_label || '', lat: r.lat, lon: r.lon, tz: r.tz,
+    house: r.house_system || 'E', chironLon: r.chiron_lon, notes: r.private_notes || '', updated: r.updated_at};
+}
+function pcPad(n){ return (n < 10 ? '0' : '') + n; }
+function pcClientToRow(c){
+  return {name: c.name, pronouns: c.pronouns || '', email: c.email || '', birth_date: c.y + '-' + pcPad(c.mo) + '-' + pcPad(c.d),
+    birth_hour: c.timeKnown ? c.h : null, birth_minute: c.timeKnown ? c.mi : null, time_known: !!c.timeKnown, place_label: c.placeLabel || '',
+    lat: c.lat, lon: c.lon, tz: c.tz, house_system: c.house || 'E', chiron_lon: (c.chironLon === undefined ? null : c.chironLon), private_notes: c.notes || '', updated_at: new Date().toISOString()};
+}
+
+function PcSupaStore(url, key){
+  this.sb = window.supabase.createClient(url, key, {auth: {persistSession: true, storageKey: 'pc-auth'}});
+  this.user = null;
+}
+PcSupaStore.prototype = {
+  live: true,
+  _u: function(r){ if (r.error) throw r.error; return r.data; },
+  session: function(){ var s = this; return s.sb.auth.getSession().then(function(r){ s.user = r.data && r.data.session ? r.data.session.user : null; return s.user; }); },
+  signIn: function(email, pw){ var s = this; return s.sb.auth.signInWithPassword({email: email, password: pw}).then(function(r){ if (r.error) throw r.error; s.user = r.data.user; return s.user; }); },
+  signUp: function(email, pw, name){
+    return this.sb.auth.signUp({email: email, password: pw, options: {data: {display_name: name}, emailRedirectTo: window.location.href.split('#')[0]}}).then(function(r){ if (r.error) throw r.error; return r.data; });
+  },
+  resetPassword: function(email){ return this.sb.auth.resetPasswordForEmail(email, {redirectTo: window.location.href.split('#')[0]}).then(function(r){ if (r.error) throw r.error; }); },
+  signOut: function(){ this.user = null; return this.sb.auth.signOut(); },
+  profile: function(){
+    var s = this;
+    return s.sb.from('pc_practitioners').select('*').eq('id', s.user.id).maybeSingle().then(function(r){
+      if (r.error) throw r.error;
+      if (r.data) return r.data;
+      var name = (s.user.user_metadata && s.user.user_metadata.display_name) || s.user.email.split('@')[0];
+      return s.sb.from('pc_practitioners').insert({id: s.user.id, display_name: name}).select().single().then(function(r2){ if (r2.error) throw r2.error; return r2.data; });
+    });
+  },
+  saveProfile: function(p){ var s = this; return s.sb.from('pc_practitioners').update({display_name: p.display_name, business_name: p.business_name, closing_note: p.closing_note}).eq('id', s.user.id).then(function(r){ if (r.error) throw r.error; }); },
+  library: function(){
+    return this.sb.from('pc_library').select('section,data').then(function(r){
+      if (r.error) throw r.error; var lib = {};
+      for (var i = 0; i < r.data.length; i++) lib[r.data[i].section] = r.data[i].data;
+      return lib;
+    });
+  },
+  saveLibrary: function(lib){
+    var rows = []; for (var k in lib) if (lib.hasOwnProperty(k)) rows.push({section: k, data: lib[k], updated_at: new Date().toISOString()});
+    return this.sb.from('pc_library').upsert(rows).then(function(r){ if (r.error) throw r.error; return rows.length; });
+  },
+  clients: function(){ return this.sb.from('pc_clients').select('*').order('name').then(function(r){ if (r.error) throw r.error; return r.data.map(pcRowToClient); }); },
+  saveClient: function(c){
+    var row = pcClientToRow(c), q = c.id ? this.sb.from('pc_clients').update(row).eq('id', c.id) : this.sb.from('pc_clients').insert(row);
+    return q.select().single().then(function(r){ if (r.error) throw r.error; return pcRowToClient(r.data); });
+  },
+  deleteClient: function(id){ return this.sb.from('pc_clients').delete().eq('id', id).then(function(r){ if (r.error) throw r.error; }); },
+  sessions: function(cid){ return this.sb.from('pc_sessions').select('*').eq('client_id', cid).order('session_date', {ascending: false}).then(function(r){ if (r.error) throw r.error; return r.data; }); },
+  saveSession: function(x){
+    var row = {client_id: x.client_id, session_date: x.session_date, topic: x.topic, notes: x.notes};
+    var q = x.id ? this.sb.from('pc_sessions').update(row).eq('id', x.id) : this.sb.from('pc_sessions').insert(row);
+    return q.select().single().then(function(r){ if (r.error) throw r.error; return r.data; });
+  },
+  deleteSession: function(id){ return this.sb.from('pc_sessions').delete().eq('id', id).then(function(r){ if (r.error) throw r.error; }); },
+  reports: function(cid){ return this.sb.from('pc_reports').select('*').eq('client_id', cid).order('updated_at', {ascending: false}).then(function(r){ if (r.error) throw r.error; return r.data; }); },
+  saveReport: function(x){
+    var row = {client_id: x.client_id, title: x.title, sections: x.sections, themes: x.themes, short_version: x.short_version, archetype_mode: x.archetype_mode, closing_note: x.closing_note, updated_at: new Date().toISOString()};
+    var q = x.id ? this.sb.from('pc_reports').update(row).eq('id', x.id) : this.sb.from('pc_reports').insert(row);
+    return q.select().single().then(function(r){ if (r.error) throw r.error; return r.data; });
+  },
+  deleteReport: function(id){ return this.sb.from('pc_reports').delete().eq('id', id).then(function(r){ if (r.error) throw r.error; }); }
+};
+
+/* Demo store: nothing leaves the page and nothing is kept after closing it. */
+function PcDemoStore(lib){ this.lib = lib; this.user = null; this.db = {clients: [], sessions: [], reports: []}; this.prof = {display_name: 'Demo Practitioner', business_name: '', approved: true, closing_note: ''}; }
+function pcId(){ return 'd' + Math.random().toString(36).slice(2, 10); }
+function pcP_(v){ return Promise.resolve(v); }
+PcDemoStore.prototype = {
+  live: false,
+  session: function(){ return pcP_(this.user); },
+  signIn: function(email){ this.user = {id: 'demo', email: email || 'demo@example.com'}; return pcP_(this.user); },
+  signUp: function(email){ return this.signIn(email); },
+  resetPassword: function(){ return pcP_(); },
+  signOut: function(){ this.user = null; return pcP_(); },
+  profile: function(){ return pcP_(this.prof); },
+  saveProfile: function(p){ this.prof.display_name = p.display_name; this.prof.business_name = p.business_name; this.prof.closing_note = p.closing_note; return pcP_(); },
+  library: function(){ return pcP_(this.lib); },
+  saveLibrary: function(lib){ this.lib = lib; return pcP_(Object.keys(lib).length); },
+  clients: function(){ return pcP_(this.db.clients.slice(0).sort(function(a, b){ return a.name.localeCompare(b.name); })); },
+  saveClient: function(c){ var copy = JSON.parse(JSON.stringify(c)); if (!copy.id) { copy.id = pcId(); this.db.clients.push(copy); } else { for (var i = 0; i < this.db.clients.length; i++) if (this.db.clients[i].id === copy.id) this.db.clients[i] = copy; } return pcP_(copy); },
+  deleteClient: function(id){ this.db.clients = this.db.clients.filter(function(c){ return c.id !== id; }); return pcP_(); },
+  sessions: function(cid){ return pcP_(this.db.sessions.filter(function(s){ return s.client_id === cid; })); },
+  saveSession: function(x){ var c = JSON.parse(JSON.stringify(x)); if (!c.id) { c.id = pcId(); this.db.sessions.unshift(c); } else { for (var i = 0; i < this.db.sessions.length; i++) if (this.db.sessions[i].id === c.id) this.db.sessions[i] = c; } return pcP_(c); },
+  deleteSession: function(id){ this.db.sessions = this.db.sessions.filter(function(s){ return s.id !== id; }); return pcP_(); },
+  reports: function(cid){ return pcP_(this.db.reports.filter(function(s){ return s.client_id === cid; })); },
+  saveReport: function(x){ var c = JSON.parse(JSON.stringify(x)); c.updated_at = new Date().toISOString(); if (!c.id) { c.id = pcId(); this.db.reports.unshift(c); } else { for (var i = 0; i < this.db.reports.length; i++) if (this.db.reports[i].id === c.id) this.db.reports[i] = c; } return pcP_(c); },
+  deleteReport: function(id){ this.db.reports = this.db.reports.filter(function(s){ return s.id !== id; }); return pcP_(); }
+};
+
+/* ===== pc app (ES5) ===== */
+(function(){
+  var CFG = window.PC_CONFIG || {};
+  var root = document.getElementById('pc-root');
+  var S = {step: 'clients', clients: [], cur: null, sessions: [], reports: [], editing: null, sessEdit: null, build: null, msg: null, scale: 1};
+  var IDLE_MIN = CFG.idleMinutes || 20, idleTimer = null;
+
+  function $(sel){ return root.querySelector(sel); }
+  function esc(s){ return pcEsc(s); }
+  function toast(t){ var d = document.createElement('div'); d.className = 'pc-toast'; d.textContent = t; root.appendChild(d); setTimeout(function(){ if (d.parentNode) d.parentNode.removeChild(d); }, 2600); }
+  function fail(e){ S.busy = false; S.msg = {err: (e && (e.message || e.error_description)) || String(e)}; render(); }
+  function today(){ var d = new Date(); return d.getFullYear() + '-' + pcPad(d.getMonth() + 1) + '-' + pcPad(d.getDate()); }
+
+  /* ---------- privacy: auto-lock after inactivity ---------- */
+  function poke(){ if (!S.user) return; clearTimeout(idleTimer); idleTimer = setTimeout(function(){ lock('Locked after ' + IDLE_MIN + ' minutes of no activity, to keep client files private.'); }, IDLE_MIN * 60000); }
+  ['click','keydown','scroll','touchstart'].forEach(function(ev){ root.addEventListener(ev, poke, true); });
+  function lock(reason){
+    S.store.signOut();
+    S.user = null; S.profile = null; S.lib = null; S.clients = []; S.cur = null; S.sessions = []; S.reports = []; S.build = null; S.editing = null; S.step = 'clients';
+    S.msg = reason ? {ok: reason} : null; render();
+  }
+
+  /* ---------- boot ---------- */
+  function boot(){
+    if (!window.Astronomy) { root.innerHTML = '<div class="pc-screen"><p>Loading the chart engine…</p></div>'; return setTimeout(boot, 300); }
+    if (CFG.demo) S.store = new PcDemoStore(window.PC_DEMO_LIB);
+    else {
+      if (!window.supabase) { root.innerHTML = '<div class="pc-screen"><p>Connecting securely…</p></div>'; return setTimeout(boot, 300); }
+      S.store = new PcSupaStore(CFG.supabaseUrl, CFG.supabaseKey);
+    }
+    if (S.store.live) S.store.sb.auth.onAuthStateChange(function(ev){ if (ev === 'PASSWORD_RECOVERY') { S.recovery = true; render(); } });
+    S.store.session().then(function(u){ if (u) afterLogin(u); else render(); }).catch(function(){ render(); });
+  }
+  function afterLogin(u){
+    S.user = u; S.msg = null; poke();
+    S.store.profile().then(function(p){
+      S.profile = p;
+      if (!p.approved) { render(); return; }
+      return S.store.library().then(function(lib){
+        S.lib = lib;
+        if (!libCount()) { S.lib = null; if (p.is_admin) { S.lib = {}; S.step = 'settings'; S.msg = {ok: 'Welcome! First, load your interpretation library below.'}; } }
+        return S.store.clients();
+      }).then(function(cl){ S.clients = cl; render(); });
+    }).catch(fail);
+  }
+
+  /* ---------- render ---------- */
+  function render(){
+    root.style.setProperty('--pc-scale', S.scale);
+    var h = topBar();
+    if (S.recovery) h += recoveryView();
+    else if (!S.user) h += authView();
+    else if (!S.profile) h += '<div class="pc-screen"><p>Opening your files…</p></div>';
+    else if (!S.profile.approved) h += pendingView();
+    else if (!S.lib) h += '<div class="pc-screen"><div class="pc-card pc-empty"><h3>Opening your library…</h3><p>If this stays here, the interpretation library has not been loaded yet. Please check back soon.</p></div></div>';
+    else if (!libCount() && S.step !== 'settings') { S.step = 'settings'; h += settingsView(); }
+    else if (S.step === 'settings') h += settingsView();
+    else if (S.step === 'build' && S.cur) h += buildView();
+    else if (S.step === 'send' && S.cur && S.build) h += sendView();
+    else h += clientsView();
+    root.innerHTML = h;
+    if (S.step === 'build' && S.build && S.user) renderPreview();
+  }
+  function msgHTML(){ if (!S.msg) return ''; return S.msg.err ? '<div class="pc-err">' + esc(S.msg.err) + '</div>' : '<div class="pc-ok">' + esc(S.msg.ok) + '</div>'; }
+  function topBar(){
+    var on = S.user && S.profile && S.profile.approved;
+    var steps = on ? '<div class="pc-steps">' +
+      '<button class="pc-step' + (S.step === 'clients' ? ' is-on' : '') + '" data-act="go" data-v="clients"><b>1</b>Clients</button>' +
+      '<button class="pc-step' + (S.step === 'build' ? ' is-on' : '') + '" data-act="go" data-v="build"' + (S.cur ? '' : ' disabled') + '><b>2</b>Build</button>' +
+      '<button class="pc-step' + (S.step === 'send' ? ' is-on' : '') + '" data-act="go" data-v="send"' + (S.build ? '' : ' disabled') + '><b>3</b>Send</button></div>' : '';
+    var tools = '<div class="pc-tools"><button class="pc-ic" data-act="font" data-v="-1" title="Smaller text">A−</button><button class="pc-ic" data-act="font" data-v="1" title="Bigger text">A+</button>' +
+      (on ? '<button class="pc-ic" data-act="go" data-v="settings" title="My settings">⚙</button>' : '') +
+      (S.user ? '<button class="pc-ic" data-act="lock" title="Lock and sign out">🔒 Lock</button>' : '') + '</div>';
+    return '<div class="pc-top"><div class="pc-brand"><small>Adventures In Astrology' + (CFG.demo ? ' · demo mode' : '') + '</small>Practitioner Center</div>' + steps + tools + '</div>';
+  }
+
+  /* ---------- auth ---------- */
+  function authView(){
+    var mode = S.authMode || 'in';
+    var h = '<div class="pc-screen"><div class="pc-auth pc-card"><span class="pc-lock">🔒 Private practitioner area</span>';
+    if (mode === 'in') h += '<h2>Welcome back</h2><p class="pc-muted">Sign in to see your clients. Each practitioner sees only their own files.</p>';
+    else if (mode === 'up') h += '<h2>Create your practitioner account</h2><p class="pc-muted">After you confirm your email, Risa approves new practitioners before client files open.</p>';
+    else h += '<h2>Reset your password</h2><p class="pc-muted">We will email you a reset link.</p>';
+    h += msgHTML();
+    if (mode === 'up') h += '<label class="pc-f"><span>Your name (shown on reports)</span><input class="pc-in" id="pc-a-name" autocomplete="name"></label>';
+    h += '<label class="pc-f"><span>Email</span><input class="pc-in" id="pc-a-email" type="email" autocomplete="email"></label>';
+    if (mode !== 'reset') h += '<label class="pc-f"><span>Password' + (mode === 'up' ? ' (8+ characters)' : '') + '</span><input class="pc-in" id="pc-a-pw" type="password" autocomplete="' + (mode === 'up' ? 'new-password' : 'current-password') + '"></label>';
+    h += '<button class="pc-btn big" data-act="auth"' + (S.busy ? ' disabled' : '') + '>' + (mode === 'in' ? 'Sign in' : mode === 'up' ? 'Create account' : 'Send reset link') + '</button>';
+    h += '<p style="margin-top:14px">' + (mode !== 'in' ? '<button class="pc-link" data-act="authmode" data-v="in">Back to sign in</button>' : '<button class="pc-link" data-act="authmode" data-v="up">New here? Create an account</button> · <button class="pc-link" data-act="authmode" data-v="reset">Forgot password</button>') + '</p>';
+    if (CFG.demo) h += '<p class="pc-note">Demo mode: type anything to sign in. Nothing you enter is saved or sent anywhere, and it all disappears when you close the page.</p>';
+    return h + '</div></div>';
+  }
+  function doAuth(){
+    var mode = S.authMode || 'in', email = ($('#pc-a-email') || {}).value || '', pw = ($('#pc-a-pw') || {}).value || '';
+    S.busy = true; S.msg = null;
+    if (mode === 'in') S.store.signIn(email.trim(), pw).then(function(u){ S.busy = false; afterLogin(u); }).catch(fail);
+    else if (mode === 'up') {
+      var name = ($('#pc-a-name') || {}).value || '';
+      if (!name.trim()) return fail('Please add your name.');
+      if (pw.length < 8) return fail('Please use a password with at least 8 characters.');
+      S.store.signUp(email.trim(), pw, name.trim()).then(function(d){
+        S.busy = false;
+        if (d && d.session) return afterLogin(d.user);
+        if (!S.store.live) return afterLogin(S.store.user);
+        S.authMode = 'in'; S.msg = {ok: 'Check your email to confirm your account, then sign in here.'}; render();
+      }).catch(fail);
+    } else S.store.resetPassword(email.trim()).then(function(){ S.busy = false; S.msg = {ok: 'If that email has an account, a reset link is on its way.'}; render(); }).catch(fail);
+    render();
+  }
+  function recoveryView(){
+    return '<div class="pc-screen"><div class="pc-auth pc-card"><h2>Choose a new password</h2>' + msgHTML() + '<label class="pc-f"><span>New password (8+ characters)</span><input class="pc-in" id="pc-r-pw" type="password" autocomplete="new-password"></label><button class="pc-btn big" data-act="setpw">Save new password</button></div></div>';
+  }
+  function pendingView(){
+    return '<div class="pc-screen"><div class="pc-auth pc-card"><span class="pc-lock">Almost there</span><h2>Your account is waiting for approval</h2><p>Thank you for joining, ' + esc(S.profile.display_name) + '! Risa reviews each new practitioner before client files and the interpretation library open. You will be able to sign in and start right away once you are approved.</p><button class="pc-btn ghost" data-act="recheck">Check again</button></div></div>';
+  }
+
+  /* ---------- settings ---------- */
+  function settingsView(){
+    var p = S.profile;
+    return '<div class="pc-screen"><div class="pc-card" style="max-width:640px"><h2>My settings</h2>' + msgHTML() +
+      '<label class="pc-f"><span>Name shown on reports</span><input class="pc-in" id="pc-s-name" value="' + esc(p.display_name) + '"></label>' +
+      '<label class="pc-f"><span>Business name (optional)</span><input class="pc-in" id="pc-s-biz" value="' + esc(p.business_name || '') + '"></label>' +
+      '<label class="pc-f"><span>My usual closing note (starts every new report, editable each time)</span><textarea class="pc-in" id="pc-s-note" rows="6">' + esc(p.closing_note || '') + '</textarea></label>' +
+      '<div class="pc-row"><button class="pc-btn" data-act="savesettings">Save settings</button><button class="pc-btn ghost" data-act="go" data-v="clients">Back to clients</button></div></div>' +
+      (p.is_admin ? '<div class="pc-card" style="max-width:640px"><h3>Interpretation library (admin)</h3><p>' + (libCount() ? 'Loaded: <b>' + libCount() + ' sections</b>.' : '<b>No library loaded yet.</b>') + ' To load or update it, pick your <span class="pc-mono">practitioner-center-library.json</span> file. Only you can do this; approved practitioners can read it but never download or change it.</p><input type="file" accept=".json,application/json" id="pc-lib-file" class="pc-in"></div>' : '') + '</div>';
+  }
+
+  function libCount(){ var n = 0; if (S.lib) for (var k in S.lib) if (S.lib.hasOwnProperty(k)) n++; return n; }
+  function loadLibraryFile(file){
+    var rd = new FileReader();
+    rd.onload = function(){
+      var lib; try { lib = JSON.parse(rd.result); } catch (e) { return fail('That file is not a library file (could not read it).'); }
+      if (!lib.sun || !lib.moon || !lib.houses) return fail('That file does not look like the interpretation library.');
+      S.msg = {ok: 'Uploading your library\u2026'}; render();
+      S.store.saveLibrary(lib).then(function(n){ S.lib = lib; S._qc = null; S._ctx = null; S.msg = {ok: 'Library loaded: ' + n + ' sections. You are ready to go!'}; render(); }).catch(fail);
+    };
+    rd.readAsText(file);
+  }
+
+  /* ---------- clients ---------- */
+  function clientsView(){
+    var q = (S.search || '').toLowerCase(), list = '';
+    for (var i = 0; i < S.clients.length; i++) {
+      var c = S.clients[i]; if (q && c.name.toLowerCase().indexOf(q) < 0) continue;
+      list += '<button class="pc-citem' + (S.cur && S.cur.id === c.id ? ' is-on' : '') + '" data-act="pick" data-v="' + c.id + '"><b>' + esc(c.name) + '</b><small>' + birthLine(c, true) + '</small></button>';
+    }
+    if (!list) list = '<p class="pc-muted" style="padding:10px">' + (S.clients.length ? 'No match.' : 'No clients yet. Add your first one!') + '</p>';
+    var left = '<div class="pc-card"><button class="pc-btn alt big" style="width:100%;justify-content:center" data-act="newclient">+ New client</button>' +
+      (S.clients.length > 6 ? '<input class="pc-in" style="margin-top:10px" placeholder="Search clients" id="pc-search" value="' + esc(S.search || '') + '">' : '') +
+      '<div class="pc-clist">' + list + '</div></div>';
+    var right = S.editing ? clientForm() : S.cur ? clientDetail() : '<div class="pc-card pc-empty"><h3>Pick a client or add a new one</h3><p>Client files are private to you. Then click <b>Build a report</b>.</p></div>';
+    return '<div class="pc-screen">' + msgHTML() + '<div class="pc-two"><div>' + left + '</div><div>' + right + '</div></div></div>';
+  }
+  function hour12(h){ var ap = h < 12 ? 'AM' : 'PM', hh = h % 12; if (hh === 0) hh = 12; return {h: hh, ap: ap}; }
+  function birthLine(c, compact){
+    var d = new Date(Date.UTC(c.y, c.mo - 1, c.d, 12)).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'});
+    var t = c.timeKnown ? (function(){ var x = hour12(c.h); return x.h + ':' + pcPad(c.mi) + ' ' + x.ap; })() : 'time unknown';
+    return esc(d + ' · ' + t + (compact ? '' : ' · ' + (c.placeLabel || '')));
+  }
+  function clientDetail(){
+    var c = S.cur, ctx = quickCtx(c);
+    var b = ctx.chart.bodies, big3 = 'Sun ' + b.Sun.sign + ' · Moon ' + (!c.timeKnown && ctx.chart.moonRange.changes ? ctx.chart.moonRange.fromSign + '/' + ctx.chart.moonRange.toSign : b.Moon.sign) + (c.timeKnown ? ' · Rising ' + b.Ascendant.sign : '');
+    var h = '<div class="pc-card"><div class="pc-row"><div><h2 style="margin:0">' + esc(c.name) + '</h2>' + (c.pronouns ? '<span class="pc-muted">' + esc(c.pronouns) + '</span>' : '') + '</div><span class="pc-spacer"></span>' +
+      '<button class="pc-btn ghost small" data-act="editclient">Edit</button><button class="pc-btn big" data-act="go" data-v="build">Build a report →</button></div>' +
+      '<div class="pc-facts"><div class="pc-fact"><small>Born</small>' + birthLine(c, true) + '</div><div class="pc-fact"><small>Place</small>' + esc(c.placeLabel || '—') + '</div><div class="pc-fact"><small>Big 3</small>' + esc(big3) + '</div>' +
+      '<div class="pc-fact"><small>Life Path · HD</small>' + ctx.num.lifePath + ' · ' + esc(ctx.hd.type) + ' ' + ctx.hd.profile + '</div>' +
+      '<div class="pc-fact"><small>Tree of Life</small>Soul sphere ' + PC_SEPH[ctx.tree.soul.key].name + ' · ' + ctx.tree.paths.filter(function(p){ return p.score > 0; }).length + ' lit paths</div></div>' +
+      (c.notes ? '<div class="pc-note"><b>Private notes:</b> ' + esc(c.notes).replace(/\n/g, '<br>') + '</div>' : '') + '</div>';
+    /* sessions */
+    h += '<div class="pc-card"><div class="pc-row"><h3 style="margin:0">Sessions</h3><span class="pc-spacer"></span><button class="pc-btn small" data-act="newsess">+ Log a session</button></div><p class="pc-muted">Private session notes, like a therapist\'s file. Only you can see these.</p>';
+    if (S.sessEdit) {
+      var x = S.sessEdit;
+      h += '<div class="pc-card" style="background:var(--gold-l)"><div class="pc-row"><label class="pc-f" style="flex:1"><span>Date</span><input class="pc-in" type="date" id="pc-x-date" value="' + esc(x.session_date) + '"></label><label class="pc-f" style="flex:2"><span>Topic</span><input class="pc-in" id="pc-x-topic" value="' + esc(x.topic || '') + '" placeholder="e.g. career crossroads, Saturn return"></label></div>' +
+        '<label class="pc-f"><span>Notes</span><textarea class="pc-in" id="pc-x-notes" rows="5">' + esc(x.notes || '') + '</textarea></label><div class="pc-row"><button class="pc-btn" data-act="savesess">Save session</button><button class="pc-btn ghost" data-act="cancelsess">Cancel</button>' + (x.id ? '<span class="pc-spacer"></span><button class="pc-btn ghost small" data-act="delsess" data-v="' + x.id + '">Delete</button>' : '') + '</div></div>';
+    }
+    if (!S.sessions.length && !S.sessEdit) h += '<p class="pc-muted">No sessions logged yet.</p>';
+    for (var i = 0; i < S.sessions.length; i++) { var s = S.sessions[i]; h += '<div class="pc-sess"><div class="pc-row"><h4>' + esc(s.session_date) + (s.topic ? ' · ' + esc(s.topic) : '') + '</h4><span class="pc-spacer"></span><button class="pc-link" data-act="editsess" data-v="' + s.id + '">Edit</button></div>' + (s.notes ? '<p style="margin:.3em 0 0">' + esc(s.notes).replace(/\n/g, '<br>') + '</p>' : '') + '</div>'; }
+    h += '</div>';
+    /* reports */
+    h += '<div class="pc-card"><h3>Saved reports</h3>';
+    if (!S.reports.length) h += '<p class="pc-muted">No saved reports yet. Click <b>Build a report</b> to make one.</p>';
+    for (var j = 0; j < S.reports.length; j++) { var r = S.reports[j]; h += '<div class="pc-rep"><div><b>' + esc(r.title) + '</b><br><small class="pc-muted">' + (r.sections || []).length + ' sections · ' + (r.short_version ? 'client version' : 'full version') + (r.archetype_mode ? ' · archetypes' : '') + ' · ' + esc(String(r.updated_at || '').slice(0, 10)) + '</small></div><span class="pc-spacer"></span><button class="pc-btn small" data-act="openrep" data-v="' + r.id + '">Open</button><button class="pc-btn ghost small" data-act="delrep" data-v="' + r.id + '">Delete</button></div>'; }
+    return h + '</div>';
+  }
+  function quickCtx(c){
+    if (S._qc && S._qc.key === JSON.stringify(c)) return S._qc.ctx;
+    var ctx = pcBuildContext(c, S.lib, {});
+    S._qc = {key: JSON.stringify(c), ctx: ctx}; return ctx;
+  }
+  function selectOpts(from, to, sel, pad){ var o = ''; for (var i = from; i <= to; i++) o += '<option value="' + i + '"' + (i === sel ? ' selected' : '') + '>' + (pad ? pcPad(i) : i) + '</option>'; return o; }
+  function clientForm(){
+    var c = S.editing, t = c.timeKnown ? hour12(c.h) : {h: 12, ap: 'PM'};
+    var h = '<div class="pc-card"><h2>' + (c.id ? 'Edit ' + esc(c.name) : 'New client') + '</h2>' + (S.formErr ? '<div class="pc-err">' + esc(S.formErr) + '</div>' : '') +
+      '<div class="pc-row"><label class="pc-f" style="flex:2"><span>Name (full birth name helps numerology)</span><input class="pc-in" id="pc-c-name" value="' + esc(c.name || '') + '"></label><label class="pc-f" style="flex:1"><span>Pronouns</span><input class="pc-in" id="pc-c-pro" value="' + esc(c.pronouns || '') + '"></label></div>' +
+      '<label class="pc-f"><span>Email (optional, for sending their report)</span><input class="pc-in" type="email" id="pc-c-email" value="' + esc(c.email || '') + '"></label>' +
+      '<label class="pc-f"><span>Birth date</span><input class="pc-in" type="date" id="pc-c-date" value="' + (c.y ? c.y + '-' + pcPad(c.mo) + '-' + pcPad(c.d) : '') + '"></label>' +
+      '<label class="pc-check"><input type="checkbox" id="pc-c-unk"' + (c.id && !c.timeKnown ? ' checked' : '') + ' data-act="toggleunk"> Birth time unknown</label>' +
+      '<div id="pc-c-timewrap" class="' + (c.id && !c.timeKnown ? 'pc-hide' : '') + '"><label class="pc-f"><span>Birth time</span><div class="pc-time"><select class="pc-in" id="pc-c-h">' + selectOpts(1, 12, t.h) + '</select><select class="pc-in" id="pc-c-m">' + selectOpts(0, 59, c.timeKnown ? c.mi : 0, true) + '</select><select class="pc-in" id="pc-c-ap"><option' + (t.ap === 'AM' ? ' selected' : '') + '>AM</option><option' + (t.ap === 'PM' ? ' selected' : '') + '>PM</option></select></div></label></div>' +
+      '<label class="pc-f"><span>Birth place (type a city, then pick it from the list)</span><input class="pc-in" id="pc-c-place" autocomplete="off" value="' + esc(c.placeLabel || '') + '"></label><div id="pc-c-sugg"></div>' +
+      '<div id="pc-c-picked">' + (c.lat !== undefined && c.lat !== null ? pickedHTML(c) : '') + '</div>' +
+      '<details style="margin:8px 0 12px"><summary class="pc-muted" style="cursor:pointer">Can\'t find the place? Enter it by hand</summary><div class="pc-row" style="margin-top:8px"><label class="pc-f"><span>Latitude</span><input class="pc-in" id="pc-c-lat" value="' + (c.lat !== undefined && c.lat !== null ? c.lat : '') + '"></label><label class="pc-f"><span>Longitude (west is minus)</span><input class="pc-in" id="pc-c-lon" value="' + (c.lon !== undefined && c.lon !== null ? c.lon : '') + '"></label><label class="pc-f"><span>Time zone (e.g. America/Chicago)</span><input class="pc-in" id="pc-c-tz" value="' + esc(c.tz || '') + '"></label></div></details>' +
+      '<label class="pc-f"><span>House system</span><select class="pc-in" id="pc-c-house"><option value="E"' + (c.house === 'E' || !c.house ? ' selected' : '') + '>Equal</option><option value="P"' + (c.house === 'P' ? ' selected' : '') + '>Placidus</option><option value="W"' + (c.house === 'W' ? ' selected' : '') + '>Whole Sign</option></select></label>' +
+      '<label class="pc-f"><span>Private notes (only you see these)</span><textarea class="pc-in" id="pc-c-notes">' + esc(c.notes || '') + '</textarea></label>' +
+      '<div class="pc-row"><button class="pc-btn big" data-act="saveclient"' + (S.busy ? ' disabled' : '') + '>Save client</button><button class="pc-btn ghost" data-act="cancelclient">Cancel</button>' + (c.id ? '<span class="pc-spacer"></span><button class="pc-btn ghost small" data-act="delclient">Delete client</button>' : '') + '</div></div>';
+    return h;
+  }
+  function pickedHTML(c){ return '<div class="pc-picked">✓ ' + esc(c.placeLabel || 'Custom place') + ' <span class="pc-mono">(' + (+c.lat).toFixed(2) + ', ' + (+c.lon).toFixed(2) + ', ' + esc(c.tz) + ')</span></div>'; }
+
+  var geoTimer = null;
+  function geoSearch(q){
+    clearTimeout(geoTimer);
+    if (q.length < 2) { $('#pc-c-sugg').innerHTML = ''; return; }
+    geoTimer = setTimeout(function(){
+      fetch('https://geocoding-api.open-meteo.com/v1/search?count=8&language=en&format=json&name=' + encodeURIComponent(q.split(',')[0].trim()))
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          var box = $('#pc-c-sugg'); if (!box) return;
+          var res = (d && d.results) || [], h = '';
+          S._geo = res;
+          for (var i = 0; i < res.length; i++) h += '<button data-act="geopick" data-v="' + i + '">' + esc([res[i].name, res[i].admin1, res[i].country].filter(Boolean).join(', ')) + '</button>';
+          box.innerHTML = h ? '<div class="pc-sugg">' + h + '</div>' : '<p class="pc-muted">No match yet. Try just the city name, or enter it by hand below.</p>';
+        }).catch(function(){ var box = $('#pc-c-sugg'); if (box) box.innerHTML = '<p class="pc-muted">Place search is not reachable right now. Enter latitude, longitude and time zone by hand below.</p>'; });
+    }, 280);
+  }
+  function readClientForm(){
+    var c = S.editing, v = function(id){ var el = $('#' + id); return el ? el.value : ''; };
+    c.name = v('pc-c-name').trim(); c.pronouns = v('pc-c-pro').trim(); c.email = v('pc-c-email').trim(); c.notes = v('pc-c-notes'); c.house = v('pc-c-house');
+    var dt = v('pc-c-date').split('-'); c.y = +dt[0]; c.mo = +dt[1]; c.d = +dt[2];
+    c.timeKnown = !$('#pc-c-unk').checked;
+    if (c.timeKnown) { var hh = +v('pc-c-h') % 12; if (v('pc-c-ap') === 'PM') hh += 12; c.h = hh; c.mi = +v('pc-c-m'); } else { c.h = null; c.mi = null; }
+    var lat = v('pc-c-lat'), lon = v('pc-c-lon'), tz = v('pc-c-tz').trim();
+    if (lat !== '' && lon !== '' && tz) { c.lat = +lat; c.lon = +lon; c.tz = tz; if (!c.placeLabel || c._manual) { c.placeLabel = v('pc-c-place').trim() || 'Custom place'; c._manual = true; } }
+    if (!c.name) return 'Please add the client\'s name.';
+    if (!c.y || !c.mo || !c.d) return 'Please add the birth date.';
+    if (c.lat === undefined || c.lat === null || isNaN(c.lat) || !c.tz) return 'Please pick the birth place from the list (or enter it by hand).';
+    if (pcZoneOffsetMin(c.tz, new Date()) === null) return 'That time zone name was not recognized. Try a name like America/New_York.';
+    return null;
+  }
+  function fetchChiron(c){
+    if (!CFG.swissApi || !c.lat) return Promise.resolve(null);
+    var ctrl = window.AbortController ? new AbortController() : null; if (ctrl) setTimeout(function(){ ctrl.abort(); }, 25000);
+    return fetch(CFG.swissApi.replace(/\/$/, '') + '/chart', {method: 'POST', headers: {'Content-Type': 'application/json'}, signal: ctrl ? ctrl.signal : undefined,
+      body: JSON.stringify({date: c.y + '-' + pcPad(c.mo) + '-' + pcPad(c.d), time: c.timeKnown ? pcPad(c.h) + ':' + pcPad(c.mi) : '12:00', timezone: c.tz, latitude: c.lat, longitude: c.lon})})
+      .then(function(r){ return r.json(); }).then(function(d){
+        var bs = (d && d.bodies) || [];
+        for (var i = 0; i < bs.length; i++) if (String(bs[i].name).toLowerCase() === 'chiron') {
+          var b = bs[i];
+          if (typeof b.longitude === 'number') return b.longitude;
+          if (typeof b.lon === 'number') return b.lon;
+          var si = PC_SIGNS.indexOf(b.sign); if (si >= 0) return si * 30 + (+b.degree || 0) + (+b.minute || 0) / 60 + (+b.second || 0) / 3600;
+        }
+        return null;
+      }).catch(function(){ return null; });
+  }
+  function saveClient(){
+    var err = readClientForm(); S.formErr = err;
+    if (err) return render();
+    S.busy = true; render();
+    var c = S.editing; delete c._manual;
+    var birthKey = [c.y, c.mo, c.d, c.h, c.mi, c.lat, c.lon].join('|');
+    var needChiron = c.chironLon === undefined || c.chironLon === null || c._birthKey !== birthKey;
+    (needChiron ? fetchChiron(c) : Promise.resolve(c.chironLon)).then(function(ch){
+      c.chironLon = ch; delete c._birthKey;
+      return S.store.saveClient(c);
+    }).then(function(saved){
+      S.busy = false; S.editing = null; S.formErr = null;
+      return S.store.clients().then(function(cl){ S.clients = cl; openClient(saved.id); toast('Client saved'); });
+    }).catch(fail);
+  }
+  function openClient(id){
+    S.cur = null; for (var i = 0; i < S.clients.length; i++) if (S.clients[i].id === id) S.cur = S.clients[i];
+    S.sessEdit = null; S.build = null; S.msg = null;
+    if (!S.cur) return render();
+    Promise.all([S.store.sessions(id), S.store.reports(id)]).then(function(r){ S.sessions = r[0]; S.reports = r[1]; render(); }).catch(fail);
+  }
+
+  /* ---------- build ---------- */
+  function allIds(){ var a = []; for (var i = 0; i < PC_SECTIONS.length; i++) for (var j = 0; j < PC_SECTIONS[i].items.length; j++) a.push(PC_SECTIONS[i].items[j][0]); return a; }
+  function newBuild(){
+    S.build = {id: null, ids: PC_PRESETS.full.slice(0), themes: [], short: false, archetype: false, house: S.cur.house || 'E', title: S.cur.name + ' · Birth Chart Reading', note: (S.profile.closing_note || '')};
+  }
+  function ctxFor(){
+    var b = S.build, key = JSON.stringify([S.cur, b.short, b.archetype, b.house]);
+    if (!S._ctx || S._ctxKey !== key) { S._ctx = pcBuildContext(S.cur, S.lib, {short: b.short, archetype: b.archetype, house: b.house}); S._ctxKey = key; }
+    S._ctx.pickedThemes = b.themes.length ? b.themes : null;
+    S._ctx.note = b.note; S._ctx.practitionerName = S.profile.display_name;
+    return S._ctx;
+  }
+  function buildView(){
+    if (!S.build) newBuild();
+    var b = S.build, ctx = ctxFor(), known = ctx.chart.timeKnown;
+    var th = '', anim = S._animFor !== S.cur.id; S._animFor = S.cur.id;
+    for (var i = 0; i < ctx.themes.length; i++) {
+      var t = ctx.themes[i]; if (t.timed && !known) continue;
+      th += '<button class="pc-theme' + (b.themes.indexOf(t.id) >= 0 ? ' is-in' : '') + '" style="' + (anim ? 'animation-delay:' + (i * 0.09) + 's' : 'animation:none') + '" data-act="theme" data-v="' + t.id + '">✨ ' + esc(t.title) + '</button>';
+    }
+    var groups = '';
+    for (var g = 0; g < PC_SECTIONS.length; g++) {
+      var grp = PC_SECTIONS[g], btns = '';
+      for (var j = 0; j < grp.items.length; j++) {
+        var it = grp.items[j], off = (it[3] && !known) || (it[0] === 'chiron' && !ctx.chart.bodies.Chiron);
+        btns += '<button class="pc-sec-btn' + (b.ids.indexOf(it[0]) >= 0 ? ' is-in' : '') + (off ? ' is-off' : '') + '" data-act="sec" data-v="' + it[0] + '"' + (off ? ' disabled title="' + (it[0] === 'chiron' ? 'Chiron position not available for this client yet' : 'Needs a birth time') + '"' : '') + '>' + esc(it[1]) + '</button>';
+      }
+      groups += '<div class="pc-group"><h4>' + esc(grp.group) + '</h4><div class="pc-pick">' + btns + '</div></div>';
+    }
+    var left = '<div class="pc-card"><h3>1. Pick what goes in</h3><div class="pc-row" style="margin-bottom:12px"><button class="pc-btn small" data-act="preset" data-v="quick">Quick read</button><button class="pc-btn small" data-act="preset" data-v="full">Full chart</button><button class="pc-btn small" data-act="preset" data-v="tree">Tree of Life</button><button class="pc-btn small plum" data-act="preset" data-v="everything">Everything</button><button class="pc-btn ghost small" data-act="preset" data-v="none">Clear</button></div>' + groups +
+      (known ? '' : '<p class="pc-note">Birth time unknown: rising, houses and year theme are switched off. Everything else is time-proof.</p>') + '</div>' +
+      '<div class="pc-card"><h3>2. Your closing note</h3><textarea class="pc-in" id="pc-b-note" rows="6" placeholder="A personal message to your client (optional)">' + esc(b.note) + '</textarea></div>';
+    var right = '<div class="pc-card" style="margin-bottom:14px"><div class="pc-row"><h2 style="margin:0">' + esc(S.cur.name) + '</h2><span class="pc-spacer"></span>' +
+      '<div class="pc-switch"><button class="' + (!b.short ? 'is-on' : '') + '" data-act="short" data-v="0">Full version</button><button class="' + (b.short ? 'is-on' : '') + '" data-act="short" data-v="1">Client short version</button></div>' +
+      '<div class="pc-switch arch"><button class="' + (!b.archetype ? 'is-on' : '') + '" data-act="arch" data-v="0">Standard</button><button class="' + (b.archetype ? 'is-on' : '') + '" data-act="arch" data-v="1">🎭 Archetypes</button></div>' +
+      (known ? '<select class="pc-in" style="width:auto" id="pc-b-house" data-act="house"><option value="E"' + (b.house === 'E' ? ' selected' : '') + '>Equal houses</option><option value="P"' + (b.house === 'P' ? ' selected' : '') + '>Placidus</option><option value="W"' + (b.house === 'W' ? ' selected' : '') + '>Whole Sign</option></select>' : '') + '</div>' +
+      (th ? '<p class="pc-muted" style="margin:10px 0 0">Themes popping up in this chart. Tap one to read it and add it:</p><div class="pc-themes">' + th + '</div>' : '') + '</div>' +
+      '<div class="pc-row" style="margin-bottom:12px"><input class="pc-in" id="pc-b-title" style="flex:1;min-width:220px" value="' + esc(b.title) + '"><button class="pc-btn" data-act="saverep"' + (S.busy ? ' disabled' : '') + '>💾 Save report</button><button class="pc-btn alt" data-act="go" data-v="send">Next: Send →</button></div>' +
+      '<div class="pc-preview pcr" id="pc-preview"></div>';
+    return '<div class="pc-screen">' + msgHTML() + '<div class="pc-build"><div>' + left + '</div><div>' + right + '</div></div></div>';
+  }
+  function orderedIds(){ var all = allIds(), b = S.build; return all.filter(function(id){ return b.ids.indexOf(id) >= 0; }); }
+  function renderPreview(){
+    var el = $('#pc-preview'); if (!el) return;
+    var html = pcRenderReport(ctxFor(), orderedIds());
+    el.innerHTML = html || '<div class="pc-empty"><h3>Your report is empty</h3><p>Click the sections on the left to add them.</p></div>';
+  }
+  function themePopup(id){
+    var ctx = ctxFor(), t = null; for (var i = 0; i < ctx.themes.length; i++) if (ctx.themes[i].id === id) t = ctx.themes[i];
+    if (!t) return;
+    var inR = S.build.themes.indexOf(id) >= 0;
+    var d = document.createElement('div'); d.className = 'pc-pop';
+    d.innerHTML = '<div class="pc-pop-box pcr"><h3>✨ ' + esc(t.title) + '</h3>' + pcThemeHTML(ctx, t) + '<div class="pc-row" style="margin-top:14px"><button class="pc-btn plum" data-act="themeadd" data-v="' + id + '">' + (inR ? 'Remove from report' : '+ Add to report') + '</button><button class="pc-btn ghost" data-act="popclose">Close</button></div></div>';
+    root.appendChild(d);
+  }
+  function captureBuildInputs(){
+    if (!S.build) return;
+    var n = $('#pc-b-note'), t = $('#pc-b-title');
+    if (n) S.build.note = n.value; if (t) S.build.title = t.value;
+  }
+  function saveReport(){
+    captureBuildInputs();
+    var b = S.build; S.busy = true; render();
+    S.store.saveReport({id: b.id, client_id: S.cur.id, title: b.title || 'Reading', sections: orderedIds(), themes: b.themes, short_version: b.short, archetype_mode: b.archetype, closing_note: b.note})
+      .then(function(r){ b.id = r.id; S.busy = false; return S.store.reports(S.cur.id); }).then(function(list){ S.reports = list; render(); toast('Report saved to ' + S.cur.name + '\'s file'); }).catch(fail);
+  }
+  function openReport(id){
+    var r = null; for (var i = 0; i < S.reports.length; i++) if (S.reports[i].id === id) r = S.reports[i];
+    if (!r) return;
+    S.build = {id: r.id, ids: (r.sections || []).slice(0), themes: (r.themes || []).slice(0), short: !!r.short_version, archetype: !!r.archetype_mode, house: S.cur.house || 'E', title: r.title, note: r.closing_note || ''};
+    S.step = 'build'; render();
+  }
+
+  /* ---------- send ---------- */
+  function sendView(){
+    var b = S.build, c = S.cur;
+    var mail = 'mailto:' + encodeURIComponent(c.email || '') + '?subject=' + encodeURIComponent('Your reading: ' + b.title) + '&body=' + encodeURIComponent('Hi ' + c.name.split(' ')[0] + ',\n\nYour reading is attached as a PDF. Take your time with it, and reach out with any questions.\n\n' + S.profile.display_name);
+    return '<div class="pc-screen">' + msgHTML() + '<div class="pc-card" style="max-width:760px;margin:0 auto"><h2>Send ' + esc(c.name.split(' ')[0]) + '\'s report</h2>' +
+      '<p><b>' + esc(b.title) + '</b><br><span class="pc-muted">' + orderedIds().length + ' sections · ' + (b.short ? 'client short version' : 'full version') + (b.archetype ? ' · archetype version' : '') + '</span></p>' +
+      '<div class="pc-card" style="background:var(--teal-l);border-color:var(--teal)"><h3>Step 1 · Make the PDF</h3><p>Click the button, then choose <b>Save as PDF</b> as the printer.</p><button class="pc-btn big" data-act="pdf">⬇ Download PDF</button></div>' +
+      '<div class="pc-card" style="background:var(--terra-l);border-color:var(--terra)"><h3>Step 2 · Email it</h3><p>Opens a ready-to-go email' + (c.email ? ' to ' + esc(c.email) : '') + '. Attach the PDF you just saved.</p><a class="pc-btn alt big" href="' + mail + '">✉ Open email</a></div>' +
+      '<div class="pc-row" style="margin-top:16px"><button class="pc-btn ghost" data-act="go" data-v="build">← Back to editing</button>' + (b.id ? '' : '<button class="pc-btn" data-act="saverep">💾 Save report to client file</button>') + '</div></div></div>';
+  }
+  function printPDF(){
+    var ctx = ctxFor(), c = S.cur, b = S.build;
+    var css = '';
+    var styleEl = document.getElementById('pc-style'); if (styleEl) css = styleEl.textContent;
+    var place = c.placeLabel && c.placeLabel !== 'Custom place' ? ' in ' + esc(c.placeLabel) : '';
+    var cover = '<div class="pc-cover"><div class="pc-cover-k">' + esc(S.profile.business_name || 'Adventures In Astrology') + '</div><h1>' + esc(b.title) + '</h1><p class="pc-cover-who">Prepared for <b>' + esc(c.name) + '</b></p><p>' + birthLine(c, true) + place + '</p>' +
+      (!c.timeKnown ? '<p><span class="pc-flag pc-flag-time">Made without a birth time</span></p>' : '') + '<p class="pc-cover-by">Prepared by ' + esc(S.profile.display_name) + ' · ' + new Date().toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}) + '</p></div>';
+    var doc = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + esc(b.title) + '</title><style>' + css +
+      '@page{size:letter;margin:.7in .75in}body{margin:0;font-family:Lora,Georgia,serif;color:#2b2135;font-size:11.5pt;line-height:1.55;--cream:#fffaf1;--ink:#2b2135;--soft:#6b5f73;--line:#eadfcc;--teal:#0f9e94;--teal-l:#d9f4f1;--terra:#e0663f;--terra-l:#fde6dc;--gold:#e8a923;--gold-l:#fff1cc;--plum:#7b4fc9;--plum-l:#efe6ff;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+      'h1,h2,h3,h4{font-family:Fraunces,Georgia,serif}.pc-cover{min-height:8.6in;display:flex;flex-direction:column;justify-content:center;text-align:center;border:3px solid var(--line);border-radius:22px;padding:40px;background:var(--cream);page-break-after:always}.pc-cover h1{font-size:30pt;margin:.3em 0}.pc-cover-k{font-family:"Space Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-size:9pt}.pc-cover-who{font-size:14pt}.pc-cover-by{margin-top:40px;color:var(--soft)}' +
+      '.pc-r-sec{page-break-inside:auto;border-bottom:2px dashed var(--line);padding:4px 0 14px;margin-bottom:14px}.pc-r-sec header{page-break-after:avoid}.pc-r-field,.pc-r-arch,.pc-tcard,.pc-center,.pc-cast-card,.pc-big3,.pc-r-asp{page-break-inside:avoid}.pc-foot{text-align:center;color:var(--soft);font-size:9pt;margin-top:24px}' +
+      '</style></head><body class="pcr">' + cover + pcRenderReport(ctx, orderedIds()) + '<p class="pc-foot">This reading is for reflection and personal growth. It is not medical, legal or financial advice.</p></body></html>';
+    if (CFG.demo) window.__pcLastDoc = doc;
+    var f = document.createElement('iframe');
+    f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0';
+    document.body.appendChild(f);
+    var w = f.contentWindow; w.document.open(); w.document.write(doc); w.document.close();
+    setTimeout(function(){ try { w.focus(); w.print(); } catch (e) { toast('Could not open the print window'); } setTimeout(function(){ if (f.parentNode) f.parentNode.removeChild(f); }, 60000); }, 900);
+  }
+
+  /* ---------- events ---------- */
+  root.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('[data-act]') : null;
+    if (!el || !root.contains(el)) { if (e.target.classList && e.target.classList.contains('pc-pop')) e.target.parentNode.removeChild(e.target); return; }
+    var a = el.getAttribute('data-act'), v = el.getAttribute('data-v');
+    if (a === 'house' || a === 'toggleunk') { if (a === 'toggleunk') $('#pc-c-timewrap').className = el.checked ? 'pc-hide' : ''; return; }
+    if (el.tagName === 'BUTTON' || el.tagName === 'A') { if (a !== 'pdf' && el.tagName === 'BUTTON') e.preventDefault(); }
+    switch (a) {
+      case 'auth': doAuth(); break;
+      case 'authmode': S.authMode = v; S.msg = null; render(); break;
+      case 'recheck': afterLogin(S.user); break;
+      case 'lock': lock('Signed out. Client files are locked.'); break;
+      case 'font': S.scale = Math.max(0.85, Math.min(1.4, S.scale + (+v) * 0.08)); render(); break;
+      case 'go':
+        captureBuildInputs(); S.msg = null;
+        if (v === 'build' && S.cur && !S.build) newBuild();
+        S.step = v; render(); break;
+      case 'savesettings':
+        S.profile.display_name = $('#pc-s-name').value.trim() || S.profile.display_name; S.profile.business_name = $('#pc-s-biz').value.trim(); S.profile.closing_note = $('#pc-s-note').value;
+        S.store.saveProfile(S.profile).then(function(){ S.msg = {ok: 'Settings saved.'}; render(); }).catch(fail); break;
+      case 'pick': S._animFor = null; openClient(v); break;
+      case 'newclient': S.editing = {house: 'E'}; S.formErr = null; S.cur = null; render(); var n = $('#pc-c-name'); if (n) n.focus(); break;
+      case 'editclient': S.editing = JSON.parse(JSON.stringify(S.cur)); S.editing._birthKey = [S.cur.y, S.cur.mo, S.cur.d, S.cur.h, S.cur.mi, S.cur.lat, S.cur.lon].join('|'); S.formErr = null; render(); break;
+      case 'cancelclient': S.editing = null; S.formErr = null; render(); break;
+      case 'saveclient': saveClient(); break;
+      case 'delclient':
+        if (S.confirmDel !== S.editing.id) { S.confirmDel = S.editing.id; el.textContent = 'Tap again to delete forever'; el.style.background = '#e0663f'; el.style.color = '#fff'; return; }
+        S.store.deleteClient(S.editing.id).then(function(){ S.editing = null; S.cur = null; S.confirmDel = null; return S.store.clients(); }).then(function(cl){ S.clients = cl; render(); toast('Client deleted'); }).catch(fail); break;
+      case 'geopick':
+        var g = S._geo[+v]; S.editing.lat = g.latitude; S.editing.lon = g.longitude; S.editing.tz = g.timezone; S.editing.placeLabel = [g.name, g.admin1, g.country].filter(Boolean).join(', '); S.editing._manual = false;
+        $('#pc-c-place').value = S.editing.placeLabel; $('#pc-c-sugg').innerHTML = ''; $('#pc-c-picked').innerHTML = pickedHTML(S.editing);
+        $('#pc-c-lat').value = g.latitude; $('#pc-c-lon').value = g.longitude; $('#pc-c-tz').value = g.timezone; break;
+      case 'newsess': S.sessEdit = {client_id: S.cur.id, session_date: today(), topic: '', notes: ''}; render(); break;
+      case 'editsess': for (var i = 0; i < S.sessions.length; i++) if (S.sessions[i].id === v) S.sessEdit = JSON.parse(JSON.stringify(S.sessions[i])); render(); break;
+      case 'cancelsess': S.sessEdit = null; render(); break;
+      case 'savesess':
+        var x = S.sessEdit; x.session_date = $('#pc-x-date').value || today(); x.topic = $('#pc-x-topic').value; x.notes = $('#pc-x-notes').value;
+        S.store.saveSession(x).then(function(){ S.sessEdit = null; return S.store.sessions(S.cur.id); }).then(function(s){ S.sessions = s; render(); toast('Session saved'); }).catch(fail); break;
+      case 'delsess':
+        if (S.confirmDel !== v) { S.confirmDel = v; el.textContent = 'Tap again to delete'; return; }
+        S.store.deleteSession(v).then(function(){ S.sessEdit = null; S.confirmDel = null; return S.store.sessions(S.cur.id); }).then(function(s){ S.sessions = s; render(); }).catch(fail); break;
+      case 'openrep': openReport(v); break;
+      case 'delrep':
+        if (S.confirmDel !== v) { S.confirmDel = v; el.textContent = 'Tap again to delete'; return; }
+        S.store.deleteReport(v).then(function(){ S.confirmDel = null; return S.store.reports(S.cur.id); }).then(function(r){ S.reports = r; render(); }).catch(fail); break;
+      case 'sec':
+        captureBuildInputs(); var ids = S.build.ids, k = ids.indexOf(v); if (k >= 0) ids.splice(k, 1); else ids.push(v); render(); break;
+      case 'preset':
+        captureBuildInputs(); S.build.ids = v === 'none' ? [] : v === 'everything' ? allIds() : PC_PRESETS[v].slice(0); render(); break;
+      case 'short': captureBuildInputs(); S.build.short = v === '1'; render(); break;
+      case 'arch': captureBuildInputs(); S.build.archetype = v === '1'; render(); break;
+      case 'theme': captureBuildInputs(); themePopup(v); break;
+      case 'themeadd':
+        var th = S.build.themes, ti = th.indexOf(v); if (ti >= 0) th.splice(ti, 1); else th.push(v);
+        if (th.length && S.build.ids.indexOf('themes') < 0) S.build.ids.push('themes');
+        render(); toast(ti >= 0 ? 'Theme removed' : 'Theme added to the report'); break;
+      case 'popclose': var p = root.querySelector('.pc-pop'); if (p) p.parentNode.removeChild(p); break;
+      case 'saverep': saveReport(); break;
+      case 'pdf': printPDF(); break;
+      case 'setpw':
+        var npw = $('#pc-r-pw').value; if (npw.length < 8) return fail('Please use at least 8 characters.');
+        S.store.sb.auth.updateUser({password: npw}).then(function(r){ if (r.error) throw r.error; S.recovery = false; S.msg = {ok: 'Password updated.'}; return S.store.session(); }).then(function(u){ if (u) afterLogin(u); else render(); }).catch(fail); break;
+    }
+  });
+  root.addEventListener('input', function(e){
+    if (e.target.id === 'pc-c-place' && S.editing) { S.editing.lat = null; S.editing.placeLabel = ''; $('#pc-c-picked').innerHTML = ''; geoSearch(e.target.value); }
+    if (e.target.id === 'pc-search') { S.search = e.target.value; var pos = e.target.selectionStart; render(); var s = $('#pc-search'); if (s) { s.focus(); s.setSelectionRange(pos, pos); } }
+  });
+  root.addEventListener('change', function(e){
+    if (e.target.id === 'pc-lib-file' && e.target.files && e.target.files[0]) loadLibraryFile(e.target.files[0]);
+    if (e.target.id === 'pc-b-house') { captureBuildInputs(); S.build.house = e.target.value; render(); }
+  });
+  root.addEventListener('keydown', function(e){ if (e.key === 'Enter' && e.target.id && e.target.id.indexOf('pc-a-') === 0) doAuth(); });
+  boot();
+})();
