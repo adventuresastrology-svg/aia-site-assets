@@ -1,5 +1,5 @@
 /* Adventures In Astrology - Practitioner Center (pc-). No client data or library text lives in this file. */
-(function(){var st=document.getElementById("pc-style");if(!st){st=document.createElement("style");st.id="pc-style";st.textContent="@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap');\n#pc-root{--pc-scale:1;--cream:#fffaf1;--paper:#ffffff;--ink:#2b2135;--soft:#6b5f73;--line:#eadfcc;--teal:#0f9e94;--teal-l:#d9f4f1;--terra:#e0663f;--terra-l:#fde6dc;--gold:#e8a923;--gold-l:#fff1cc;--plum:#7b4fc9;--plum-l:#efe6ff;\n  font-family:'Lora',Georgia,serif;color:var(--ink);background:var(--cream);font-size:calc(16px * var(--pc-scale));line-height:1.55;border-radius:18px;overflow:hidden;box-shadow:0 2px 18px rgba(60,40,20,.08);max-width:1280px;margin:0 auto;text-align:left}\n#pc-root *{box-sizing:border-box}\n#pc-root h1,#pc-root h2,#pc-root h3,#pc-root h4{font-family:'Fraunces',Georgia,serif;color:var(--ink);margin:0 0 .4em;line-height:1.2;letter-spacing:0;text-transform:none}\n#pc-root p{margin:0 0 .7em;font-size:1em}\n#pc-root button,#pc-root input,#pc-root select,#pc-root textarea{font:inherit;color:inherit}\n#pc-root .pc-mono{font-family:'Space Mono',monospace}\n#pc-root .pc-muted{color:var(--soft);font-size:.92em}\n#pc-root .pc-hide{display:none!important}\n\n/* top bar */\n#pc-root .pc-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 20px;background:var(--paper);border-bottom:2px solid var(--line)}\n#pc-root .pc-brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.25em;margin-right:auto}\n#pc-root .pc-brand small{display:block;font-family:'Space Mono',monospace;font-size:.55em;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;font-weight:400}\n#pc-root .pc-steps{display:flex;gap:6px}\n#pc-root .pc-step{border:2px solid var(--line);background:var(--cream);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:600}\n#pc-root .pc-step b{display:inline-block;width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--line);margin-right:6px;font-family:'Space Mono',monospace;font-size:.85em}\n#pc-root .pc-step.is-on{border-color:var(--teal);background:var(--teal-l)}\n#pc-root .pc-step.is-on b{background:var(--teal);color:#fff}\n#pc-root .pc-step:disabled{opacity:.45;cursor:not-allowed}\n#pc-root .pc-tools{display:flex;gap:6px;align-items:center}\n#pc-root .pc-ic{border:2px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px;cursor:pointer;font-weight:700}\n\n/* buttons */\n#pc-root .pc-btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:12px;padding:11px 18px;font-weight:700;cursor:pointer;background:var(--teal);color:#fff;font-size:1em;text-decoration:none}\n#pc-root .pc-btn:hover{filter:brightness(1.06)}\n#pc-root .pc-btn.alt{background:var(--terra)}\n#pc-root .pc-btn.plum{background:var(--plum)}\n#pc-root .pc-btn.ghost{background:#fff;color:var(--ink);border:2px solid var(--line)}\n#pc-root .pc-btn.big{font-size:1.1em;padding:14px 22px}\n#pc-root .pc-btn.small{padding:6px 12px;font-size:.9em;border-radius:9px}\n#pc-root .pc-btn:disabled{opacity:.5;cursor:wait}\n#pc-root .pc-link{background:none;border:none;color:var(--teal);font-weight:700;cursor:pointer;padding:0;text-decoration:underline}\n\n/* layout */\n#pc-root .pc-screen{padding:22px}\n#pc-root .pc-two{display:grid;grid-template-columns:300px 1fr;gap:22px}\n#pc-root .pc-build{display:grid;grid-template-columns:330px 1fr;gap:22px}\n@media (max-width:900px){#pc-root .pc-two,#pc-root .pc-build{grid-template-columns:1fr}}\n#pc-root .pc-card{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:18px}\n#pc-root .pc-card+.pc-card{margin-top:16px}\n#pc-root .pc-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}\n#pc-root .pc-spacer{flex:1}\n\n/* forms */\n#pc-root label.pc-f{display:block;margin-bottom:12px;font-weight:600}\n#pc-root label.pc-f span{display:block;font-size:.9em;margin-bottom:4px}\n#pc-root .pc-in{width:100%;border:2px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}\n#pc-root .pc-in:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-l)}\n#pc-root textarea.pc-in{min-height:90px;resize:vertical}\n#pc-root .pc-time{display:flex;gap:6px}\n#pc-root .pc-time select{width:auto;flex:1}\n#pc-root .pc-check{display:flex;gap:8px;align-items:center;font-weight:600;cursor:pointer;margin:6px 0 12px}\n#pc-root .pc-check input{width:20px;height:20px;accent-color:var(--teal)}\n#pc-root .pc-sugg{border:2px solid var(--teal);border-radius:10px;background:#fff;margin-top:4px;overflow:hidden}\n#pc-root .pc-sugg button{display:block;width:100%;text-align:left;padding:9px 12px;border:none;background:#fff;cursor:pointer;border-bottom:1px solid var(--line)}\n#pc-root .pc-sugg button:hover{background:var(--teal-l)}\n#pc-root .pc-picked{background:var(--teal-l);border-radius:10px;padding:8px 12px;margin-top:6px;font-size:.92em}\n#pc-root .pc-err{background:var(--terra-l);color:#8a2c0c;border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:600}\n#pc-root .pc-ok{background:var(--teal-l);color:#075e57;border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:600}\n\n/* auth */\n#pc-root .pc-auth{max-width:440px;margin:30px auto}\n#pc-root .pc-auth h2{font-size:1.7em}\n#pc-root .pc-lock{display:inline-block;background:var(--plum-l);color:var(--plum);border-radius:999px;padding:4px 12px;font-family:'Space Mono',monospace;font-size:.75em;margin-bottom:10px}\n\n/* client list */\n#pc-root .pc-clist{max-height:520px;overflow:auto;margin-top:10px}\n#pc-root .pc-citem{display:block;width:100%;text-align:left;border:2px solid transparent;background:none;border-radius:12px;padding:10px 12px;cursor:pointer}\n#pc-root .pc-citem:hover{background:var(--cream)}\n#pc-root .pc-citem.is-on{border-color:var(--teal);background:var(--teal-l)}\n#pc-root .pc-citem b{display:block}\n#pc-root .pc-citem small{color:var(--soft)}\n#pc-root .pc-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0}\n#pc-root .pc-fact{background:var(--cream);border-radius:12px;padding:10px 12px}\n#pc-root .pc-fact small{display:block;font-family:'Space Mono',monospace;font-size:.72em;color:var(--soft);text-transform:uppercase;letter-spacing:.08em}\n#pc-root .pc-sess{border-left:4px solid var(--gold);background:var(--gold-l);border-radius:0 12px 12px 0;padding:10px 14px;margin-bottom:10px}\n#pc-root .pc-sess h4{margin:0}\n#pc-root .pc-rep{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}\n#pc-root .pc-empty{text-align:center;padding:40px 20px;color:var(--soft)}\n\n/* build */\n#pc-root .pc-themes{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}\n#pc-root .pc-theme{border:2px solid var(--plum);background:var(--plum-l);color:#4a2a8a;border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:700;animation:pcPop .45s cubic-bezier(.2,1.6,.4,1) both}\n#pc-root .pc-theme.is-in{background:var(--plum);color:#fff}\n@keyframes pcPop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}\n#pc-root .pc-pop{position:fixed;inset:0;background:rgba(43,33,53,.45);display:flex;align-items:center;justify-content:center;z-index:99999;padding:16px}\n#pc-root .pc-pop-box{background:#fff;border-radius:18px;max-width:560px;width:100%;max-height:85vh;overflow:auto;padding:22px;border-top:8px solid var(--plum)}\n#pc-root .pc-group{margin-bottom:14px}\n#pc-root .pc-group h4{font-size:.95em;margin-bottom:6px;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--soft)}\n#pc-root .pc-pick{display:flex;flex-wrap:wrap;gap:6px}\n#pc-root .pc-sec-btn{border:2px solid var(--line);background:#fff;border-radius:10px;padding:7px 11px;cursor:pointer;font-weight:600}\n#pc-root .pc-sec-btn.is-in{border-color:var(--teal);background:var(--teal);color:#fff}\n#pc-root .pc-sec-btn.is-off{opacity:.4;cursor:not-allowed;text-decoration:line-through}\n#pc-root .pc-switch{display:flex;background:var(--cream);border:2px solid var(--line);border-radius:12px;padding:3px;gap:3px}\n#pc-root .pc-switch button{border:none;background:none;padding:8px 12px;border-radius:9px;cursor:pointer;font-weight:700;color:var(--soft)}\n#pc-root .pc-switch button.is-on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}\n#pc-root .pc-switch.arch button.is-on{background:var(--plum);color:#fff}\n#pc-root .pc-preview{background:#fff;border:2px solid var(--line);border-radius:16px;padding:26px 30px;max-height:900px;overflow:auto}\n\n/* report */\n#pc-root .pc-r-sec,.pcr .pc-r-sec{padding:6px 0 18px;border-bottom:2px dashed var(--line);margin-bottom:18px}\n.pc-r-sec header{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px}\n.pc-r-sec h3{font-size:1.35em;margin:0}\n.pc-r-sec h3 small{display:block;font-family:'Space Mono',monospace;font-size:.55em;color:var(--soft);font-weight:400;margin-top:3px}\n.pc-r-sec h4{font-size:1.05em;margin:.6em 0 .3em}\n.pc-deg{font-family:'Space Mono',monospace;font-size:.8em;color:var(--teal)}\n.pc-flag{font-family:'Space Mono',monospace;font-size:.68em;border-radius:999px;padding:2px 9px;text-transform:uppercase;letter-spacing:.06em}\n.pc-flag-proof{background:var(--teal-l);color:#075e57}\n.pc-flag-time{background:var(--gold-l);color:#7a5200}\n.pc-r-lab{font-family:'Space Mono',monospace;font-size:.72em;text-transform:uppercase;letter-spacing:.08em;color:var(--terra);margin-top:6px}\n.pc-r-field p{margin:.15em 0 .55em}\n.pc-r-arch{background:var(--plum-l);border-left:4px solid var(--plum);border-radius:0 12px 12px 0;padding:10px 14px;margin:6px 0 10px}\n.pc-r-arch div{margin:2px 0}\n.pc-r-arch-q{font-size:1.08em;color:#4a2a8a}\n.pc-chips{margin-top:6px}\n.pc-chip{display:inline-block;background:#fff;border:1px solid var(--plum);color:#4a2a8a;border-radius:999px;padding:1px 9px;margin:2px 4px 2px 0;font-size:.82em}\n.pc-note{background:var(--gold-l);border-radius:10px;padding:8px 12px;font-size:.95em}\n.pc-orb{font-family:'Space Mono',monospace;font-size:.7em;color:var(--soft);font-weight:400}\n.pc-big3{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}\n.pc-big3-l{font-family:'Space Mono',monospace;font-size:.78em;text-transform:uppercase;color:var(--teal)}\n.pc-bars{margin:6px 0 12px}\n.pc-bar-row{display:grid;grid-template-columns:70px 1fr 30px;align-items:center;gap:8px;margin:4px 0}\n.pc-bar{height:14px;border-radius:7px;display:block}\n.pc-el-fire{background:var(--terra)}.pc-el-earth{background:#5a9a3c}.pc-el-air{background:var(--gold)}.pc-el-water{background:var(--teal)}\n.pc-cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}\n.pc-cast-card{background:var(--cream);border-radius:12px;padding:10px 12px;border:1px solid var(--line)}\n.pc-cast-card b{display:block;font-family:'Fraunces',serif}\n.pc-cast-card small{font-family:'Space Mono',monospace;font-size:.72em;color:var(--soft)}\n.pc-cast-card p{font-style:italic;font-size:.9em;margin:.3em 0 0}\n.pc-cast-g{font-size:1.4em;color:var(--plum);font-family:'Segoe UI Symbol','Apple Symbols',sans-serif}\n.pc-table{width:100%;border-collapse:collapse;font-size:.93em}\n.pc-table th,.pc-table td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}\n.pc-table th{font-family:'Space Mono',monospace;font-size:.75em;text-transform:uppercase;color:var(--soft)}\n.pc-num{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}\n.pc-num-n{flex:none;width:2.4em;height:2.4em;border-radius:50%;background:var(--gold);color:#fff;font-family:'Fraunces',serif;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.2em}\n.pc-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}\n.pc-kv div{background:var(--cream);border-radius:10px;padding:8px 10px}\n.pc-kv b{display:block;font-family:'Space Mono',monospace;font-size:.72em;text-transform:uppercase;color:var(--teal)}\n.pc-centers{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}\n.pc-center{border-radius:12px;padding:9px 11px;border:2px solid var(--line)}\n.pc-center span{font-family:'Space Mono',monospace;font-size:.7em;text-transform:uppercase}\n.pc-center small{display:block;color:var(--soft)}\n.pc-center p{font-size:.9em;margin:.3em 0 0}\n.pc-center.is-def{background:var(--gold-l);border-color:var(--gold)}\n.pc-tcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}\n.pc-tcard{border:2px solid var(--plum);border-radius:14px;padding:12px;text-align:center;background:linear-gradient(180deg,var(--plum-l),#fff)}\n.pc-tcard-n{font-family:'Fraunces',serif;font-size:1.6em;color:var(--plum);font-weight:700}\n.pc-tcard b{display:block;font-family:'Fraunces',serif}\n.pc-tcard small{display:block;font-family:'Space Mono',monospace;font-size:.7em;color:var(--soft)}\n.pc-tcard p{font-size:.9em;margin:.4em 0 0}\n.pc-r-asp,.pc-r-theme{margin-bottom:10px}\n#pc-root .pc-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px;z-index:99999;font-weight:600}\n.pc-tree-wrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:20px;align-items:start}\n@media (max-width:700px){.pc-tree-wrap{grid-template-columns:1fr}}\n.pc-tree-svg{width:100%;height:auto;display:block}\n.pc-lvl{font-family:'Space Mono',monospace;font-size:.62em;text-transform:uppercase;border-radius:999px;padding:2px 8px;vertical-align:middle;color:#fff}\n.pc-lvl-radiant{background:#c48a10}.pc-lvl-steady{background:var(--teal)}.pc-lvl-growing{background:var(--terra)}\n.pc-path{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;page-break-inside:avoid}\n.pc-path-n{flex:none;width:2.3em;height:2.3em;border-radius:12px;background:var(--plum-l);color:var(--plum);border:2px solid var(--plum);display:flex;align-items:center;justify-content:center;font-size:1.25em;font-weight:700}\n.pc-path h4{margin:0 0 .2em}\n";document.head.appendChild(st);}})();
+(function(){var st=document.getElementById("pc-style");if(!st){st=document.createElement("style");st.id="pc-style";st.textContent="@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap');\n#pc-root{--pc-scale:1;--cream:#fffaf1;--paper:#ffffff;--ink:#2b2135;--soft:#6b5f73;--line:#eadfcc;--teal:#0f9e94;--teal-l:#d9f4f1;--terra:#e0663f;--terra-l:#fde6dc;--gold:#e8a923;--gold-l:#fff1cc;--plum:#7b4fc9;--plum-l:#efe6ff;\n  font-family:'Lora',Georgia,serif;color:var(--ink);background:var(--cream);font-size:calc(16px * var(--pc-scale));line-height:1.55;border-radius:18px;overflow:hidden;box-shadow:0 2px 18px rgba(60,40,20,.08);max-width:1280px;margin:0 auto;text-align:left}\n#pc-root *{box-sizing:border-box}\n#pc-root h1,#pc-root h2,#pc-root h3,#pc-root h4{font-family:'Fraunces',Georgia,serif;color:var(--ink);margin:0 0 .4em;line-height:1.2;letter-spacing:0;text-transform:none}\n#pc-root p{margin:0 0 .7em;font-size:1em}\n#pc-root button,#pc-root input,#pc-root select,#pc-root textarea{font:inherit;color:inherit}\n#pc-root .pc-mono{font-family:'Space Mono',monospace}\n#pc-root .pc-muted{color:var(--soft);font-size:.92em}\n#pc-root .pc-hide{display:none!important}\n\n/* top bar */\n#pc-root .pc-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 20px;background:var(--paper);border-bottom:2px solid var(--line)}\n#pc-root .pc-brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.25em;margin-right:auto}\n#pc-root .pc-brand small{display:block;font-family:'Space Mono',monospace;font-size:.55em;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;font-weight:400}\n#pc-root .pc-steps{display:flex;gap:6px}\n#pc-root .pc-step{border:2px solid var(--line);background:var(--cream);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:600}\n#pc-root .pc-step b{display:inline-block;width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--line);margin-right:6px;font-family:'Space Mono',monospace;font-size:.85em}\n#pc-root .pc-step.is-on{border-color:var(--teal);background:var(--teal-l)}\n#pc-root .pc-step.is-on b{background:var(--teal);color:#fff}\n#pc-root .pc-step:disabled{opacity:.45;cursor:not-allowed}\n#pc-root .pc-tools{display:flex;gap:6px;align-items:center}\n#pc-root .pc-ic{border:2px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px;cursor:pointer;font-weight:700}\n\n/* buttons */\n#pc-root .pc-btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:12px;padding:11px 18px;font-weight:700;cursor:pointer;background:var(--teal);color:#fff;font-size:1em;text-decoration:none}\n#pc-root .pc-btn:hover{filter:brightness(1.06)}\n#pc-root .pc-btn.alt{background:var(--terra)}\n#pc-root .pc-btn.plum{background:var(--plum)}\n#pc-root .pc-btn.ghost{background:#fff;color:var(--ink);border:2px solid var(--line)}\n#pc-root .pc-btn.big{font-size:1.1em;padding:14px 22px}\n#pc-root .pc-btn.small{padding:6px 12px;font-size:.9em;border-radius:9px}\n#pc-root .pc-btn:disabled{opacity:.5;cursor:wait}\n#pc-root .pc-link{background:none;border:none;color:var(--teal);font-weight:700;cursor:pointer;padding:0;text-decoration:underline}\n\n/* layout */\n#pc-root .pc-screen{padding:22px}\n#pc-root .pc-two{display:grid;grid-template-columns:300px 1fr;gap:22px}\n#pc-root .pc-build{display:grid;grid-template-columns:minmax(380px,440px) 1fr;gap:22px}\n@media (max-width:900px){#pc-root .pc-two,#pc-root .pc-build{grid-template-columns:1fr}}\n#pc-root .pc-card{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:18px}\n#pc-root .pc-card+.pc-card{margin-top:16px}\n#pc-root .pc-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}\n#pc-root .pc-spacer{flex:1}\n\n/* forms */\n#pc-root label.pc-f{display:block;margin-bottom:12px;font-weight:600}\n#pc-root label.pc-f span{display:block;font-size:.9em;margin-bottom:4px}\n#pc-root .pc-in{width:100%;border:2px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}\n#pc-root .pc-in:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-l)}\n#pc-root textarea.pc-in{min-height:90px;resize:vertical}\n#pc-root .pc-time{display:flex;gap:6px}\n#pc-root .pc-time select{width:auto;flex:1}\n#pc-root .pc-check{display:flex;gap:8px;align-items:center;font-weight:600;cursor:pointer;margin:6px 0 12px}\n#pc-root .pc-check input{width:20px;height:20px;accent-color:var(--teal)}\n#pc-root .pc-sugg{border:2px solid var(--teal);border-radius:10px;background:#fff;margin-top:4px;overflow:hidden}\n#pc-root .pc-sugg button{display:block;width:100%;text-align:left;padding:9px 12px;border:none;background:#fff;cursor:pointer;border-bottom:1px solid var(--line)}\n#pc-root .pc-sugg button:hover{background:var(--teal-l)}\n#pc-root .pc-picked{background:var(--teal-l);border-radius:10px;padding:8px 12px;margin-top:6px;font-size:.92em}\n#pc-root .pc-err{background:var(--terra-l);color:#8a2c0c;border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:600}\n#pc-root .pc-ok{background:var(--teal-l);color:#075e57;border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:600}\n\n/* auth */\n#pc-root .pc-auth{max-width:440px;margin:30px auto}\n#pc-root .pc-auth h2{font-size:1.7em}\n#pc-root .pc-lock{display:inline-block;background:var(--plum-l);color:var(--plum);border-radius:999px;padding:4px 12px;font-family:'Space Mono',monospace;font-size:.75em;margin-bottom:10px}\n\n/* client list */\n#pc-root .pc-clist{max-height:520px;overflow:auto;margin-top:10px}\n#pc-root .pc-citem{display:block;width:100%;text-align:left;border:2px solid transparent;background:none;border-radius:12px;padding:10px 12px;cursor:pointer}\n#pc-root .pc-citem:hover{background:var(--cream)}\n#pc-root .pc-citem.is-on{border-color:var(--teal);background:var(--teal-l)}\n#pc-root .pc-citem b{display:block}\n#pc-root .pc-citem small{color:var(--soft)}\n#pc-root .pc-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0}\n#pc-root .pc-fact{background:var(--cream);border-radius:12px;padding:10px 12px}\n#pc-root .pc-fact small{display:block;font-family:'Space Mono',monospace;font-size:.72em;color:var(--soft);text-transform:uppercase;letter-spacing:.08em}\n#pc-root .pc-sess{border-left:4px solid var(--gold);background:var(--gold-l);border-radius:0 12px 12px 0;padding:10px 14px;margin-bottom:10px}\n#pc-root .pc-sess h4{margin:0}\n#pc-root .pc-rep{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}\n#pc-root .pc-empty{text-align:center;padding:40px 20px;color:var(--soft)}\n\n/* build */\n#pc-root .pc-themes{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}\n#pc-root .pc-theme{border:2px solid var(--plum);background:var(--plum-l);color:#4a2a8a;border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:700;animation:pcPop .45s cubic-bezier(.2,1.6,.4,1) both}\n#pc-root .pc-theme.is-in{background:var(--plum);color:#fff}\n@keyframes pcPop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}\n#pc-root .pc-pop{position:fixed;inset:0;background:rgba(43,33,53,.45);display:flex;align-items:center;justify-content:center;z-index:99999;padding:16px}\n#pc-root .pc-pop-box{background:#fff;border-radius:18px;max-width:560px;width:100%;max-height:85vh;overflow:auto;padding:22px;border-top:8px solid var(--plum)}\n#pc-root .pc-group{margin-bottom:14px}\n#pc-root .pc-group h4{font-size:.95em;margin-bottom:6px;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--soft)}\n#pc-root .pc-pick{display:flex;flex-wrap:wrap;gap:6px}\n#pc-root .pc-sec-btn{border:2px solid var(--line);background:#fff;border-radius:10px;padding:7px 11px;cursor:pointer;font-weight:600}\n#pc-root .pc-sec-btn.is-in{border-color:var(--teal);background:var(--teal);color:#fff}\n#pc-root .pc-sec-btn.is-off{opacity:.4;cursor:not-allowed;text-decoration:line-through}\n#pc-root .pc-switch{display:flex;background:var(--cream);border:2px solid var(--line);border-radius:12px;padding:3px;gap:3px}\n#pc-root .pc-switch button{border:none;background:none;padding:8px 12px;border-radius:9px;cursor:pointer;font-weight:700;color:var(--soft)}\n#pc-root .pc-switch button.is-on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}\n#pc-root .pc-switch.arch button.is-on{background:var(--plum);color:#fff}\n#pc-root .pc-preview{background:#fff;border:2px solid var(--line);border-radius:16px;padding:26px 30px;max-height:900px;overflow:auto}\n\n/* report */\n#pc-root .pc-r-sec,.pcr .pc-r-sec{padding:6px 0 18px;border-bottom:2px dashed var(--line);margin-bottom:18px}\n.pc-r-sec header{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px}\n.pc-r-sec h3{font-size:1.35em;margin:0}\n.pc-r-sec h3 small{display:block;font-family:'Space Mono',monospace;font-size:.55em;color:var(--soft);font-weight:400;margin-top:3px}\n.pc-r-sec h4{font-size:1.05em;margin:.6em 0 .3em}\n.pc-deg{font-family:'Space Mono',monospace;font-size:.8em;color:var(--teal)}\n.pc-flag{font-family:'Space Mono',monospace;font-size:.68em;border-radius:999px;padding:2px 9px;text-transform:uppercase;letter-spacing:.06em}\n.pc-flag-proof{background:var(--teal-l);color:#075e57}\n.pc-flag-time{background:var(--gold-l);color:#7a5200}\n.pc-r-lab{font-family:'Space Mono',monospace;font-size:.72em;text-transform:uppercase;letter-spacing:.08em;color:var(--terra);margin-top:6px}\n.pc-r-field p{margin:.15em 0 .55em}\n.pc-r-arch{background:var(--plum-l);border-left:4px solid var(--plum);border-radius:0 12px 12px 0;padding:10px 14px;margin:6px 0 10px}\n.pc-r-arch div{margin:2px 0}\n.pc-r-arch-q{font-size:1.08em;color:#4a2a8a}\n.pc-chips{margin-top:6px}\n.pc-chip{display:inline-block;background:#fff;border:1px solid var(--plum);color:#4a2a8a;border-radius:999px;padding:1px 9px;margin:2px 4px 2px 0;font-size:.82em}\n.pc-note{background:var(--gold-l);border-radius:10px;padding:8px 12px;font-size:.95em}\n.pc-orb{font-family:'Space Mono',monospace;font-size:.7em;color:var(--soft);font-weight:400}\n.pc-big3{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}\n.pc-big3-l{font-family:'Space Mono',monospace;font-size:.78em;text-transform:uppercase;color:var(--teal)}\n.pc-bars{margin:6px 0 12px}\n.pc-bar-row{display:grid;grid-template-columns:70px 1fr 30px;align-items:center;gap:8px;margin:4px 0}\n.pc-bar{height:14px;border-radius:7px;display:block}\n.pc-el-fire{background:var(--terra)}.pc-el-earth{background:#5a9a3c}.pc-el-air{background:var(--gold)}.pc-el-water{background:var(--teal)}\n.pc-cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}\n.pc-cast-card{background:var(--cream);border-radius:12px;padding:10px 12px;border:1px solid var(--line)}\n.pc-cast-card b{display:block;font-family:'Fraunces',serif}\n.pc-cast-card small{font-family:'Space Mono',monospace;font-size:.72em;color:var(--soft)}\n.pc-cast-card p{font-style:italic;font-size:.9em;margin:.3em 0 0}\n.pc-cast-g{font-size:1.4em;color:var(--plum);font-family:'Segoe UI Symbol','Apple Symbols',sans-serif}\n.pc-table{width:100%;border-collapse:collapse;font-size:.93em}\n.pc-table th,.pc-table td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}\n.pc-table th{font-family:'Space Mono',monospace;font-size:.75em;text-transform:uppercase;color:var(--soft)}\n.pc-num{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}\n.pc-num-n{flex:none;width:2.4em;height:2.4em;border-radius:50%;background:var(--gold);color:#fff;font-family:'Fraunces',serif;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.2em}\n.pc-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}\n.pc-kv div{background:var(--cream);border-radius:10px;padding:8px 10px}\n.pc-kv b{display:block;font-family:'Space Mono',monospace;font-size:.72em;text-transform:uppercase;color:var(--teal)}\n.pc-centers{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}\n.pc-center{border-radius:12px;padding:9px 11px;border:2px solid var(--line)}\n.pc-center span{font-family:'Space Mono',monospace;font-size:.7em;text-transform:uppercase}\n.pc-center small{display:block;color:var(--soft)}\n.pc-center p{font-size:.9em;margin:.3em 0 0}\n.pc-center.is-def{background:var(--gold-l);border-color:var(--gold)}\n.pc-tcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}\n.pc-tcard{border:2px solid var(--plum);border-radius:14px;padding:12px;text-align:center;background:linear-gradient(180deg,var(--plum-l),#fff)}\n.pc-tcard-n{font-family:'Fraunces',serif;font-size:1.6em;color:var(--plum);font-weight:700}\n.pc-tcard b{display:block;font-family:'Fraunces',serif}\n.pc-tcard small{display:block;font-family:'Space Mono',monospace;font-size:.7em;color:var(--soft)}\n.pc-tcard p{font-size:.9em;margin:.4em 0 0}\n.pc-r-asp,.pc-r-theme{margin-bottom:10px}\n#pc-root .pc-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:12px;padding:12px 18px;z-index:99999;font-weight:600}\n.pc-tree-wrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:20px;align-items:start}\n@media (max-width:700px){.pc-tree-wrap{grid-template-columns:1fr}}\n.pc-tree-svg{width:100%;height:auto;display:block}\n.pc-lvl{font-family:'Space Mono',monospace;font-size:.62em;text-transform:uppercase;border-radius:999px;padding:2px 8px;vertical-align:middle;color:#fff}\n.pc-lvl-radiant{background:#c48a10}.pc-lvl-steady{background:var(--teal)}.pc-lvl-growing{background:var(--terra)}\n.pc-path{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;page-break-inside:avoid}\n.pc-path-n{flex:none;width:2.3em;height:2.3em;border-radius:12px;background:var(--plum-l);color:var(--plum);border:2px solid var(--plum);display:flex;align-items:center;justify-content:center;font-size:1.25em;font-weight:700}\n.pc-path h4{margin:0 0 .2em}\n.pc-mx-svg{width:100%;height:auto;display:block}\n#pc-root .pc-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}\n#pc-root .pc-tile{border:none;border-radius:18px;padding:22px 18px;background:var(--teal);color:#fff;font-weight:700;font-size:1.1em;cursor:pointer;text-align:left;box-shadow:0 2px 10px rgba(0,0,0,.08)}\n#pc-root .pc-tile b{display:block;font-family:'Fraunces',serif;font-size:2.2em;line-height:1.1;margin-bottom:4px}\n#pc-root .pc-tile.alt{background:var(--terra)}#pc-root .pc-tile.plum{background:var(--plum)}\n#pc-root .pc-tile:hover{filter:brightness(1.06)}\n/* ---------- professional shell ---------- */\n#pc-root .pc-shell{display:grid;grid-template-columns:230px 1fr;min-height:640px}\n#pc-root .pc-side{background:#2b2135;color:#fff;display:flex;flex-direction:column;padding:18px 12px;gap:14px}\n#pc-root .pc-side-brand{display:flex;gap:10px;align-items:center;padding:4px 6px 14px;border-bottom:1px solid rgba(255,255,255,.14)}\n#pc-root .pc-side-brand b{display:block;font-family:'Fraunces',serif;font-size:1.02em;line-height:1.2;color:#fff}\n#pc-root .pc-side-brand small{color:#cbbfd6;font-size:.8em}\n#pc-root .pc-logo{flex:none;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:1.3em;color:#fff}\n#pc-root .pc-side nav{display:flex;flex-direction:column;gap:4px}\n#pc-root .pc-nav{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:none;color:#e9e2f0;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600}\n#pc-root .pc-nav span{width:1.4em;text-align:center;opacity:.9}\n#pc-root .pc-nav em{margin-left:auto;font-style:normal;font-size:.75em;background:rgba(255,255,255,.14);border-radius:999px;padding:1px 8px}\n#pc-root .pc-nav:hover{background:rgba(255,255,255,.08)}\n#pc-root .pc-nav.is-on{background:#fff;color:#2b2135}\n#pc-root .pc-nav:disabled{opacity:.35;cursor:not-allowed}\n#pc-root .pc-side-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.14);padding-top:10px}\n#pc-root .pc-side-foot small{display:block;color:#9f93ab;font-size:.72em;padding:6px 12px 0;font-family:'Space Mono',monospace}\n#pc-root .pc-main{min-width:0;background:var(--cream)}\n@media (max-width:860px){#pc-root .pc-shell{grid-template-columns:1fr}#pc-root .pc-side nav{flex-direction:row;flex-wrap:wrap}#pc-root .pc-side-foot{margin-top:0}}\n#pc-root .pc-rcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}\n#pc-root .pc-rcard{position:relative;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:transform .12s}\n#pc-root .pc-rcard:hover{transform:translateY(-2px);border-color:var(--rc)}\n#pc-root .pc-rcard b{font-family:'Fraunces',serif;font-size:1em;line-height:1.2}\n#pc-root .pc-rcard small{color:var(--soft);font-size:.8em;line-height:1.35}\n#pc-root .pc-rcard-i{width:34px;height:34px;border-radius:10px;background:var(--rc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1em}\n#pc-root .pc-rcard.is-on{border-color:var(--rc);box-shadow:0 0 0 3px color-mix(in srgb,var(--rc) 22%,transparent);background:color-mix(in srgb,var(--rc) 7%,#fff)}\n#pc-root .pc-rcard-n{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;background:var(--rc);color:#fff;font-weight:700;font-size:.8em;display:flex;align-items:center;justify-content:center}\n#pc-root .pc-optrow{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}\n#pc-root .pc-optrow>span{width:60px;font-weight:700;font-size:.9em}\n#pc-root .pc-clienthead{display:flex;align-items:center;gap:12px;margin-bottom:16px}\n#pc-root .pc-stick{position:sticky;top:10px;z-index:2;margin-bottom:12px}\n#pc-root .pc-stepcard{display:flex;gap:14px;align-items:flex-start}\n#pc-root .pc-stepnum{flex:none;width:38px;height:38px;border-radius:50%;background:var(--teal);color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:1.2em;display:flex;align-items:center;justify-content:center}\n#pc-root .pc-stepnum.alt{background:var(--terra)}\n#pc-root .pc-swatch{width:34px;height:34px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px var(--line);cursor:pointer}\n#pc-root .pc-swatch.is-on{box-shadow:0 0 0 3px var(--ink)}\n.pc-toc{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}\n.pc-toc li{display:flex;align-items:center;gap:8px;font-family:'Fraunces',serif}\n.pc-toc-i{width:24px;height:24px;border-radius:7px;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.8em}\n.pc-toc-box{background:var(--cream);border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:18px}\n.pc-chapter{margin-bottom:10px}\n.pc-chapter-head{display:flex;gap:14px;align-items:center;border-left:6px solid;padding:10px 14px;margin:6px 0 16px;background:var(--cream);border-radius:0 14px 14px 0}\n.pc-chapter-head h2{margin:0;font-size:1.5em}\n.pc-chapter-head p{margin:2px 0 0;color:var(--soft);font-size:.92em}\n.pc-chapter-i{flex:none;width:44px;height:44px;border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3em}\n.pc-chapter-k{font-family:'Space Mono',monospace;font-size:.7em;text-transform:uppercase;letter-spacing:.1em;color:var(--soft)}\n.pc-cover{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;text-align:center;border:2px solid var(--line);border-radius:20px;padding:46px 40px;background:#fffaf1}\n.pc-cover-band{position:absolute;left:0;right:0;top:0;height:14px;background:var(--brand)}\n.pc-cover h1{font-family:'Fraunces',serif;font-size:2.1em;margin:.3em 0;color:#2b2135}\n.pc-cover-k{font-family:'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);font-size:.75em;font-weight:700}\n.pc-cover-who{font-size:1.15em}\n.pc-cover-by{margin-top:26px;color:#6b5f73;font-size:.9em}\n.pc-cover-toc{margin:22px auto 0;text-align:left;display:inline-block}\n.pc-cover-mini{padding:30px 22px}\n.pc-cover-mini h1{font-size:1.5em}\n";document.head.appendChild(st);}})();
 var PC_ARCH = {"CAST": {"Sun": {"archetype": "The Sovereign", "question": "Who am I becoming?", "domain": "identity, vitality, the thing you are here to shine", "light": "wholeness, warmth, the courage to be seen as yourself", "shadow": "performing a self instead of inhabiting one"}, "Moon": {"archetype": "The Keeper", "question": "What do I need in order to feel safe?", "domain": "instinct, memory, comfort, the private inner weather", "light": "deep attunement, the ability to hold and be held", "shadow": "mistaking familiarity for safety"}, "Mercury": {"archetype": "The Messenger", "question": "How do I make sense of things?", "domain": "mind, language, learning, exchange", "light": "clarity, curiosity, the gift of making things understandable", "shadow": "thinking about it as a substitute for living it"}, "Venus": {"archetype": "The Lover", "question": "What is worth having, and worth keeping?", "domain": "value, beauty, attraction, what you move toward", "light": "genuine delight, generous taste, real intimacy", "shadow": "earning affection instead of receiving it"}, "Mars": {"archetype": "The Warrior", "question": "What will I fight for?", "domain": "drive, courage, appetite, the will to act", "light": "clean effort, honest wanting, protective strength", "shadow": "force where patience was needed, or stillness where force was"}, "Jupiter": {"archetype": "The Explorer", "question": "How far can I go?", "domain": "expansion, meaning, faith, the appetite for more", "light": "generosity, perspective, contagious enthusiasm", "shadow": "more as an escape from enough"}, "Saturn": {"archetype": "The Architect", "question": "What am I responsible for?", "domain": "structure, limit, mastery, the long build", "light": "durable work, real authority, the patience to finish", "shadow": "the blueprint that never gets built because it isn't perfect"}, "Uranus": {"archetype": "The Rebel", "question": "What must be freed?", "domain": "awakening, disruption, the sudden turn", "light": "originality, honesty, the nerve to leave what doesn't fit", "shadow": "breaking things to feel free rather than to become free"}, "Neptune": {"archetype": "The Mystic", "question": "What am I longing toward?", "domain": "imagination, longing, dissolution, the unseen", "light": "compassion, artistry, access to what can't be measured", "shadow": "the fog that protects you from having to choose"}, "Pluto": {"archetype": "The Alchemist", "question": "What must end so that I can grow?", "domain": "power, depth, buried material, transformation", "light": "regenerative strength, the courage to look directly at it", "shadow": "control disguised as depth"}, "Chiron": {"archetype": "The Wounded Guide", "question": "Where does my pain become my gift?", "domain": "the tender place, and the teaching that grows from it", "light": "hard-won compassion, the ability to reach people others can't", "shadow": "tending everyone else's version of your own wound"}, "North Node": {"archetype": "The Frontier", "question": "Where am I being asked to go?", "domain": "the unfamiliar direction that grows you", "light": "expansion into what you are not yet fluent in", "shadow": "waiting to feel ready before you go"}, "South Node": {"archetype": "The Homeland", "question": "What am I already fluent in?", "domain": "the old skill, so practiced it feels like nothing", "light": "a genuine gift you can lean on and give away", "shadow": "retreating into what is easy and calling it your nature"}}, "SIGN_EPITHET": {"Aries": "Blazing", "Taurus": "Rooted", "Gemini": "Quicksilver", "Cancer": "Shell-Armored", "Leo": "Radiant", "Virgo": "Fine-Tuned", "Libra": "Even-Handed", "Scorpio": "Deepwater", "Sagittarius": "Far-Roaming", "Capricorn": "Summit-Bound", "Aquarius": "Signal-Sending", "Pisces": "Fog-Walking"}, "SIGN_STYLE": {"Aries": "directly, immediately, and without waiting for permission", "Taurus": "slowly, sensually, and only once it feels solid", "Gemini": "quickly, curiously, and in more than one direction at once", "Cancer": "protectively, indirectly, and through what it cares about", "Leo": "warmly, visibly, and with the whole heart on display", "Virgo": "precisely, usefully, and by refining the details", "Libra": "relationally, gracefully, and by weighing both sides", "Scorpio": "intensely, privately, and all the way to the bottom", "Sagittarius": "expansively, honestly, and by going further out", "Capricorn": "patiently, structurally, and with the long view in mind", "Aquarius": "unusually, independently, and with the whole group in view", "Pisces": "permeably, imaginatively, and without hard edges"}, "TERRAIN": {"Fire": {"name": "The Wildlands", "gift": "you generate your own heat and you move before you are certain", "void": "The Firekeeper Without Fire. Spontaneous combustion is not issued to you. You choose your spark deliberately \u2014 and you build the hearth that holds it for everyone else. Different job, arguably a better one."}, "Earth": {"name": "The Bedrock", "gift": "you want it real, usable, and able to hold weight", "void": "The Untethered. Form does not come naturally, so you get to invent your own. The invitation is not discipline for its own sake \u2014 it is finding the one container that actually fits you, rather than borrowing someone else's."}, "Air": {"name": "The Open Sky", "gift": "you think in connections and you need room to move between ideas", "void": "The One Who Knows Without Explaining. Understanding arrives whole rather than in sentences. Your growth edge is translation \u2014 trusting that putting it into words doesn't flatten it."}, "Water": {"name": "The Deep", "gift": "you read the room before anyone speaks and you feel your way forward", "void": "The Clear-Eyed. You are not swamped by atmosphere, which makes you steady when others are not. The practice is remembering that a feeling doesn't have to be justified to be real."}}, "PACE": {"Cardinal": ["The Starter", "you begin things; the opening move is yours"], "Fixed": ["The Holder", "you sustain things; you stay when others leave"], "Mutable": ["The Shapeshifter", "you adapt things; you change form to keep moving"]}, "HOUSE_STAGE": {"1": ["The Threshold", "how you arrive, and what people meet first"], "2": ["The Storehouse", "what you own, value, and can rely on"], "3": ["The Crossroads", "everyday talk, siblings, short journeys, learning"], "4": ["The Hearth", "home, lineage, the private root system"], "5": ["The Stage", "play, creation, romance, what you make for the joy of it"], "6": ["The Workshop", "daily craft, service, health, the repeating hours"], "7": ["The Mirror", "partnership, and who you become in close company"], "8": ["The Undercroft", "shared resources, intimacy, what is buried and shared"], "9": ["The Far Country", "belief, travel, higher study, the search for meaning"], "10": ["The Summit", "public life, vocation, what you are known for"], "11": ["The Gathering", "community, networks, the future you build with others"], "12": ["The Quiet Room", "solitude, the unconscious, retreat and release"]}, "DOMICILE": {"Sun": ["Leo"], "Moon": ["Cancer"], "Mercury": ["Gemini", "Virgo"], "Venus": ["Libra", "Taurus"], "Mars": ["Aries", "Scorpio"], "Jupiter": ["Pisces", "Sagittarius"], "Saturn": ["Aquarius", "Capricorn"], "Uranus": ["Aquarius"], "Neptune": ["Pisces"], "Pluto": ["Scorpio"]}, "EXALTATION": {"Sun": "Aries", "Moon": "Taurus", "Mercury": "Virgo", "Venus": "Pisces", "Mars": "Capricorn", "Jupiter": "Cancer", "Saturn": "Libra"}, "MODERN_RULER": {"Aries": "Mars", "Taurus": "Venus", "Gemini": "Mercury", "Cancer": "Moon", "Leo": "Sun", "Virgo": "Mercury", "Libra": "Venus", "Scorpio": "Pluto", "Sagittarius": "Jupiter", "Capricorn": "Saturn", "Aquarius": "Uranus", "Pisces": "Neptune"}};
 /* ===== pc reference data (ES5). Starter text for HD / tarot / transits written in AIA growth voice; edit freely. ===== */
 var PC_HD_ORDER = [41,19,13,49,30,55,37,63,22,36,25,17,21,51,42,3,27,24,2,23,8,20,16,35,45,12,15,52,39,53,62,56,31,33,7,4,29,59,40,64,47,6,46,18,48,57,32,50,28,44,1,43,14,34,9,5,26,11,10,58,38,54,61,60];
@@ -661,6 +661,87 @@ function pcTreeSVG(tree){
   return out + '</svg>';
 }
 
+/* ===== pc Destiny Matrix (22 arcana octagram) + Annual Profection helpers (ES5) ===== */
+function pcR22(n){ n = Math.abs(n); while (n > 22) n = pcDigitSum(n); return n === 0 ? 22 : n; }
+var PC_ARCANA = {
+  1:['The Magician','starting things, skill, confident self-expression','scattered energy, talking more than doing'],
+  2:['The High Priestess','intuition, quiet wisdom, inner knowing','self-doubt, hiding your knowing, withdrawing'],
+  3:['The Empress','creativity, abundance, beauty, nurturing','over-giving, comfort-seeking, creative blocks'],
+  4:['The Emperor','leadership, structure, steady responsibility','control, rigidity, carrying everything alone'],
+  5:['The Hierophant','teaching, mentoring, meaningful tradition','preaching, fixed beliefs, needing approval'],
+  6:['The Lovers','heart-led choices, connection, harmony','people-pleasing, indecision, relying on others'],
+  7:['The Chariot','drive, focus, movement toward goals','pushing too hard, restlessness, burnout'],
+  8:['Justice','fairness, honesty, clear agreements','judging, rigid rules, guilt'],
+  9:['The Hermit','wisdom, depth, guidance found within','isolation, overthinking, closing off'],
+  10:['Wheel of Fortune','flow, luck, moving with change','fear of change, feeling stuck in cycles'],
+  11:['Strength','gentle power, stamina, warm courage','pushing through, anger, wearing yourself out'],
+  12:['The Hanged Man','new perspective, service, creative surrender','martyrdom, waiting, feeling stuck'],
+  13:['Death','transformation, release, fresh chapters','clinging to the past, fear of endings'],
+  14:['Temperance','balance, healing, creative blending','extremes, impatience, all or nothing'],
+  15:['The Devil','magnetism, ambition, owning your desires','attachment, control, old habits that bind'],
+  16:['The Tower','breakthroughs, building on truth','sudden upheaval, holding on to what is not working'],
+  17:['The Star','hope, inspiration, being seen for your gifts','self-doubt, hiding your light'],
+  18:['The Moon','imagination, intuition, dreams','fear, confusion, avoiding what is unclear'],
+  19:['The Sun','joy, warmth, leadership with heart','burnout, needing to shine, ego'],
+  20:['Judgement','awakening, family wisdom, a calling','old family patterns, harsh self-judgment'],
+  21:['The World','completion, wide horizons, belonging everywhere','feeling limited, unfinished cycles'],
+  22:['The Fool','freedom, curiosity, fresh starts','avoiding commitment, recklessness']
+};
+var PC_MX_POS = {
+  A:['Your personal portrait','How you show up in the world and the energy people meet first.'],
+  B:['Your talents','Natural gifts and inspiration that come easily to you.'],
+  C:['Your material path','Work, money and what you build in the physical world.'],
+  D:['Your karmic tail','Lessons you came in with. Working with this energy consciously turns it into a strength.'],
+  E:['Your comfort zone','The center of your matrix: where you feel most like yourself.'],
+  F:['Father line, gifts','Strengths passed down through your father\'s side.'],
+  G:['Mother line, gifts','Strengths passed down through your mother\'s side.'],
+  Y:['Father line, lessons','Patterns from your father\'s side that you are here to heal or transform.'],
+  K:['Mother line, lessons','Patterns from your mother\'s side that you are here to heal or transform.']
+};
+function pcMatrix(c){
+  var A = pcR22(c.d), B = pcR22(c.mo), C = pcR22(pcDigitSum(c.y)), D = pcR22(A + B + C), E = pcR22(A + B + C + D);
+  var F = pcR22(A + B), G = pcR22(B + C), Y = pcR22(C + D), K = pcR22(D + A);
+  var sky = pcR22(B + D), earth = pcR22(A + C), personal = pcR22(sky + earth);
+  var male = pcR22(F + Y), female = pcR22(G + K), social = pcR22(male + female);
+  var spiritual = pcR22(personal + social);
+  var B1 = pcR22(B + E), D1 = pcR22(D + E), D2 = pcR22(D + D1);
+  return {A: A, B: B, C: C, D: D, E: E, F: F, G: G, Y: Y, K: K, B1: B1, D1: D1, D2: D2,
+    sky: sky, earth: earth, personal: personal, male: male, female: female, social: social, spiritual: spiritual};
+}
+function pcMatrixSVG(m){
+  var P = {A:[40,180], B:[180,40], C:[320,180], D:[180,320], E:[180,180], F:[81,81], G:[279,81], Y:[279,279], K:[81,279], B1:[180,110], D1:[180,250]};
+  var col = {A:'#7b4fc9', B:'#0f9e94', C:'#e8a923', D:'#e0663f', E:'#2b2135', F:'#5a9a3c', G:'#5a9a3c', Y:'#5a9a3c', K:'#5a9a3c', B1:'#0f9e94', D1:'#e0663f'};
+  var s = '<svg class="pc-mx-svg" viewBox="0 0 360 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Destiny Matrix chart"><rect width="360" height="380" rx="16" fill="#fffaf1"/>';
+  s += '<polygon points="40,180 180,40 320,180 180,320" fill="none" stroke="#d8c9b0" stroke-width="2"/>';
+  s += '<polygon points="81,81 279,81 279,279 81,279" fill="none" stroke="#d8c9b0" stroke-width="2"/>';
+  s += '<line x1="40" y1="180" x2="320" y2="180" stroke="#eadfcc" stroke-width="1.5"/><line x1="180" y1="40" x2="180" y2="320" stroke="#eadfcc" stroke-width="1.5"/>';
+  s += '<line x1="81" y1="81" x2="279" y2="279" stroke="#eadfcc" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="279" y1="81" x2="81" y2="279" stroke="#eadfcc" stroke-width="1.5" stroke-dasharray="4 4"/>';
+  for (var k in P) {
+    var r = (k === 'E') ? 26 : (k === 'B1' || k === 'D1') ? 15 : 21;
+    s += '<circle cx="' + P[k][0] + '" cy="' + P[k][1] + '" r="' + r + '" fill="' + (k === 'B1' || k === 'D1' ? '#fff' : col[k]) + '" stroke="' + col[k] + '" stroke-width="2.5"/>';
+    s += '<text x="' + P[k][0] + '" y="' + (P[k][1] + (r > 20 ? 6 : 5)) + '" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="' + (r > 20 ? 17 : 13) + '" fill="' + (k === 'B1' || k === 'D1' ? col[k] : '#fff') + '">' + m[k] + '</text>';
+  }
+  s += '<g font-family="Space Mono,monospace" font-size="9" fill="#6b5f73"><text x="40" y="214" text-anchor="middle">you</text><text x="180" y="14" text-anchor="middle">talents</text><text x="320" y="214" text-anchor="middle">material</text><text x="180" y="356" text-anchor="middle">karmic tail</text><text x="208" y="168">core</text><text x="20" y="372">green = ancestral lines (father: top-left and bottom-right; mother: top-right and bottom-left)</text></g>';
+  return s + '</svg>';
+}
+
+/* Annual profection: whole-sign from the Ascendant; solar (from the Sun sign) when the birth time is unknown */
+var PC_TRAD_RULER = {Aries:'Mars',Taurus:'Venus',Gemini:'Mercury',Cancer:'Moon',Leo:'Sun',Virgo:'Mercury',Libra:'Venus',Scorpio:'Mars',Sagittarius:'Jupiter',Capricorn:'Saturn',Aquarius:'Saturn',Pisces:'Jupiter'};
+function pcProfectionFull(chart, c, today){
+  var now = today || new Date(), age = now.getFullYear() - c.y;
+  if (now.getMonth() + 1 < c.mo || (now.getMonth() + 1 === c.mo && now.getDate() < c.d)) age--;
+  var solar = !chart.timeKnown, base = solar ? chart.bodies.Sun.sign : chart.bodies.Ascendant.sign, bi = PC_SIGNS.indexOf(base);
+  function yearFor(a){
+    var sign = PC_SIGNS[(bi + a) % 12], lord = PC_TRAD_RULER[sign], acts = [];
+    for (var i = 0; i < PC_BODIES.length; i++) { var nm = PC_BODIES[i]; if (nm === 'Moon' && solar && chart.moonRange.changes) continue; if (chart.bodies[nm].sign === sign) acts.push(nm); }
+    return {age: a, house: (a % 12) + 1, sign: sign, lord: lord, activated: acts, from: c.y + a, to: c.y + a + 1};
+  }
+  var cur = yearFor(age), cycle = [];
+  for (var j = 0; j < 12; j++) cycle.push(yearFor(age + j));
+  cur.solar = solar; cur.base = base; cur.lordBody = chart.bodies[cur.lord]; cur.cycle = cycle; cur.next = cycle[1];
+  return cur;
+}
+
 /* ===== pc report sections (ES5). Every section renders in full / client-short, standard / archetype. ===== */
 function pcEsc(s){ return String(s === undefined || s === null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function pcSentences(s, n){
@@ -1029,6 +1110,77 @@ function pcSecTreePillars(ctx){
   return {title: 'Your Pillar Balance', html: html + pcP(ctx.opts.short ? pcSentences(txt, 2) : txt)};
 }
 
+
+/* ---------- Destiny Matrix sections ---------- */
+function pcArc(n){ return PC_ARCANA[n]; }
+function pcMxRow(ctx, key, n){
+  var a = pcArc(n), pos = PC_MX_POS[key];
+  if (ctx.opts.short) return '<div class="pc-num"><div class="pc-num-n" style="background:var(--plum)">' + n + '</div><div><b>' + pcEsc(pos[0]) + ': ' + pcEsc(a[0]) + '</b><p>' + pcEsc(a[1].charAt(0).toUpperCase() + a[1].slice(1)) + '.</p></div></div>';
+  return '<div class="pc-num"><div class="pc-num-n" style="background:var(--plum)">' + n + '</div><div><b>' + pcEsc(pos[0]) + ': ' + pcEsc(a[0]) + '</b><p class="pc-muted">' + pcEsc(pos[1]) + '</p>' +
+    pcLabel('In balance', a[1].charAt(0).toUpperCase() + a[1].slice(1) + '.') + pcLabel('Growth edge', a[2].charAt(0).toUpperCase() + a[2].slice(1) + '.') + '</div></div>';
+}
+function pcSecMxMap(ctx){
+  var m = ctx.matrix;
+  var html = '<div class="pc-tree-wrap">' + pcMatrixSVG(m) + '<div>' + pcP('The Destiny Matrix maps your birth date onto the 22 Major Arcana. Each point is an energy you carry, with a balanced side to grow into and a growth edge to work with.') +
+    '<div class="pc-kv"><div><b>Comfort zone</b>' + m.E + ' · ' + pcArc(m.E)[0] + '</div><div><b>Talents</b>' + m.B + ' · ' + pcArc(m.B)[0] + '</div><div><b>Karmic tail</b>' + m.D + '-' + m.D1 + '-' + m.D2 + '</div><div><b>Life purpose</b>' + m.personal + ' · ' + pcArc(m.personal)[0] + '</div></div></div></div>';
+  return {title: 'Destiny Matrix: Your Chart', flag: pcFlag(false), html: html};
+}
+function pcSecMxCore(ctx){
+  var m = ctx.matrix;
+  return {title: 'Your Core Energies', html: pcMxRow(ctx, 'E', m.E) + pcMxRow(ctx, 'A', m.A) + pcMxRow(ctx, 'B', m.B) + pcMxRow(ctx, 'C', m.C)};
+}
+function pcSecMxKarma(ctx){
+  var m = ctx.matrix, html = pcP('Your karmic tail is ' + m.D + '-' + m.D1 + '-' + m.D2 + ': the lessons you came in with, read from the outside in.');
+  html += pcMxRow(ctx, 'D', m.D);
+  if (!ctx.opts.short) html += pcLabel('Inner steps', m.D1 + ' (' + pcArc(m.D1)[0] + ') and ' + m.D2 + ' (' + pcArc(m.D2)[0] + '): ' + pcArc(m.D1)[1] + '; ' + pcArc(m.D2)[1] + '.');
+  return {title: 'Your Karmic Tail', html: html};
+}
+function pcSecMxAncestors(ctx){
+  var m = ctx.matrix;
+  return {title: 'Your Ancestral Lines', html: (ctx.opts.short ? '' : pcP('The outer square shows what flows through your family lines: gifts to use and patterns to transform.')) + pcMxRow(ctx, 'F', m.F) + pcMxRow(ctx, 'G', m.G) + pcMxRow(ctx, 'Y', m.Y) + pcMxRow(ctx, 'K', m.K)};
+}
+function pcSecMxPurpose(ctx){
+  var m = ctx.matrix;
+  function row(label, when, n, parts){ var a = pcArc(n); return '<div class="pc-num"><div class="pc-num-n" style="background:var(--teal)">' + n + '</div><div><b>' + label + ': ' + pcEsc(a[0]) + '</b> <span class="pc-muted">' + when + '</span><p>' + pcEsc(a[1].charAt(0).toUpperCase() + a[1].slice(1)) + '.' + (ctx.opts.short || !parts ? '' : ' <span class="pc-muted">(' + parts + ')</span>') + '</p></div></div>'; }
+  return {title: 'Your Life Purposes', html: (ctx.opts.short ? '' : pcP('Your matrix shows three purposes that unfold over a lifetime. They build on each other.')) +
+    row('Personal purpose', 'finding yourself, about ages 20 to 40', m.personal, 'sky ' + m.sky + ' + earth ' + m.earth) +
+    row('Social purpose', 'your place among people, about ages 40 to 60', m.social, 'father line ' + m.male + ' + mother line ' + m.female) +
+    row('Spiritual purpose', 'your deepest calling, 60 and beyond', m.spiritual, null)};
+}
+
+/* ---------- Annual Profection sections ---------- */
+function pcProfNote(ctx){ var P = ctx.prof2; return P.solar ? '<p class="pc-note">Birth time unknown, so this uses a <b>solar profection</b>: counted from the Sun sign (' + P.base + ') instead of the rising sign.</p>' : ''; }
+function pcSecProfYear(ctx){
+  var P = ctx.prof2, L = ctx.lib.profection, e = ctx.lib.houses.entries[String(P.house)], c = PC_ARCH.CAST[P.lord], st = PC_ARCH.HOUSE_STAGE[String(P.house)];
+  var html = pcProfNote(ctx) + (ctx.opts.short ? '' : pcP(L.standardFraming));
+  html += '<div class="pc-kv"><div><b>Age</b>' + P.age + '</div><div><b>Year</b>' + P.from + ' to ' + P.to + ' birthdays</div><div><b>Activated house</b>' + pcOrd(P.house) + (ctx.opts.archetype ? ', ' + st[0] : '') + '</div><div><b>Year sign</b>' + P.sign + '</div><div><b>Lord of the Year</b>' + P.lord + '</div></div>';
+  html += pcLabel('Theme of the year', ctx.opts.short ? pcSentences(e.text, 1) : e.text);
+  if (P.activated.length) html += pcLabel('Planets switched on this year', P.activated.join(', ') + ' (already in ' + P.sign + ' in your chart, so their themes come forward too).');
+  return {title: ctx.opts.archetype ? 'Your Year on the Stage of ' + st[0] : 'Annual Profection: Your Year at a Glance', flag: P.solar ? '' : pcFlag(true), html: html};
+}
+function pcSecProfLord(ctx){
+  var P = ctx.prof2, b = P.lordBody, c = PC_ARCH.CAST[P.lord], key = pcLow(P.lord), D = ctx.lib, e = D[key] && D[key].signs ? D[key].signs[pcLow(b.sign)] : null, html = '';
+  html += pcP(P.lord + ' guides this year. Its placement in your birth chart shows how the year wants to unfold for you.');
+  if (ctx.opts.archetype && c) html += '<div class="pc-r-arch"><b>' + pcEsc(pcCharacter(P.lord, b.sign)) + '</b> leads this year and asks: <i>' + pcEsc(c.question) + '</i></div>';
+  html += pcLabel('Where it lives in your chart', P.lord + ' in ' + b.sign + (ctx.chart.timeKnown ? ', ' + pcOrd(b.house) + ' house' : '') + (b.retro ? ', retrograde' : '') + '.');
+  if (e) html += ctx.opts.short ? pcP(pcSentences(e.plainEnglish, 2)) : pcLabel('What that means', pcSentences(e.plainEnglish, 3)) + pcLabel('Lean into', pcSentences(e.strength, 2)) + pcLabel('Watch for', pcSentences(e.shadow, 2));
+  if (c) html += pcLabel('Make the most of it', 'Give energy to ' + c.domain + '. At its best this brings ' + c.light + '.');
+  var tr = (ctx.transits || []).filter(function(t){ return t.target === P.lord; });
+  if (tr.length && !ctx.opts.short) html += pcLabel('Big transits to your year lord', tr.slice(0, 4).map(function(t){ return t.mover + ' ' + t.name + ' ' + P.lord + ' (strongest ' + pcFmtDate(t.exact) + ')'; }).join('; ') + '. These are peak moments of the year.');
+  return {title: (ctx.opts.archetype && c ? c.archetype : P.lord) + ': Lord of Your Year', html: html};
+}
+function pcSecProfCycle(ctx){
+  var P = ctx.prof2, html = pcProfNote(ctx) + '<table class="pc-table"><tr><th>Age</th><th>Birthday year</th><th>House</th><th>Sign</th><th>Lord</th></tr>';
+  for (var i = 0; i < P.cycle.length; i++) {
+    var y = P.cycle[i];
+    html += '<tr' + (i === 0 ? ' style="background:var(--gold-l);font-weight:700"' : '') + '><td>' + y.age + (i === 0 ? ' (now)' : '') + '</td><td>' + y.from + '</td><td>' + (ctx.opts.archetype ? PC_ARCH.HOUSE_STAGE[String(y.house)][0] : pcOrd(y.house)) + '</td><td>' + y.sign + '</td><td>' + y.lord + '</td></tr>';
+  }
+  html += '</table>';
+  var n = P.next, ne = ctx.lib.houses.entries[String(n.house)];
+  html += pcLabel('Next year (from your ' + n.from + ' birthday)', 'Your ' + pcOrd(n.house) + ' house year, guided by ' + n.lord + '. ' + pcSentences(ne.text, 1));
+  return {title: 'Your 12-Year Profection Cycle', html: html};
+}
+
 var PC_SECTIONS = [
   {group:'Start here', items:[['intro','Welcome', pcSecIntro],['big3','Big 3 summary', pcSecBig3],['cast','Archetype cast', pcSecCast]]},
   {group:'Birth chart', items:[['sun','Sun', pcSecPlanet('Sun')],['moon','Moon', pcSecPlanet('Moon')],['rising','Rising', pcSecRising, 1],['mercury','Mercury', pcSecPlanet('Mercury')],['venus','Venus', pcSecPlanet('Venus')],['mars','Mars', pcSecPlanet('Mars')],['jupiter','Jupiter', pcSecPlanet('Jupiter')],['saturn','Saturn', pcSecPlanet('Saturn')],['uranus','Uranus', pcSecPlanet('Uranus')],['neptune','Neptune', pcSecPlanet('Neptune')],['pluto','Pluto', pcSecPlanet('Pluto')],['nodes','Nodes', pcSecNodes],['chiron','Chiron', pcSecSimpleSigns('chiron','Chiron')],['lilith','Lilith', pcSecSimpleSigns('lilith','Lilith')]]},
@@ -1037,7 +1189,9 @@ var PC_SECTIONS = [
   {group:'Human Design', items:[['hdtype','Type and strategy', pcSecHDType],['hdauth','Authority', pcSecHDAuth],['hdprofile','Profile', pcSecHDProfile],['hdcenters','Centers', pcSecHDCenters]]},
   {group:'Tree of Life', items:[['tolmap','Tree map', pcSecTreeMap],['tolseph','Sephiroth', pcSecTreeSeph],['tolpaths','Lit paths', pcSecTreePaths],['tolsoul','Soul sphere', pcSecTreeSoul],['tolpillars','Pillars', pcSecTreePillars]]},
   {group:'Tarot', items:[['tbirth','Birth cards', pcSecTarotBirth],['tyear','Year card', pcSecTarotYear],['tbig3','Big 3 cards', pcSecTarotBig3]]},
-  {group:'Timing', items:[['tnow','Active now', pcSecTransitsNow],['tyearahead','Year ahead', pcSecTransitsYear],['profection','Year theme', pcSecProfection, 1]]},
+  {group:'Destiny Matrix', items:[['mxmap','Matrix chart', pcSecMxMap],['mxcore','Core energies', pcSecMxCore],['mxkarma','Karmic tail', pcSecMxKarma],['mxancestors','Ancestral lines', pcSecMxAncestors],['mxpurpose','Life purposes', pcSecMxPurpose]]},
+  {group:'Annual Profection', items:[['profection','Year at a glance', pcSecProfYear],['proflord','Lord of the Year', pcSecProfLord],['profcycle','12-year cycle', pcSecProfCycle]]},
+  {group:'Transits', items:[['tnow','Active now', pcSecTransitsNow],['tyearahead','Year ahead', pcSecTransitsYear]]},
   {group:'Finish', items:[['closing','Closing note', pcSecClosing]]}
 ];
 var PC_SECTION_BY_ID = {};
@@ -1045,6 +1199,8 @@ var PC_SECTION_BY_ID = {};
 var PC_PRESETS = {
   quick: ['big3','sun','moon','rising','lifepath','hdtype','tnow','closing'],
   full: ['intro','big3','sun','moon','rising','mercury','venus','mars','jupiter','saturn','nodes','balance','aspects','themes','houses','closing'],
+  matrix: ['mxmap','mxcore','mxkarma','mxancestors','mxpurpose','closing'],
+  year: ['profection','proflord','profcycle','tnow','tyearahead','peryear','tyear','closing'],
   tree: ['tolmap','tolseph','tolpaths','tolsoul','tolpillars','closing'],
   everything: null
 };
@@ -1055,6 +1211,8 @@ function pcBuildContext(client, lib, opts){
   var ctx = {client: client, chart: chart, lib: lib, opts: opts, themes: pcThemes(chart), num: pcNumerology(client, today),
     hd: pcHumanDesign(chart), tarot: pcTarot(client, chart, today), transits: pcTransits(chart, today), prof: pcProfection(chart, client, today)};
   ctx.tree = pcTree(ctx);
+  ctx.matrix = pcMatrix(client);
+  ctx.prof2 = pcProfectionFull(chart, client, today);
   return ctx;
 }
 function pcRenderReport(ctx, ids){
@@ -1067,6 +1225,70 @@ function pcRenderReport(ctx, ids){
     out.push('<section class="pc-r-sec" data-sec="' + s.id + '"><header><h3>' + r.title + '</h3>' + (r.deg ? '<span class="pc-deg">' + pcEsc(r.deg) + '</span>' : '') + (r.flag && !ctx.chart.timeKnown ? r.flag : '') + '</header>' + r.html + '</section>');
   }
   return out.join('');
+}
+
+/* ===== pc report library + bundles (ES5) ===== */
+var PC_REPORTS = [
+  {id:'natal', name:'Birth Chart Reading', icon:'☉', color:'#0f9e94', tagline:'The full natal chart in everyday language: planets, houses, aspects and themes.',
+    sections:['big3','sun','moon','rising','mercury','venus','mars','jupiter','saturn','uranus','neptune','pluto','nodes','balance','aspects','themes','houses'], snap:['big3','balance','themes']},
+  {id:'big3', name:'Big 3 Snapshot', icon:'✦', color:'#e0663f', tagline:'Sun, Moon and Rising: the core self, emotional needs and first impression.',
+    sections:['big3','sun','moon','rising'], snap:['big3']},
+  {id:'archetypes', name:'Archetype Cast', icon:'🎭', color:'#7b4fc9', archetype:true, tagline:'Meet the characters running the show: every planet as a named archetype.',
+    sections:['cast','big3','sun','moon','mercury','venus','mars','aspects'], snap:['cast','big3']},
+  {id:'year', name:'Year Ahead', icon:'⏳', color:'#e8a923', tagline:'Annual profection, Lord of the Year, transits and the 12-year cycle.',
+    sections:['profection','proflord','tnow','tyearahead','profcycle','peryear','tyear'], snap:['profection','tnow']},
+  {id:'matrix', name:'Destiny Matrix', icon:'✵', color:'#c0398a', tagline:'Talents, comfort zone, karmic tail, ancestral lines and life purposes.',
+    sections:['mxmap','mxcore','mxkarma','mxancestors','mxpurpose'], snap:['mxmap','mxpurpose']},
+  {id:'tree', name:'Tree of Life', icon:'✡', color:'#4b6bd6', tagline:'Your chart on the Qabalistic Tree: spheres, lit paths, soul sphere and pillars.',
+    sections:['tolmap','tolseph','tolpaths','tolsoul','tolpillars'], snap:['tolmap','tolsoul']},
+  {id:'numerology', name:'Numerology Profile', icon:'#', color:'#5a9a3c', tagline:'Life Path, Personal Year and the numbers in your name.',
+    sections:['lifepath','peryear','namenums'], snap:['lifepath']},
+  {id:'hd', name:'Human Design', icon:'△', color:'#2b8fbd', tagline:'Type, strategy, authority, profile and energy centers.',
+    sections:['hdtype','hdauth','hdprofile','hdcenters'], snap:['hdtype','hdauth']},
+  {id:'tarot', name:'Tarot Birth Cards', icon:'♠', color:'#8a5a2b', tagline:'Soul and personality cards, the year card and the Big 3 in the tarot.',
+    sections:['tbirth','tyear','tbig3'], snap:['tbirth']},
+  {id:'soul', name:'Soul Growth', icon:'☊', color:'#3c7a6b', tagline:'North Node path, Chiron, Lilith, karmic tail and soul sphere.',
+    sections:['nodes','chiron','lilith','mxkarma','tolsoul'], snap:['nodes','mxkarma']}
+];
+var PC_REPORT_BY_ID = {};
+(function(){ for (var i = 0; i < PC_REPORTS.length; i++) PC_REPORT_BY_ID[PC_REPORTS[i].id] = PC_REPORTS[i]; })();
+var PC_LENGTHS = {full: 'Full', concise: 'Concise', snapshot: 'Snapshot'};
+
+function pcWithOpts(ctx, over){
+  var c = {}, k; for (k in ctx) if (ctx.hasOwnProperty(k)) c[k] = ctx[k];
+  var o = {}; for (k in ctx.opts) o[k] = ctx.opts[k]; for (k in over) o[k] = over[k];
+  c.opts = o; return c;
+}
+/* plan = {reports:[ids], length, archetype, welcome, closing, extra:[section ids], removed:[section ids]} */
+function pcBundleChapters(plan, ctx){
+  var used = {}, chapters = [], i, j;
+  for (i = 0; i < plan.reports.length; i++) {
+    var R = PC_REPORT_BY_ID[plan.reports[i]]; if (!R) continue;
+    var list = plan.length === 'snapshot' ? R.snap : R.sections, ids = [];
+    for (j = 0; j < list.length; j++) {
+      var sid = list[j], S = PC_SECTION_BY_ID[sid];
+      if (!S || used[sid] || (plan.removed && plan.removed.indexOf(sid) >= 0)) continue;
+      if (S.needsTime && !ctx.chart.timeKnown) continue;
+      used[sid] = 1; ids.push(sid);
+    }
+    if (ids.length) chapters.push({report: R, ids: ids});
+  }
+  var extra = (plan.extra || []).filter(function(sid){ return !used[sid] && PC_SECTION_BY_ID[sid] && sid !== 'intro' && sid !== 'closing'; });
+  if (extra.length) chapters.push({report: {id: 'extra', name: 'Additional Insights', icon: '+', color: '#6b5f73', tagline: 'Sections added by your reader.'}, ids: extra});
+  return chapters;
+}
+function pcRenderBundle(plan, ctx, forPrint){
+  var short = plan.length !== 'full', base = pcWithOpts(ctx, {short: short, archetype: !!plan.archetype});
+  var chapters = pcBundleChapters(plan, base), html = '', toc = '';
+  if (plan.welcome) html += pcRenderReport(base, ['intro']);
+  for (var i = 0; i < chapters.length; i++) {
+    var ch = chapters[i], R = ch.report, cctx = R.archetype ? pcWithOpts(base, {archetype: true}) : base;
+    toc += '<li><span class="pc-toc-i" style="background:' + R.color + '">' + R.icon + '</span>' + pcEsc(R.name) + '</li>';
+    html += '<div class="pc-chapter"><div class="pc-chapter-head" style="border-color:' + R.color + '"><span class="pc-chapter-i" style="background:' + R.color + '">' + R.icon + '</span><div><div class="pc-chapter-k">Part ' + (i + 1) + '</div><h2>' + pcEsc(R.name) + '</h2><p>' + pcEsc(R.tagline) + '</p></div></div>' +
+      pcRenderReport(cctx, ch.ids) + '</div>';
+  }
+  if (plan.closing) html += pcRenderReport(base, ['closing']);
+  return {html: html, toc: chapters.length > 1 ? '<ol class="pc-toc">' + toc + '</ol>' : '', count: chapters.length};
 }
 
 /* ===== pc store: Supabase (live) or in-memory demo (ES5, Promise-based) ===== */
@@ -1106,7 +1328,7 @@ PcSupaStore.prototype = {
       return s.sb.from('pc_practitioners').insert({id: s.user.id, display_name: name}).select().single().then(function(r2){ if (r2.error) throw r2.error; return r2.data; });
     });
   },
-  saveProfile: function(p){ var s = this; return s.sb.from('pc_practitioners').update({display_name: p.display_name, business_name: p.business_name, closing_note: p.closing_note}).eq('id', s.user.id).then(function(r){ if (r.error) throw r.error; }); },
+  saveProfile: function(p){ var s = this; return s.sb.from('pc_practitioners').update({display_name: p.display_name, business_name: p.business_name, closing_note: p.closing_note, tagline: p.tagline || '', brand_color: p.brand_color || ''}).eq('id', s.user.id).then(function(r){ if (r.error) throw r.error; }); },
   library: function(){
     return this.sb.from('pc_library').select('section,data').then(function(r){
       if (r.error) throw r.error; var lib = {};
@@ -1133,10 +1355,12 @@ PcSupaStore.prototype = {
   deleteSession: function(id){ return this.sb.from('pc_sessions').delete().eq('id', id).then(function(r){ if (r.error) throw r.error; }); },
   reports: function(cid){ return this.sb.from('pc_reports').select('*').eq('client_id', cid).order('updated_at', {ascending: false}).then(function(r){ if (r.error) throw r.error; return r.data; }); },
   saveReport: function(x){
-    var row = {client_id: x.client_id, title: x.title, sections: x.sections, themes: x.themes, short_version: x.short_version, archetype_mode: x.archetype_mode, closing_note: x.closing_note, updated_at: new Date().toISOString()};
+    var row = {client_id: x.client_id, title: x.title, sections: x.sections, themes: x.themes, short_version: x.short_version, archetype_mode: x.archetype_mode, closing_note: x.closing_note, plan: x.plan || null, updated_at: new Date().toISOString()};
     var q = x.id ? this.sb.from('pc_reports').update(row).eq('id', x.id) : this.sb.from('pc_reports').insert(row);
     return q.select().single().then(function(r){ if (r.error) throw r.error; return r.data; });
   },
+  allReports: function(){ return this.sb.from('pc_reports').select('id,client_id,title,sections,short_version,archetype_mode,plan,updated_at').order('updated_at', {ascending: false}).limit(30).then(function(r){ if (r.error) throw r.error; return r.data; }); },
+  recentSessions: function(){ return this.sb.from('pc_sessions').select('id,client_id,session_date,topic').order('session_date', {ascending: false}).limit(8).then(function(r){ if (r.error) throw r.error; return r.data; }); },
   deleteReport: function(id){ return this.sb.from('pc_reports').delete().eq('id', id).then(function(r){ if (r.error) throw r.error; }); }
 };
 
@@ -1152,7 +1376,7 @@ PcDemoStore.prototype = {
   resetPassword: function(){ return pcP_(); },
   signOut: function(){ this.user = null; return pcP_(); },
   profile: function(){ return pcP_(this.prof); },
-  saveProfile: function(p){ this.prof.display_name = p.display_name; this.prof.business_name = p.business_name; this.prof.closing_note = p.closing_note; return pcP_(); },
+  saveProfile: function(p){ var k; for (k in p) this.prof[k] = p[k]; return pcP_(); },
   library: function(){ return pcP_(this.lib); },
   saveLibrary: function(lib){ this.lib = lib; return pcP_(Object.keys(lib).length); },
   clients: function(){ return pcP_(this.db.clients.slice(0).sort(function(a, b){ return a.name.localeCompare(b.name); })); },
@@ -1163,6 +1387,8 @@ PcDemoStore.prototype = {
   deleteSession: function(id){ this.db.sessions = this.db.sessions.filter(function(s){ return s.id !== id; }); return pcP_(); },
   reports: function(cid){ return pcP_(this.db.reports.filter(function(s){ return s.client_id === cid; })); },
   saveReport: function(x){ var c = JSON.parse(JSON.stringify(x)); c.updated_at = new Date().toISOString(); if (!c.id) { c.id = pcId(); this.db.reports.unshift(c); } else { for (var i = 0; i < this.db.reports.length; i++) if (this.db.reports[i].id === c.id) this.db.reports[i] = c; } return pcP_(c); },
+  allReports: function(){ return pcP_(this.db.reports.slice(0).sort(function(a, b){ return a.updated_at < b.updated_at ? 1 : -1; })); },
+  recentSessions: function(){ return pcP_(this.db.sessions.slice(0).sort(function(a, b){ return a.session_date < b.session_date ? 1 : -1; }).slice(0, 8)); },
   deleteReport: function(id){ this.db.reports = this.db.reports.filter(function(s){ return s.id !== id; }); return pcP_(); }
 };
 
@@ -1170,7 +1396,7 @@ PcDemoStore.prototype = {
 (function(){
   var CFG = window.PC_CONFIG || {};
   var root = document.getElementById('pc-root');
-  var S = {step: 'clients', clients: [], cur: null, sessions: [], reports: [], editing: null, sessEdit: null, build: null, msg: null, scale: 1};
+  var S = {step: 'home', ctab: 'overview', homeReports: [], homeSessions: [], clients: [], cur: null, sessions: [], reports: [], editing: null, sessEdit: null, build: null, msg: null, scale: 1};
   var IDLE_MIN = CFG.idleMinutes || 20, idleTimer = null;
 
   function $(sel){ return root.querySelector(sel); }
@@ -1184,7 +1410,7 @@ PcDemoStore.prototype = {
   ['click','keydown','scroll','touchstart'].forEach(function(ev){ root.addEventListener(ev, poke, true); });
   function lock(reason){
     S.store.signOut();
-    S.user = null; S.profile = null; S.lib = null; S.clients = []; S.cur = null; S.sessions = []; S.reports = []; S.build = null; S.editing = null; S.step = 'clients';
+    S.user = null; S.profile = null; S.lib = null; S.clients = []; S.cur = null; S.sessions = []; S.reports = []; S.build = null; S.editing = null; S.step = 'home';
     S.msg = reason ? {ok: reason} : null; render();
   }
 
@@ -1208,38 +1434,47 @@ PcDemoStore.prototype = {
         S.lib = lib;
         if (!libCount()) { S.lib = null; if (p.is_admin) { S.lib = {}; S.step = 'settings'; S.msg = {ok: 'Welcome! First, load your interpretation library below.'}; } }
         return S.store.clients();
-      }).then(function(cl){ S.clients = cl; render(); });
+      }).then(function(cl){ S.clients = cl; return loadHome(); }).then(function(){ render(); });
     }).catch(fail);
   }
 
   /* ---------- render ---------- */
   function render(){
     root.style.setProperty('--pc-scale', S.scale);
-    var h = topBar();
-    if (S.recovery) h += recoveryView();
-    else if (!S.user) h += authView();
-    else if (!S.profile) h += '<div class="pc-screen"><p>Opening your files…</p></div>';
-    else if (!S.profile.approved) h += pendingView();
-    else if (!S.lib) h += '<div class="pc-screen"><div class="pc-card pc-empty"><h3>Opening your library…</h3><p>If this stays here, the interpretation library has not been loaded yet. Please check back soon.</p></div></div>';
-    else if (!libCount() && S.step !== 'settings') { S.step = 'settings'; h += settingsView(); }
-    else if (S.step === 'settings') h += settingsView();
-    else if (S.step === 'build' && S.cur) h += buildView();
-    else if (S.step === 'send' && S.cur && S.build) h += sendView();
-    else h += clientsView();
-    root.innerHTML = h;
+    var on = S.user && S.profile && S.profile.approved && S.lib;
+    var body;
+    if (S.recovery) body = recoveryView();
+    else if (!S.user) body = authView();
+    else if (!S.profile) body = '<div class="pc-screen"><p>Opening your files\u2026</p></div>';
+    else if (!S.profile.approved) body = pendingView();
+    else if (!S.lib) body = '<div class="pc-screen"><div class="pc-card pc-empty"><h3>Opening your library\u2026</h3><p>If this stays here, the interpretation library has not been loaded yet. Please check back soon.</p></div></div>';
+    else if (!libCount() && S.step !== 'settings') { S.step = 'settings'; body = settingsView(); }
+    else if (S.step === 'settings') body = settingsView();
+    else if (S.step === 'home') body = homeView();
+    else if (S.step === 'reports') body = reportsView();
+    else if (S.step === 'build' && S.cur) body = buildView();
+    else if (S.step === 'send' && S.cur && S.build) body = sendView();
+    else body = clientsView();
+    root.innerHTML = on ? '<div class="pc-shell">' + sideBar() + '<div class="pc-main">' + headBar() + body + '</div></div>' : headBar() + body;
     if (S.step === 'build' && S.build && S.user) renderPreview();
   }
   function msgHTML(){ if (!S.msg) return ''; return S.msg.err ? '<div class="pc-err">' + esc(S.msg.err) + '</div>' : '<div class="pc-ok">' + esc(S.msg.ok) + '</div>'; }
-  function topBar(){
-    var on = S.user && S.profile && S.profile.approved;
-    var steps = on ? '<div class="pc-steps">' +
-      '<button class="pc-step' + (S.step === 'clients' ? ' is-on' : '') + '" data-act="go" data-v="clients"><b>1</b>Clients</button>' +
-      '<button class="pc-step' + (S.step === 'build' ? ' is-on' : '') + '" data-act="go" data-v="build"' + (S.cur ? '' : ' disabled') + '><b>2</b>Build</button>' +
-      '<button class="pc-step' + (S.step === 'send' ? ' is-on' : '') + '" data-act="go" data-v="send"' + (S.build ? '' : ' disabled') + '><b>3</b>Send</button></div>' : '';
-    var tools = '<div class="pc-tools"><button class="pc-ic" data-act="font" data-v="-1" title="Smaller text">A−</button><button class="pc-ic" data-act="font" data-v="1" title="Bigger text">A+</button>' +
-      (on ? '<button class="pc-ic" data-act="go" data-v="settings" title="My settings">⚙</button>' : '') +
-      (S.user ? '<button class="pc-ic" data-act="lock" title="Lock and sign out">🔒 Lock</button>' : '') + '</div>';
-    return '<div class="pc-top"><div class="pc-brand"><small>Adventures In Astrology' + (CFG.demo ? ' · demo mode' : '') + '</small>Practitioner Center</div>' + steps + tools + '</div>';
+  function brandName(){ return (S.profile && S.profile.business_name) || 'Practitioner Center'; }
+  function navBtn(step, icon, label, disabled){
+    var onNow = S.step === step || (step === 'clients' && S.step === 'clients');
+    return '<button class="pc-nav' + (onNow ? ' is-on' : '') + '" data-act="go" data-v="' + step + '"' + (disabled ? ' disabled' : '') + '><span>' + icon + '</span>' + label + '</button>';
+  }
+  function sideBar(){
+    return '<aside class="pc-side"><div class="pc-side-brand"><div class="pc-logo" style="background:' + esc(S.profile.brand_color || '#7b4fc9') + '">' + esc(brandName().charAt(0)) + '</div><div><b>' + esc(brandName()) + '</b><small>' + esc(S.profile.display_name || '') + '</small></div></div>' +
+      '<nav>' + navBtn('home', '\u2302', 'Dashboard') + navBtn('clients', '\u263A', 'Clients') +
+      navBtn('build', '\u2726', 'Report Library' + (S.cur ? '<em>' + esc(S.cur.name.split(' ')[0]) + '</em>' : ''), !S.cur) +
+      navBtn('reports', '\u2630', 'Saved Reports') + navBtn('settings', '\u2699', 'Settings & Branding') + '</nav>' +
+      '<div class="pc-side-foot"><button class="pc-nav" data-act="lock"><span>\uD83D\uDD12</span>Lock &amp; sign out</button><small>Powered by Adventures In Astrology</small></div></aside>';
+  }
+  function headBar(){
+    var title = {home: 'Dashboard', clients: S.cur && !S.editing ? S.cur.name : 'Clients', build: 'Report Library', send: 'Deliver Report', reports: 'Saved Reports', settings: 'Settings & Branding'}[S.step] || 'Practitioner Center';
+    if (!(S.user && S.profile && S.profile.approved && S.lib)) title = 'Practitioner Center';
+    return '<div class="pc-top"><div class="pc-brand"><small>' + (CFG.demo ? 'Demo mode \u00B7 ' : '') + 'Professional Reading Suite</small>' + esc(title) + '</div><div class="pc-tools"><button class="pc-ic" data-act="font" data-v="-1" title="Smaller text">A\u2212</button><button class="pc-ic" data-act="font" data-v="1" title="Bigger text">A+</button></div></div>';
   }
 
   /* ---------- auth ---------- */
@@ -1283,14 +1518,24 @@ PcDemoStore.prototype = {
   }
 
   /* ---------- settings ---------- */
+  var PC_BRAND_COLORS = ['#7b4fc9','#0f9e94','#e0663f','#c48a10','#2b8fbd','#c0398a','#3c7a6b','#2b2135'];
   function settingsView(){
-    var p = S.profile;
-    return '<div class="pc-screen"><div class="pc-card" style="max-width:640px"><h2>My settings</h2>' + msgHTML() +
-      '<label class="pc-f"><span>Name shown on reports</span><input class="pc-in" id="pc-s-name" value="' + esc(p.display_name) + '"></label>' +
-      '<label class="pc-f"><span>Business name (optional)</span><input class="pc-in" id="pc-s-biz" value="' + esc(p.business_name || '') + '"></label>' +
-      '<label class="pc-f"><span>My usual closing note (starts every new report, editable each time)</span><textarea class="pc-in" id="pc-s-note" rows="6">' + esc(p.closing_note || '') + '</textarea></label>' +
-      '<div class="pc-row"><button class="pc-btn" data-act="savesettings">Save settings</button><button class="pc-btn ghost" data-act="go" data-v="clients">Back to clients</button></div></div>' +
-      (p.is_admin ? '<div class="pc-card" style="max-width:640px"><h3>Interpretation library (admin)</h3><p>' + (libCount() ? 'Loaded: <b>' + libCount() + ' sections</b>.' : '<b>No library loaded yet.</b>') + ' To load or update it, pick your <span class="pc-mono">practitioner-center-library.json</span> file. Only you can do this; approved practitioners can read it but never download or change it.</p><input type="file" accept=".json,application/json" id="pc-lib-file" class="pc-in"></div>' : '') + '</div>';
+    var p = S.profile, sw = '';
+    for (var i = 0; i < PC_BRAND_COLORS.length; i++) sw += '<button class="pc-swatch' + ((p.brand_color || '#7b4fc9') === PC_BRAND_COLORS[i] ? ' is-on' : '') + '" style="background:' + PC_BRAND_COLORS[i] + '" data-act="brandcolor" data-v="' + PC_BRAND_COLORS[i] + '" title="' + PC_BRAND_COLORS[i] + '"></button>';
+    return '<div class="pc-screen">' + msgHTML() + '<div class="pc-two"><div class="pc-card"><h3>Your branding</h3><p class="pc-muted">This appears on every PDF you send.</p>' +
+      '<label class="pc-f"><span>Your name (shown as "Prepared by")</span><input class="pc-in" id="pc-s-name" value="' + esc(p.display_name) + '"></label>' +
+      '<label class="pc-f"><span>Business name</span><input class="pc-in" id="pc-s-biz" value="' + esc(p.business_name || '') + '" placeholder="e.g. Moonlit Path Astrology"></label>' +
+      '<label class="pc-f"><span>Tagline or website (optional)</span><input class="pc-in" id="pc-s-tag" value="' + esc(p.tagline || '') + '" placeholder="e.g. moonlitpath.com"></label>' +
+      '<div class="pc-f"><span style="display:block;font-weight:600;font-size:.9em;margin-bottom:6px">Brand color</span><div class="pc-row">' + sw + '</div></div>' +
+      '<label class="pc-f"><span>Your usual closing note (starts every new report; you can edit it each time)</span><textarea class="pc-in" id="pc-s-note" rows="5">' + esc(p.closing_note || '') + '</textarea></label>' +
+      '<button class="pc-btn" data-act="savesettings">Save settings</button></div>' +
+      '<div class="pc-card"><h3>PDF cover preview</h3>' + coverHTML({title: 'Birth Chart Reading', client: 'Client Name', line: 'Born Mar 14, 1992 \u00B7 7:45 AM \u00B7 Portland', toc: ''}, true) + '</div></div>' +
+      (p.is_admin ? '<div class="pc-card"><h3>Interpretation library (admin)</h3><p>' + (libCount() ? 'Loaded: <b>' + libCount() + ' sections</b>.' : '<b>No library loaded yet.</b>') + ' To load or update it, pick your <span class="pc-mono">practitioner-center-library.json</span> file. Only you can do this; approved practitioners can read it but never download or change it.</p><input type="file" accept=".json,application/json" id="pc-lib-file" class="pc-in"></div>' : '') + '</div>';
+  }
+  function coverHTML(o, mini){
+    var p = S.profile, col = p.brand_color || '#7b4fc9';
+    return '<div class="pc-cover' + (mini ? ' pc-cover-mini' : '') + '" style="--brand:' + col + '"><div class="pc-cover-band"></div><div class="pc-cover-k">' + esc(p.business_name || p.display_name || 'Your Reader') + '</div><h1>' + esc(o.title) + '</h1><p class="pc-cover-who">Prepared for <b>' + esc(o.client) + '</b></p><p>' + o.line + '</p>' + (o.flag || '') + (o.toc ? '<div class="pc-cover-toc"><div class="pc-cover-k">Inside this reading</div>' + o.toc + '</div>' : '') +
+      '<p class="pc-cover-by">Prepared by ' + esc(p.display_name || '') + (p.tagline ? ' \u00B7 ' + esc(p.tagline) : '') + ' \u00B7 ' + new Date().toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}) + '</p></div>';
   }
 
   function libCount(){ var n = 0; if (S.lib) for (var k in S.lib) if (S.lib.hasOwnProperty(k)) n++; return n; }
@@ -1305,6 +1550,34 @@ PcDemoStore.prototype = {
     rd.readAsText(file);
   }
 
+  function loadHome(){
+    return Promise.all([S.store.allReports(), S.store.recentSessions()]).then(function(r){ S.homeReports = r[0]; S.homeSessions = r[1]; }).catch(function(){ S.homeReports = []; S.homeSessions = []; });
+  }
+  function clientName(id){ for (var i = 0; i < S.clients.length; i++) if (S.clients[i].id === id) return S.clients[i].name; return 'Client'; }
+  function homeView(){
+    var first = (S.profile.display_name || '').split(' ')[0];
+    var h = '<div class="pc-screen">' + msgHTML() + '<h2 style="margin-bottom:14px">Welcome, ' + esc(first) + '</h2>';
+    h += '<div class="pc-tiles"><button class="pc-tile alt" data-act="newclient"><b>+</b>New client</button>' +
+      '<button class="pc-tile" data-act="go" data-v="clients"><b>' + S.clients.length + '</b>My clients</button>' +
+      '<button class="pc-tile plum" data-act="go" data-v="reports"><b>' + S.homeReports.length + '</b>Saved reports</button></div>';
+    h += '<div class="pc-two" style="margin-top:18px"><div class="pc-card"><h3>Recent sessions</h3>';
+    if (!S.homeSessions.length) h += '<p class="pc-muted">No sessions logged yet.</p>';
+    for (var i = 0; i < S.homeSessions.length; i++) { var x = S.homeSessions[i]; h += '<button class="pc-citem" data-act="opensessclient" data-v="' + x.client_id + '"><b>' + esc(clientName(x.client_id)) + '</b><small>' + esc(x.session_date) + (x.topic ? ' \u00B7 ' + esc(x.topic) : '') + '</small></button>'; }
+    h += '</div><div class="pc-card"><h3>Recent reports</h3>' + reportRows(S.homeReports.slice(0, 6), true) + (S.homeReports.length > 6 ? '<button class="pc-btn ghost small" data-act="go" data-v="reports">See all reports</button>' : '') + '</div></div></div>';
+    return h;
+  }
+  function reportRows(list, withClient){
+    if (!list.length) return '<p class="pc-muted">No saved reports yet. Open a client and click <b>Open Report Library</b>.</p>';
+    var h = '';
+    for (var j = 0; j < list.length; j++) { var r = list[j]; h += '<div class="pc-rep"><div><b>' + esc(r.title) + '</b><br><small class="pc-muted">' + (withClient ? esc(clientName(r.client_id)) + ' \u00B7 ' : '') + (r.sections || []).length + ' sections \u00B7 ' + (r.short_version ? 'client version' : 'full version') + (r.archetype_mode ? ' \u00B7 archetypes' : '') + ' \u00B7 ' + esc(String(r.updated_at || '').slice(0, 10)) + '</small></div><span class="pc-spacer"></span><button class="pc-btn small" data-act="openany" data-v="' + r.id + '" data-c="' + r.client_id + '">Open</button></div>'; }
+    return h;
+  }
+  function reportsView(){
+    var q = (S.rsearch || '').toLowerCase();
+    var list = S.homeReports.filter(function(r){ return !q || (r.title + ' ' + clientName(r.client_id)).toLowerCase().indexOf(q) >= 0; });
+    return '<div class="pc-screen">' + msgHTML() + '<div class="pc-card"><div class="pc-row"><h2 style="margin:0">All saved reports</h2><span class="pc-spacer"></span><input class="pc-in" style="max-width:280px" id="pc-rsearch" placeholder="Search by client or title" value="' + esc(S.rsearch || '') + '"></div><div style="margin-top:14px">' + reportRows(list, true) + '</div></div></div>';
+  }
+
   /* ---------- clients ---------- */
   function clientsView(){
     var q = (S.search || '').toLowerCase(), list = '';
@@ -1316,7 +1589,7 @@ PcDemoStore.prototype = {
     var left = '<div class="pc-card"><button class="pc-btn alt big" style="width:100%;justify-content:center" data-act="newclient">+ New client</button>' +
       (S.clients.length > 6 ? '<input class="pc-in" style="margin-top:10px" placeholder="Search clients" id="pc-search" value="' + esc(S.search || '') + '">' : '') +
       '<div class="pc-clist">' + list + '</div></div>';
-    var right = S.editing ? clientForm() : S.cur ? clientDetail() : '<div class="pc-card pc-empty"><h3>Pick a client or add a new one</h3><p>Client files are private to you. Then click <b>Build a report</b>.</p></div>';
+    var right = S.editing ? clientForm() : S.cur ? clientDetail() : '<div class="pc-card pc-empty"><h3>Pick a client or add a new one</h3><p>Client files are private to you. Then click <b>Open Report Library</b>.</p></div>';
     return '<div class="pc-screen">' + msgHTML() + '<div class="pc-two"><div>' + left + '</div><div>' + right + '</div></div></div>';
   }
   function hour12(h){ var ap = h < 12 ? 'AM' : 'PM', hh = h % 12; if (hh === 0) hh = 12; return {h: hh, ap: ap}; }
@@ -1329,11 +1602,24 @@ PcDemoStore.prototype = {
     var c = S.cur, ctx = quickCtx(c);
     var b = ctx.chart.bodies, big3 = 'Sun ' + b.Sun.sign + ' · Moon ' + (!c.timeKnown && ctx.chart.moonRange.changes ? ctx.chart.moonRange.fromSign + '/' + ctx.chart.moonRange.toSign : b.Moon.sign) + (c.timeKnown ? ' · Rising ' + b.Ascendant.sign : '');
     var h = '<div class="pc-card"><div class="pc-row"><div><h2 style="margin:0">' + esc(c.name) + '</h2>' + (c.pronouns ? '<span class="pc-muted">' + esc(c.pronouns) + '</span>' : '') + '</div><span class="pc-spacer"></span>' +
-      '<button class="pc-btn ghost small" data-act="editclient">Edit</button><button class="pc-btn big" data-act="go" data-v="build">Build a report →</button></div>' +
+      '<button class="pc-btn ghost small" data-act="editclient">Edit</button><button class="pc-btn big" data-act="go" data-v="build">Open Report Library →</button></div>' +
       '<div class="pc-facts"><div class="pc-fact"><small>Born</small>' + birthLine(c, true) + '</div><div class="pc-fact"><small>Place</small>' + esc(c.placeLabel || '—') + '</div><div class="pc-fact"><small>Big 3</small>' + esc(big3) + '</div>' +
       '<div class="pc-fact"><small>Life Path · HD</small>' + ctx.num.lifePath + ' · ' + esc(ctx.hd.type) + ' ' + ctx.hd.profile + '</div>' +
       '<div class="pc-fact"><small>Tree of Life</small>Soul sphere ' + PC_SEPH[ctx.tree.soul.key].name + ' · ' + ctx.tree.paths.filter(function(p){ return p.score > 0; }).length + ' lit paths</div></div>' +
-      (c.notes ? '<div class="pc-note"><b>Private notes:</b> ' + esc(c.notes).replace(/\n/g, '<br>') + '</div>' : '') + '</div>';
+      (c.notes ? '<div class="pc-note"><b>Private notes:</b> ' + esc(c.notes).replace(/\n/g, '<br>') + '</div>' : '') +
+      '<div class="pc-switch" style="margin-top:14px;display:inline-flex"><button class="' + (S.ctab === 'overview' ? 'is-on' : '') + '" data-act="ctab" data-v="overview">Overview</button><button class="' + (S.ctab === 'sessions' ? 'is-on' : '') + '" data-act="ctab" data-v="sessions">Sessions (' + S.sessions.length + ')</button><button class="' + (S.ctab === 'reports' ? 'is-on' : '') + '" data-act="ctab" data-v="reports">Reports (' + S.reports.length + ')</button></div></div>';
+    if (S.ctab === 'overview') {
+      h += '<div class="pc-card"><h3>Quick look</h3><div class="pc-facts">' +
+        '<div class="pc-fact"><small>Destiny Matrix</small>Comfort zone ' + ctx.matrix.E + ' \u00B7 ' + PC_ARCANA[ctx.matrix.E][0] + '</div>' +
+        '<div class="pc-fact"><small>Year theme</small>' + pcOrd(ctx.prof2.house) + ' house \u00B7 ' + ctx.prof2.lord + ' year' + (ctx.prof2.solar ? ' (solar)' : '') + '</div>' +
+        '<div class="pc-fact"><small>Last session</small>' + (S.sessions[0] ? esc(S.sessions[0].session_date) + (S.sessions[0].topic ? ' \u00B7 ' + esc(S.sessions[0].topic) : '') : 'None yet') + '</div>' +
+        '<div class="pc-fact"><small>Last report</small>' + (S.reports[0] ? esc(S.reports[0].title) : 'None yet') + '</div></div>' +
+        '<div class="pc-row"><button class="pc-btn" data-act="newsess">+ Log a session</button><button class="pc-btn plum" data-act="go" data-v="build">Open Report Library \u2192</button></div></div>';
+      return h;
+    }
+    if (S.ctab === 'reports') {
+      return h + '<div class="pc-card"><h3>Saved reports</h3>' + reportRows(S.reports, false) + '</div>';
+    }
     /* sessions */
     h += '<div class="pc-card"><div class="pc-row"><h3 style="margin:0">Sessions</h3><span class="pc-spacer"></span><button class="pc-btn small" data-act="newsess">+ Log a session</button></div><p class="pc-muted">Private session notes, like a therapist\'s file. Only you can see these.</p>';
     if (S.sessEdit) {
@@ -1344,11 +1630,7 @@ PcDemoStore.prototype = {
     if (!S.sessions.length && !S.sessEdit) h += '<p class="pc-muted">No sessions logged yet.</p>';
     for (var i = 0; i < S.sessions.length; i++) { var s = S.sessions[i]; h += '<div class="pc-sess"><div class="pc-row"><h4>' + esc(s.session_date) + (s.topic ? ' · ' + esc(s.topic) : '') + '</h4><span class="pc-spacer"></span><button class="pc-link" data-act="editsess" data-v="' + s.id + '">Edit</button></div>' + (s.notes ? '<p style="margin:.3em 0 0">' + esc(s.notes).replace(/\n/g, '<br>') + '</p>' : '') + '</div>'; }
     h += '</div>';
-    /* reports */
-    h += '<div class="pc-card"><h3>Saved reports</h3>';
-    if (!S.reports.length) h += '<p class="pc-muted">No saved reports yet. Click <b>Build a report</b> to make one.</p>';
-    for (var j = 0; j < S.reports.length; j++) { var r = S.reports[j]; h += '<div class="pc-rep"><div><b>' + esc(r.title) + '</b><br><small class="pc-muted">' + (r.sections || []).length + ' sections · ' + (r.short_version ? 'client version' : 'full version') + (r.archetype_mode ? ' · archetypes' : '') + ' · ' + esc(String(r.updated_at || '').slice(0, 10)) + '</small></div><span class="pc-spacer"></span><button class="pc-btn small" data-act="openrep" data-v="' + r.id + '">Open</button><button class="pc-btn ghost small" data-act="delrep" data-v="' + r.id + '">Delete</button></div>'; }
-    return h + '</div>';
+    return h;
   }
   function quickCtx(c){
     if (S._qc && S._qc.key === JSON.stringify(c)) return S._qc.ctx;
@@ -1435,108 +1717,124 @@ PcDemoStore.prototype = {
       return S.store.clients().then(function(cl){ S.clients = cl; openClient(saved.id); toast('Client saved'); });
     }).catch(fail);
   }
-  function openClient(id){
+  function openClient(id, then){
     S.cur = null; for (var i = 0; i < S.clients.length; i++) if (S.clients[i].id === id) S.cur = S.clients[i];
     S.sessEdit = null; S.build = null; S.msg = null;
     if (!S.cur) return render();
-    Promise.all([S.store.sessions(id), S.store.reports(id)]).then(function(r){ S.sessions = r[0]; S.reports = r[1]; render(); }).catch(fail);
+    Promise.all([S.store.sessions(id), S.store.reports(id)]).then(function(r){ S.sessions = r[0]; S.reports = r[1]; if (then) then(); else render(); }).catch(fail);
   }
 
   /* ---------- build ---------- */
   function allIds(){ var a = []; for (var i = 0; i < PC_SECTIONS.length; i++) for (var j = 0; j < PC_SECTIONS[i].items.length; j++) a.push(PC_SECTIONS[i].items[j][0]); return a; }
   function newBuild(){
-    S.build = {id: null, ids: PC_PRESETS.full.slice(0), themes: [], short: false, archetype: false, house: S.cur.house || 'E', title: S.cur.name + ' · Birth Chart Reading', note: (S.profile.closing_note || '')};
+    S.build = {id: null, reports: ['natal'], length: 'concise', archetype: false, welcome: true, closing: true, extra: [], removed: [], themes: [], house: S.cur.house || 'E', title: '', note: (S.profile.closing_note || '')};
+  }
+  function planOf(b){ return {reports: b.reports, length: b.length, archetype: b.archetype, welcome: b.welcome, closing: b.closing, extra: b.extra, removed: b.removed}; }
+  function autoTitle(){
+    var b = S.build; if (b.title) return b.title;
+    if (!b.reports.length) return S.cur.name + ' \u00B7 Reading';
+    if (b.reports.length === 1) return PC_REPORT_BY_ID[b.reports[0]].name;
+    return 'Combined Reading: ' + b.reports.map(function(r){ return PC_REPORT_BY_ID[r].name; }).join(' + ');
   }
   function ctxFor(){
-    var b = S.build, key = JSON.stringify([S.cur, b.short, b.archetype, b.house]);
-    if (!S._ctx || S._ctxKey !== key) { S._ctx = pcBuildContext(S.cur, S.lib, {short: b.short, archetype: b.archetype, house: b.house}); S._ctxKey = key; }
+    var b = S.build, key = JSON.stringify([S.cur, b.house]);
+    if (!S._ctx || S._ctxKey !== key) { S._ctx = pcBuildContext(S.cur, S.lib, {short: false, archetype: false, house: b.house}); S._ctxKey = key; }
     S._ctx.pickedThemes = b.themes.length ? b.themes : null;
     S._ctx.note = b.note; S._ctx.practitionerName = S.profile.display_name;
     return S._ctx;
   }
+  function bundleIds(){ var ch = pcBundleChapters(planOf(S.build), ctxFor()), out = []; for (var i = 0; i < ch.length; i++) out = out.concat(ch[i].ids); return out; }
   function buildView(){
     if (!S.build) newBuild();
-    var b = S.build, ctx = ctxFor(), known = ctx.chart.timeKnown;
-    var th = '', anim = S._animFor !== S.cur.id; S._animFor = S.cur.id;
-    for (var i = 0; i < ctx.themes.length; i++) {
-      var t = ctx.themes[i]; if (t.timed && !known) continue;
-      th += '<button class="pc-theme' + (b.themes.indexOf(t.id) >= 0 ? ' is-in' : '') + '" style="' + (anim ? 'animation-delay:' + (i * 0.09) + 's' : 'animation:none') + '" data-act="theme" data-v="' + t.id + '">✨ ' + esc(t.title) + '</button>';
+    var b = S.build, ctx = ctxFor(), known = ctx.chart.timeKnown, cards = '';
+    for (var i = 0; i < PC_REPORTS.length; i++) {
+      var R = PC_REPORTS[i], on = b.reports.indexOf(R.id) >= 0, pos = b.reports.indexOf(R.id) + 1;
+      cards += '<button class="pc-rcard' + (on ? ' is-on' : '') + '" style="--rc:' + R.color + '" data-act="report" data-v="' + R.id + '"><span class="pc-rcard-i">' + R.icon + '</span>' + (on ? '<span class="pc-rcard-n">' + pos + '</span>' : '') + '<b>' + esc(R.name) + '</b><small>' + esc(R.tagline) + '</small></button>';
     }
-    var groups = '';
+    var th = '', anim = S._animFor !== S.cur.id; S._animFor = S.cur.id;
+    for (var t = 0; t < ctx.themes.length; t++) {
+      var tt = ctx.themes[t]; if (tt.timed && !known) continue;
+      th += '<button class="pc-theme' + (b.themes.indexOf(tt.id) >= 0 ? ' is-in' : '') + '" style="' + (anim ? 'animation-delay:' + (t * 0.09) + 's' : 'animation:none') + '" data-act="theme" data-v="' + tt.id + '">\u2728 ' + esc(tt.title) + '</button>';
+    }
+    var inIds = bundleIds(), fine = '';
     for (var g = 0; g < PC_SECTIONS.length; g++) {
       var grp = PC_SECTIONS[g], btns = '';
       for (var j = 0; j < grp.items.length; j++) {
-        var it = grp.items[j], off = (it[3] && !known) || (it[0] === 'chiron' && !ctx.chart.bodies.Chiron);
-        btns += '<button class="pc-sec-btn' + (b.ids.indexOf(it[0]) >= 0 ? ' is-in' : '') + (off ? ' is-off' : '') + '" data-act="sec" data-v="' + it[0] + '"' + (off ? ' disabled title="' + (it[0] === 'chiron' ? 'Chiron position not available for this client yet' : 'Needs a birth time') + '"' : '') + '>' + esc(it[1]) + '</button>';
+        var it = grp.items[j]; if (it[0] === 'intro' || it[0] === 'closing') continue;
+        var off = (it[3] && !known) || (it[0] === 'chiron' && !ctx.chart.bodies.Chiron);
+        btns += '<button class="pc-sec-btn' + (inIds.indexOf(it[0]) >= 0 ? ' is-in' : '') + (off ? ' is-off' : '') + '" data-act="sec" data-v="' + it[0] + '"' + (off ? ' disabled' : '') + '>' + esc(it[1]) + '</button>';
       }
-      groups += '<div class="pc-group"><h4>' + esc(grp.group) + '</h4><div class="pc-pick">' + btns + '</div></div>';
+      fine += '<div class="pc-group"><h4>' + esc(grp.group) + '</h4><div class="pc-pick">' + btns + '</div></div>';
     }
-    var left = '<div class="pc-card"><h3>1. Pick what goes in</h3><div class="pc-row" style="margin-bottom:12px"><button class="pc-btn small" data-act="preset" data-v="quick">Quick read</button><button class="pc-btn small" data-act="preset" data-v="full">Full chart</button><button class="pc-btn small" data-act="preset" data-v="tree">Tree of Life</button><button class="pc-btn small plum" data-act="preset" data-v="everything">Everything</button><button class="pc-btn ghost small" data-act="preset" data-v="none">Clear</button></div>' + groups +
-      (known ? '' : '<p class="pc-note">Birth time unknown: rising, houses and year theme are switched off. Everything else is time-proof.</p>') + '</div>' +
-      '<div class="pc-card"><h3>2. Your closing note</h3><textarea class="pc-in" id="pc-b-note" rows="6" placeholder="A personal message to your client (optional)">' + esc(b.note) + '</textarea></div>';
-    var right = '<div class="pc-card" style="margin-bottom:14px"><div class="pc-row"><h2 style="margin:0">' + esc(S.cur.name) + '</h2><span class="pc-spacer"></span>' +
-      '<div class="pc-switch"><button class="' + (!b.short ? 'is-on' : '') + '" data-act="short" data-v="0">Full version</button><button class="' + (b.short ? 'is-on' : '') + '" data-act="short" data-v="1">Client short version</button></div>' +
-      '<div class="pc-switch arch"><button class="' + (!b.archetype ? 'is-on' : '') + '" data-act="arch" data-v="0">Standard</button><button class="' + (b.archetype ? 'is-on' : '') + '" data-act="arch" data-v="1">🎭 Archetypes</button></div>' +
-      (known ? '<select class="pc-in" style="width:auto" id="pc-b-house" data-act="house"><option value="E"' + (b.house === 'E' ? ' selected' : '') + '>Equal houses</option><option value="P"' + (b.house === 'P' ? ' selected' : '') + '>Placidus</option><option value="W"' + (b.house === 'W' ? ' selected' : '') + '>Whole Sign</option></select>' : '') + '</div>' +
-      (th ? '<p class="pc-muted" style="margin:10px 0 0">Themes popping up in this chart. Tap one to read it and add it:</p><div class="pc-themes">' + th + '</div>' : '') + '</div>' +
-      '<div class="pc-row" style="margin-bottom:12px"><input class="pc-in" id="pc-b-title" style="flex:1;min-width:220px" value="' + esc(b.title) + '"><button class="pc-btn" data-act="saverep"' + (S.busy ? ' disabled' : '') + '>💾 Save report</button><button class="pc-btn alt" data-act="go" data-v="send">Next: Send →</button></div>' +
-      '<div class="pc-preview pcr" id="pc-preview"></div>';
-    return '<div class="pc-screen">' + msgHTML() + '<div class="pc-build"><div>' + left + '</div><div>' + right + '</div></div></div>';
+    var c = S.cur, bb = ctx.chart.bodies;
+    var head = '<div class="pc-card pc-clienthead"><div><small class="pc-muted">Reading for</small><h2 style="margin:0">' + esc(c.name) + '</h2><span class="pc-muted">' + birthLine(c, true) + ' \u00B7 Sun ' + bb.Sun.sign + (known ? ' \u00B7 Rising ' + bb.Ascendant.sign : '') + '</span></div><span class="pc-spacer"></span><button class="pc-btn ghost small" data-act="go" data-v="clients">Change client</button></div>';
+    var left = '<div class="pc-card"><h3>1. Choose reports</h3><p class="pc-muted">Tap one report, or several to combine them into one reading.</p><div class="pc-rcards">' + cards + '</div></div>' +
+      '<div class="pc-card"><h3>2. Length and style</h3>' +
+      '<div class="pc-optrow"><span>Length</span><div class="pc-switch">' + ['full','concise','snapshot'].map(function(k){ return '<button class="' + (b.length === k ? 'is-on' : '') + '" data-act="length" data-v="' + k + '">' + PC_LENGTHS[k] + '</button>'; }).join('') + '</div></div>' +
+      '<p class="pc-muted" style="margin:-4px 0 10px">' + {full: 'Every detail, for you or a deep-dive client.', concise: 'Plain-English highlights of every section. Best for most clients.', snapshot: 'Only the key pages of each report. Great for combined readings.'}[b.length] + '</p>' +
+      '<div class="pc-optrow"><span>Voice</span><div class="pc-switch arch"><button class="' + (!b.archetype ? 'is-on' : '') + '" data-act="arch" data-v="0">Standard</button><button class="' + (b.archetype ? 'is-on' : '') + '" data-act="arch" data-v="1">\uD83C\uDFAD Archetypes</button></div></div>' +
+      (known ? '<div class="pc-optrow"><span>Houses</span><select class="pc-in" style="width:auto" id="pc-b-house"><option value="E"' + (b.house === 'E' ? ' selected' : '') + '>Equal</option><option value="P"' + (b.house === 'P' ? ' selected' : '') + '>Placidus</option><option value="W"' + (b.house === 'W' ? ' selected' : '') + '>Whole Sign</option></select></div>' : '<p class="pc-note">Birth time unknown: rising, houses and house timing are left out, and the year ahead uses a solar profection.</p>') +
+      '<label class="pc-check"><input type="checkbox" data-act="welcome"' + (b.welcome ? ' checked' : '') + '> Include welcome page</label>' +
+      '<label class="pc-check"><input type="checkbox" data-act="closingtog"' + (b.closing ? ' checked' : '') + '> Include my closing note</label>' +
+      (b.closing ? '<textarea class="pc-in" id="pc-b-note" rows="4" placeholder="A personal message to your client">' + esc(b.note) + '</textarea>' : '') + '</div>' +
+      (th ? '<div class="pc-card"><h3>Themes in this chart</h3><p class="pc-muted">Tap a theme to read it and add it to the reading.</p><div class="pc-themes">' + th + '</div></div>' : '') +
+      '<details class="pc-card"><summary style="cursor:pointer;font-weight:700">Fine-tune sections (optional)</summary><p class="pc-muted">Teal sections are in the reading. Tap to add or remove any section.</p>' + fine + '</details>';
+    var right = '<div class="pc-card pc-stick"><div class="pc-row"><input class="pc-in" id="pc-b-title" style="flex:1;min-width:200px" value="' + esc(autoTitle()) + '"><button class="pc-btn ghost" data-act="saverep"' + (S.busy ? ' disabled' : '') + '>\uD83D\uDCBE Save</button><button class="pc-btn alt" data-act="go" data-v="send"' + (b.reports.length || b.extra.length ? '' : ' disabled') + '>Deliver \u2192</button></div>' +
+      '<p class="pc-muted" style="margin:8px 0 0">' + b.reports.length + ' report' + (b.reports.length === 1 ? '' : 's') + ' \u00B7 ' + PC_LENGTHS[b.length] + (b.archetype ? ' \u00B7 archetype voice' : '') + '</p></div><div class="pc-preview pcr" id="pc-preview"></div>';
+    return '<div class="pc-screen">' + msgHTML() + head + '<div class="pc-build"><div>' + left + '</div><div>' + right + '</div></div></div>';
   }
-  function orderedIds(){ var all = allIds(), b = S.build; return all.filter(function(id){ return b.ids.indexOf(id) >= 0; }); }
   function renderPreview(){
     var el = $('#pc-preview'); if (!el) return;
-    var html = pcRenderReport(ctxFor(), orderedIds());
-    el.innerHTML = html || '<div class="pc-empty"><h3>Your report is empty</h3><p>Click the sections on the left to add them.</p></div>';
+    var r = pcRenderBundle(planOf(S.build), ctxFor());
+    el.innerHTML = r.html ? (r.toc ? '<div class="pc-toc-box"><b>Inside this reading</b>' + r.toc + '</div>' : '') + r.html : '<div class="pc-empty"><h3>Pick a report to begin</h3><p>Choose one or more reports on the left. They appear here as you go.</p></div>';
   }
   function themePopup(id){
     var ctx = ctxFor(), t = null; for (var i = 0; i < ctx.themes.length; i++) if (ctx.themes[i].id === id) t = ctx.themes[i];
     if (!t) return;
     var inR = S.build.themes.indexOf(id) >= 0;
     var d = document.createElement('div'); d.className = 'pc-pop';
-    d.innerHTML = '<div class="pc-pop-box pcr"><h3>✨ ' + esc(t.title) + '</h3>' + pcThemeHTML(ctx, t) + '<div class="pc-row" style="margin-top:14px"><button class="pc-btn plum" data-act="themeadd" data-v="' + id + '">' + (inR ? 'Remove from report' : '+ Add to report') + '</button><button class="pc-btn ghost" data-act="popclose">Close</button></div></div>';
+    d.innerHTML = '<div class="pc-pop-box pcr"><h3>\u2728 ' + esc(t.title) + '</h3>' + pcThemeHTML(pcWithOpts(ctx, {short: false, archetype: S.build.archetype}), t) + '<div class="pc-row" style="margin-top:14px"><button class="pc-btn plum" data-act="themeadd" data-v="' + id + '">' + (inR ? 'Remove from reading' : '+ Add to reading') + '</button><button class="pc-btn ghost" data-act="popclose">Close</button></div></div>';
     root.appendChild(d);
   }
   function captureBuildInputs(){
     if (!S.build) return;
     var n = $('#pc-b-note'), t = $('#pc-b-title');
-    if (n) S.build.note = n.value; if (t) S.build.title = t.value;
+    if (n) S.build.note = n.value;
+    if (t && t.value !== autoTitle()) S.build.title = t.value;
   }
   function saveReport(){
     captureBuildInputs();
     var b = S.build; S.busy = true; render();
-    S.store.saveReport({id: b.id, client_id: S.cur.id, title: b.title || 'Reading', sections: orderedIds(), themes: b.themes, short_version: b.short, archetype_mode: b.archetype, closing_note: b.note})
-      .then(function(r){ b.id = r.id; S.busy = false; return S.store.reports(S.cur.id); }).then(function(list){ S.reports = list; render(); toast('Report saved to ' + S.cur.name + '\'s file'); }).catch(fail);
+    var plan = planOf(b); plan.house = b.house;
+    S.store.saveReport({id: b.id, client_id: S.cur.id, title: autoTitle(), sections: bundleIds(), themes: b.themes, short_version: b.length !== 'full', archetype_mode: b.archetype, closing_note: b.note, plan: plan})
+      .then(function(r){ b.id = r.id; S.busy = false; return S.store.reports(S.cur.id); }).then(function(list){ S.reports = list; loadHome(); render(); toast('Saved to ' + S.cur.name + '\'s file'); }).catch(fail);
   }
   function openReport(id){
     var r = null; for (var i = 0; i < S.reports.length; i++) if (S.reports[i].id === id) r = S.reports[i];
     if (!r) return;
-    S.build = {id: r.id, ids: (r.sections || []).slice(0), themes: (r.themes || []).slice(0), short: !!r.short_version, archetype: !!r.archetype_mode, house: S.cur.house || 'E', title: r.title, note: r.closing_note || ''};
+    var p = r.plan || {reports: [], length: r.short_version ? 'concise' : 'full', archetype: !!r.archetype_mode, welcome: (r.sections || []).indexOf('intro') >= 0, closing: (r.sections || []).indexOf('closing') >= 0, extra: (r.sections || []).filter(function(x){ return x !== 'intro' && x !== 'closing'; }), removed: []};
+    S.build = {id: r.id, reports: p.reports || [], length: p.length || 'concise', archetype: !!p.archetype, welcome: p.welcome !== false, closing: p.closing !== false, extra: p.extra || [], removed: p.removed || [], themes: (r.themes || []).slice(0), house: p.house || S.cur.house || 'E', title: r.title, note: r.closing_note || ''};
     S.step = 'build'; render();
   }
-
-  /* ---------- send ---------- */
   function sendView(){
-    var b = S.build, c = S.cur;
-    var mail = 'mailto:' + encodeURIComponent(c.email || '') + '?subject=' + encodeURIComponent('Your reading: ' + b.title) + '&body=' + encodeURIComponent('Hi ' + c.name.split(' ')[0] + ',\n\nYour reading is attached as a PDF. Take your time with it, and reach out with any questions.\n\n' + S.profile.display_name);
-    return '<div class="pc-screen">' + msgHTML() + '<div class="pc-card" style="max-width:760px;margin:0 auto"><h2>Send ' + esc(c.name.split(' ')[0]) + '\'s report</h2>' +
-      '<p><b>' + esc(b.title) + '</b><br><span class="pc-muted">' + orderedIds().length + ' sections · ' + (b.short ? 'client short version' : 'full version') + (b.archetype ? ' · archetype version' : '') + '</span></p>' +
-      '<div class="pc-card" style="background:var(--teal-l);border-color:var(--teal)"><h3>Step 1 · Make the PDF</h3><p>Click the button, then choose <b>Save as PDF</b> as the printer.</p><button class="pc-btn big" data-act="pdf">⬇ Download PDF</button></div>' +
-      '<div class="pc-card" style="background:var(--terra-l);border-color:var(--terra)"><h3>Step 2 · Email it</h3><p>Opens a ready-to-go email' + (c.email ? ' to ' + esc(c.email) : '') + '. Attach the PDF you just saved.</p><a class="pc-btn alt big" href="' + mail + '">✉ Open email</a></div>' +
-      '<div class="pc-row" style="margin-top:16px"><button class="pc-btn ghost" data-act="go" data-v="build">← Back to editing</button>' + (b.id ? '' : '<button class="pc-btn" data-act="saverep">💾 Save report to client file</button>') + '</div></div></div>';
+    var b = S.build, c = S.cur, r = pcRenderBundle(planOf(b), ctxFor());
+    var mail = 'mailto:' + encodeURIComponent(c.email || '') + '?subject=' + encodeURIComponent('Your reading: ' + autoTitle()) + '&body=' + encodeURIComponent('Hi ' + c.name.split(' ')[0] + ',\n\nYour reading is attached as a PDF. Take your time with it, and reach out with any questions.\n\n' + S.profile.display_name + (S.profile.business_name ? '\n' + S.profile.business_name : ''));
+    return '<div class="pc-screen">' + msgHTML() + '<div class="pc-two"><div class="pc-card">' + coverHTML({title: autoTitle(), client: c.name, line: birthLine(c, true), toc: r.toc}, true) + '</div><div>' +
+      '<div class="pc-card"><h3>' + esc(autoTitle()) + '</h3><p class="pc-muted">' + r.count + ' part' + (r.count === 1 ? '' : 's') + ' \u00B7 ' + PC_LENGTHS[b.length] + (b.archetype ? ' \u00B7 archetype voice' : '') + '</p></div>' +
+      '<div class="pc-card pc-stepcard"><span class="pc-stepnum">1</span><div><h3>Download the PDF</h3><p>Click below, then choose <b>Save as PDF</b> as the printer.</p><button class="pc-btn big" data-act="pdf">\u2B07 Download PDF</button></div></div>' +
+      '<div class="pc-card pc-stepcard"><span class="pc-stepnum alt">2</span><div><h3>Email your client</h3><p>Opens a ready-to-send email' + (c.email ? ' to ' + esc(c.email) : '') + '. Attach the PDF you saved.</p><a class="pc-btn alt big" href="' + mail + '">\u2709 Open email</a></div></div>' +
+      '<div class="pc-row"><button class="pc-btn ghost" data-act="go" data-v="build">\u2190 Back to the library</button>' + (b.id ? '' : '<button class="pc-btn" data-act="saverep">\uD83D\uDCBE Save to client file</button>') + '</div></div></div></div>';
   }
   function printPDF(){
-    var ctx = ctxFor(), c = S.cur, b = S.build;
-    var css = '';
-    var styleEl = document.getElementById('pc-style'); if (styleEl) css = styleEl.textContent;
-    var place = c.placeLabel && c.placeLabel !== 'Custom place' ? ' in ' + esc(c.placeLabel) : '';
-    var cover = '<div class="pc-cover"><div class="pc-cover-k">' + esc(S.profile.business_name || 'Adventures In Astrology') + '</div><h1>' + esc(b.title) + '</h1><p class="pc-cover-who">Prepared for <b>' + esc(c.name) + '</b></p><p>' + birthLine(c, true) + place + '</p>' +
-      (!c.timeKnown ? '<p><span class="pc-flag pc-flag-time">Made without a birth time</span></p>' : '') + '<p class="pc-cover-by">Prepared by ' + esc(S.profile.display_name) + ' · ' + new Date().toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}) + '</p></div>';
-    var doc = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + esc(b.title) + '</title><style>' + css +
-      '@page{size:letter;margin:.7in .75in}body{margin:0;font-family:Lora,Georgia,serif;color:#2b2135;font-size:11.5pt;line-height:1.55;--cream:#fffaf1;--ink:#2b2135;--soft:#6b5f73;--line:#eadfcc;--teal:#0f9e94;--teal-l:#d9f4f1;--terra:#e0663f;--terra-l:#fde6dc;--gold:#e8a923;--gold-l:#fff1cc;--plum:#7b4fc9;--plum-l:#efe6ff;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
-      'h1,h2,h3,h4{font-family:Fraunces,Georgia,serif}.pc-cover{min-height:8.6in;display:flex;flex-direction:column;justify-content:center;text-align:center;border:3px solid var(--line);border-radius:22px;padding:40px;background:var(--cream);page-break-after:always}.pc-cover h1{font-size:30pt;margin:.3em 0}.pc-cover-k{font-family:"Space Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-size:9pt}.pc-cover-who{font-size:14pt}.pc-cover-by{margin-top:40px;color:var(--soft)}' +
-      '.pc-r-sec{page-break-inside:auto;border-bottom:2px dashed var(--line);padding:4px 0 14px;margin-bottom:14px}.pc-r-sec header{page-break-after:avoid}.pc-r-field,.pc-r-arch,.pc-tcard,.pc-center,.pc-cast-card,.pc-big3,.pc-r-asp{page-break-inside:avoid}.pc-foot{text-align:center;color:var(--soft);font-size:9pt;margin-top:24px}' +
-      '</style></head><body class="pcr">' + cover + pcRenderReport(ctx, orderedIds()) + '<p class="pc-foot">This reading is for reflection and personal growth. It is not medical, legal or financial advice.</p></body></html>';
+    var c = S.cur, b = S.build, r = pcRenderBundle(planOf(b), ctxFor(), true), col = S.profile.brand_color || '#7b4fc9';
+    var css = ''; var styleEl = document.getElementById('pc-style'); if (styleEl) css = styleEl.textContent;
+    var place = c.placeLabel && c.placeLabel !== 'Custom place' ? ' \u00B7 ' + esc(c.placeLabel) : '';
+    var cover = coverHTML({title: autoTitle(), client: c.name, line: birthLine(c, true) + place, toc: r.toc, flag: !c.timeKnown ? '<p><span class="pc-flag pc-flag-time">Made without a birth time</span></p>' : ''}, false);
+    var doc = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + esc(autoTitle()) + ' - ' + esc(c.name) + '</title><style>' + css +
+      '@page{size:letter;margin:.7in .75in}body{margin:0;font-family:Lora,Georgia,serif;color:#2b2135;font-size:11.5pt;line-height:1.55;--brand:' + col + ';--cream:#fffaf1;--ink:#2b2135;--soft:#6b5f73;--line:#eadfcc;--teal:#0f9e94;--teal-l:#d9f4f1;--terra:#e0663f;--terra-l:#fde6dc;--gold:#e8a923;--gold-l:#fff1cc;--plum:#7b4fc9;--plum-l:#efe6ff;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+      'h1,h2,h3,h4{font-family:Fraunces,Georgia,serif}.pc-cover{min-height:8.6in;page-break-after:always}.pc-chapter{page-break-before:always}.pc-chapter:first-of-type{page-break-before:auto}' +
+      '.pc-r-sec{page-break-inside:auto}.pc-r-sec header{page-break-after:avoid}.pc-r-field,.pc-r-arch,.pc-tcard,.pc-center,.pc-cast-card,.pc-big3,.pc-r-asp,.pc-num,.pc-path{page-break-inside:avoid}.pc-foot{text-align:center;color:var(--soft);font-size:9pt;margin-top:24px}' +
+      '</style></head><body class="pcr">' + cover + r.html + '<p class="pc-foot">Prepared by ' + esc(S.profile.display_name) + (S.profile.business_name ? ', ' + esc(S.profile.business_name) : '') + '. This reading is for reflection and personal growth. It is not medical, legal or financial advice.</p></body></html>';
     if (CFG.demo) window.__pcLastDoc = doc;
     var f = document.createElement('iframe');
     f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0';
@@ -1550,6 +1848,7 @@ PcDemoStore.prototype = {
     var el = e.target.closest ? e.target.closest('[data-act]') : null;
     if (!el || !root.contains(el)) { if (e.target.classList && e.target.classList.contains('pc-pop')) e.target.parentNode.removeChild(e.target); return; }
     var a = el.getAttribute('data-act'), v = el.getAttribute('data-v');
+    if (a === 'welcome' || a === 'closingtog') { captureBuildInputs(); if (a === 'welcome') S.build.welcome = el.checked; else S.build.closing = el.checked; render(); return; }
     if (a === 'house' || a === 'toggleunk') { if (a === 'toggleunk') $('#pc-c-timewrap').className = el.checked ? 'pc-hide' : ''; return; }
     if (el.tagName === 'BUTTON' || el.tagName === 'A') { if (a !== 'pdf' && el.tagName === 'BUTTON') e.preventDefault(); }
     switch (a) {
@@ -1561,12 +1860,14 @@ PcDemoStore.prototype = {
       case 'go':
         captureBuildInputs(); S.msg = null;
         if (v === 'build' && S.cur && !S.build) newBuild();
-        S.step = v; render(); break;
+        S.step = v;
+        if (v === 'home' || v === 'reports') { loadHome().then(render); } else render();
+        break;
       case 'savesettings':
-        S.profile.display_name = $('#pc-s-name').value.trim() || S.profile.display_name; S.profile.business_name = $('#pc-s-biz').value.trim(); S.profile.closing_note = $('#pc-s-note').value;
+        S.profile.display_name = $('#pc-s-name').value.trim() || S.profile.display_name; S.profile.business_name = $('#pc-s-biz').value.trim(); S.profile.tagline = $('#pc-s-tag').value.trim(); S.profile.closing_note = $('#pc-s-note').value;
         S.store.saveProfile(S.profile).then(function(){ S.msg = {ok: 'Settings saved.'}; render(); }).catch(fail); break;
-      case 'pick': S._animFor = null; openClient(v); break;
-      case 'newclient': S.editing = {house: 'E'}; S.formErr = null; S.cur = null; render(); var n = $('#pc-c-name'); if (n) n.focus(); break;
+      case 'pick': S._animFor = null; S.ctab = 'overview'; openClient(v); break;
+      case 'newclient': S.step = 'clients'; S.editing = {house: 'E'}; S.formErr = null; S.cur = null; render(); var n = $('#pc-c-name'); if (n) n.focus(); break;
       case 'editclient': S.editing = JSON.parse(JSON.stringify(S.cur)); S.editing._birthKey = [S.cur.y, S.cur.mo, S.cur.d, S.cur.h, S.cur.mi, S.cur.lat, S.cur.lon].join('|'); S.formErr = null; render(); break;
       case 'cancelclient': S.editing = null; S.formErr = null; render(); break;
       case 'saveclient': saveClient(); break;
@@ -1577,7 +1878,7 @@ PcDemoStore.prototype = {
         var g = S._geo[+v]; S.editing.lat = g.latitude; S.editing.lon = g.longitude; S.editing.tz = g.timezone; S.editing.placeLabel = [g.name, g.admin1, g.country].filter(Boolean).join(', '); S.editing._manual = false;
         $('#pc-c-place').value = S.editing.placeLabel; $('#pc-c-sugg').innerHTML = ''; $('#pc-c-picked').innerHTML = pickedHTML(S.editing);
         $('#pc-c-lat').value = g.latitude; $('#pc-c-lon').value = g.longitude; $('#pc-c-tz').value = g.timezone; break;
-      case 'newsess': S.sessEdit = {client_id: S.cur.id, session_date: today(), topic: '', notes: ''}; render(); break;
+      case 'newsess': S.ctab = 'sessions'; S.sessEdit = {client_id: S.cur.id, session_date: today(), topic: '', notes: ''}; render(); break;
       case 'editsess': for (var i = 0; i < S.sessions.length; i++) if (S.sessions[i].id === v) S.sessEdit = JSON.parse(JSON.stringify(S.sessions[i])); render(); break;
       case 'cancelsess': S.sessEdit = null; render(); break;
       case 'savesess':
@@ -1587,19 +1888,30 @@ PcDemoStore.prototype = {
         if (S.confirmDel !== v) { S.confirmDel = v; el.textContent = 'Tap again to delete'; return; }
         S.store.deleteSession(v).then(function(){ S.sessEdit = null; S.confirmDel = null; return S.store.sessions(S.cur.id); }).then(function(s){ S.sessions = s; render(); }).catch(fail); break;
       case 'openrep': openReport(v); break;
+      case 'ctab': S.ctab = v; S.sessEdit = null; render(); break;
+      case 'opensessclient': S.step = 'clients'; S.ctab = 'sessions'; openClient(v); break;
+      case 'openany': var cid = el.getAttribute('data-c'); S.step = 'clients'; openClient(cid, function(){ openReport(v); }); break;
       case 'delrep':
         if (S.confirmDel !== v) { S.confirmDel = v; el.textContent = 'Tap again to delete'; return; }
         S.store.deleteReport(v).then(function(){ S.confirmDel = null; return S.store.reports(S.cur.id); }).then(function(r){ S.reports = r; render(); }).catch(fail); break;
       case 'sec':
-        captureBuildInputs(); var ids = S.build.ids, k = ids.indexOf(v); if (k >= 0) ids.splice(k, 1); else ids.push(v); render(); break;
-      case 'preset':
-        captureBuildInputs(); S.build.ids = v === 'none' ? [] : v === 'everything' ? allIds() : PC_PRESETS[v].slice(0); render(); break;
-      case 'short': captureBuildInputs(); S.build.short = v === '1'; render(); break;
+        captureBuildInputs(); var bi = bundleIds(), bx = S.build;
+        if (bi.indexOf(v) >= 0) { var ei = bx.extra.indexOf(v); if (ei >= 0) bx.extra.splice(ei, 1); else bx.removed.push(v); }
+        else { var ri = bx.removed.indexOf(v); if (ri >= 0) bx.removed.splice(ri, 1); else bx.extra.push(v); }
+        render(); break;
+      case 'report':
+        captureBuildInputs(); var rl = S.build.reports, rk = rl.indexOf(v); if (rk >= 0) rl.splice(rk, 1); else rl.push(v);
+        if (rl.length > 1 && S.build.length === 'full' && !S._lenTouched) S.build.length = 'concise';
+        render(); break;
+      case 'length': captureBuildInputs(); S.build.length = v; S._lenTouched = true; render(); break;
+      case 'welcome': captureBuildInputs(); S.build.welcome = el.checked; render(); return;
+      case 'closingtog': captureBuildInputs(); S.build.closing = el.checked; render(); return;
+      case 'brandcolor': S.profile.brand_color = v; S.profile.display_name = $('#pc-s-name').value.trim() || S.profile.display_name; S.profile.business_name = $('#pc-s-biz').value.trim(); S.profile.tagline = $('#pc-s-tag').value.trim(); S.profile.closing_note = $('#pc-s-note').value; render(); break;
       case 'arch': captureBuildInputs(); S.build.archetype = v === '1'; render(); break;
       case 'theme': captureBuildInputs(); themePopup(v); break;
       case 'themeadd':
         var th = S.build.themes, ti = th.indexOf(v); if (ti >= 0) th.splice(ti, 1); else th.push(v);
-        if (th.length && S.build.ids.indexOf('themes') < 0) S.build.ids.push('themes');
+        if (th.length && bundleIds().indexOf('themes') < 0) { var rmi = S.build.removed.indexOf('themes'); if (rmi >= 0) S.build.removed.splice(rmi, 1); else S.build.extra.push('themes'); }
         render(); toast(ti >= 0 ? 'Theme removed' : 'Theme added to the report'); break;
       case 'popclose': var p = root.querySelector('.pc-pop'); if (p) p.parentNode.removeChild(p); break;
       case 'saverep': saveReport(); break;
@@ -1611,6 +1923,7 @@ PcDemoStore.prototype = {
   });
   root.addEventListener('input', function(e){
     if (e.target.id === 'pc-c-place' && S.editing) { S.editing.lat = null; S.editing.placeLabel = ''; $('#pc-c-picked').innerHTML = ''; geoSearch(e.target.value); }
+    if (e.target.id === 'pc-rsearch') { S.rsearch = e.target.value; var rp = e.target.selectionStart; render(); var rs = $('#pc-rsearch'); if (rs) { rs.focus(); rs.setSelectionRange(rp, rp); } }
     if (e.target.id === 'pc-search') { S.search = e.target.value; var pos = e.target.selectionStart; render(); var s = $('#pc-search'); if (s) { s.focus(); s.setSelectionRange(pos, pos); } }
   });
   root.addEventListener('change', function(e){
