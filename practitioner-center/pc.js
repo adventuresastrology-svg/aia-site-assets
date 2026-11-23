@@ -1715,8 +1715,8 @@ PcDemoStore.prototype = {
   function settingsView(){
     var p = S.profile, sw = '';
     for (var i = 0; i < PC_BRAND_COLORS.length; i++) sw += '<button class="pc-swatch' + ((p.brand_color || '#7b4fc9') === PC_BRAND_COLORS[i] ? ' is-on' : '') + '" style="background:' + PC_BRAND_COLORS[i] + '" data-act="brandcolor" data-v="' + PC_BRAND_COLORS[i] + '" title="' + PC_BRAND_COLORS[i] + '"></button>';
-    var libHTML = p.is_admin ? (libCount() ? '<div class="pc-card"><h3>Interpretation library</h3><p>Loaded: <b>' + libCount() + ' sections</b>. To update it, choose a newer <span class="pc-mono">practitioner-center-library.json</span> file.</p><input type="file" accept=".json,application/json" id="pc-lib-file" class="pc-in"></div>' :
-      '<div class="pc-card pc-libfirst"><span class="pc-stepnum alt">1</span><div><h2>One-time setup: load your interpretation library</h2><p>The reports are written from your library, so it needs to be loaded once before anything else opens.</p><ol><li>Click <b>Choose File</b> below.</li><li>Open your <b>Desktop</b> and pick <span class="pc-mono">practitioner-center-library.json</span>.</li><li>Wait for the green "Library loaded" message. Then every tab in the menu opens.</li></ol><input type="file" accept=".json,application/json" id="pc-lib-file" class="pc-in"></div></div>') : '';
+    var libHTML = p.is_admin ? (libCount() ? '<div class="pc-card"><h3>Interpretation library</h3><p>Loaded: <b>' + libCount() + ' sections</b>' + (S.aiaLib.aspectsMercury ? ', including the Additions' : '') + '. To update it or add the Additions, choose the file here (.json or .js, such as <span class="pc-mono">BCR_DATA_Additions.js</span>). Uploads add or replace only the sections inside the file.</p><input type="file" accept=".json,.js,application/json,text/javascript" id="pc-lib-file" class="pc-in"></div>' :
+      '<div class="pc-card pc-libfirst"><span class="pc-stepnum alt">1</span><div><h2>One-time setup: load your interpretation library</h2><p>The reports are written from your library, so it needs to be loaded once before anything else opens.</p><ol><li>Click <b>Choose File</b> below.</li><li>Open your <b>Desktop</b> and pick <span class="pc-mono">practitioner-center-library.json</span> (your Full Tier library). You can add <span class="pc-mono">BCR_DATA_Additions.js</span> the same way afterward.</li><li>Wait for the green "Library loaded" message. Then every tab in the menu opens.</li></ol><input type="file" accept=".json,.js,application/json,text/javascript" id="pc-lib-file" class="pc-in"></div></div>') : '';
     return '<div class="pc-screen">' + msgHTML() + (libCount() ? '' : libHTML) + (libCount() ? librarySourceCard() : '') + '<div class="pc-two"><div class="pc-card"><h3>Your branding</h3><p class="pc-muted">This appears on every PDF you send.</p>' +
       '<label class="pc-f"><span>Your name (shown as "Prepared by")</span><input class="pc-in" id="pc-s-name" value="' + esc(p.display_name) + '"></label>' +
       '<label class="pc-f"><span>Business name</span><input class="pc-in" id="pc-s-biz" value="' + esc(p.business_name || '') + '" placeholder="e.g. Moonlit Path Astrology"></label>' +
@@ -1774,17 +1774,31 @@ PcDemoStore.prototype = {
     }
     return h + '</div>';
   }
+  function parseLibraryText(text, allowJs){
+    var t = String(text).replace(/^\uFEFF/, '');
+    try { var j = JSON.parse(t); return j && j.BCR_DATA ? j.BCR_DATA : j; } catch (e) {}
+    if (!allowJs) throw new Error('Please choose a .json library file.');
+    var fakeWin = {BCR_DATA: {}};
+    /* admin-only: reads Risa's own library file (window.BCR_DATA = ...) into a sandbox object */
+    (new Function('window', 'var BCR_DATA = window.BCR_DATA;\n' + t + '\n;return window;'))(fakeWin);
+    return fakeWin.BCR_DATA;
+  }
   function loadLibraryFile(file){
     var rd = new FileReader();
     rd.onload = function(){
-      var lib; try { lib = JSON.parse(rd.result); } catch (e) { return fail('That file is not a library file (could not read it).'); }
-      if (!lib.sun || !lib.moon || !lib.houses) return fail('That file does not look like the interpretation library.');
+      var lib; try { lib = parseLibraryText(rd.result, true); } catch (e) { return fail('That file could not be read as a library (' + e.message + ').'); }
+      var v = pcValidateLibrary(lib || {});
+      if (!v.present && !v.extras.length) return fail('That file does not contain any library sections (sun, moon, rising, aspectsMercury and so on).');
+      var adds = v.present < PC_LIB_SECTIONS.length;
       S.msg = {ok: 'Uploading your library\u2026'}; render();
-      S.store.saveLibrary(lib).then(function(n){ S.aiaLib = lib; applyLibrary(); S.msg = {ok: 'Library loaded: ' + n + ' sections. You are ready to go!'}; render(); }).catch(fail);
+      S.store.saveLibrary(lib).then(function(n){
+        var merged = {}, k; for (k in S.aiaLib) if (S.aiaLib.hasOwnProperty(k)) merged[k] = S.aiaLib[k]; for (k in lib) if (lib.hasOwnProperty(k)) merged[k] = lib[k];
+        S.aiaLib = merged; applyLibrary();
+        S.msg = {ok: (adds ? 'Added or updated ' + n + ' sections' : 'Library loaded: ' + n + ' sections') + '. Library now holds ' + libCount() + ' sections. You are ready to go!'}; render();
+      }).catch(fail);
     };
     rd.readAsText(file);
   }
-
   function loadHome(){
     return Promise.all([S.store.allReports(), S.store.recentSessions()]).then(function(r){ S.homeReports = r[0]; S.homeSessions = r[1]; }).catch(function(){ S.homeReports = []; S.homeSessions = []; });
   }
