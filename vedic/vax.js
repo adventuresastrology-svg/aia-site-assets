@@ -828,7 +828,7 @@ window.VAXCORE = VAXCORE;
       var L = LESSONS[i], t = '';
       for (var j = 0; j < L.tasks.length; j++) {
         var key = L.id + '-' + j;
-        t += '<li><label for="vas-' + key + '">' + L.tasks[j] + '</label><textarea id="vas-' + key + '" data-ws="' + key + '" rows="2" style="width:100%;box-sizing:border-box;font-family:\'EB Garamond\',Georgia,serif;font-size:16px;border:1px solid #B9A88F;border-radius:6px;padding:6px;margin-top:4px;background:#FFFDF8;color:#1C1814">' + (ws[key] ? String(ws[key]).replace(/&/g, '&amp;').replace(/</g, '&lt;') : '') + '</textarea></li>';
+        t += '<li><label for="vas-' + key + '" style="text-transform:none;letter-spacing:0;font-family:\'EB Garamond\',Georgia,serif;font-size:16.5px;font-weight:400;color:#1C1814">' + L.tasks[j] + '</label><textarea id="vas-' + key + '" data-ws="' + key + '" rows="2" style="width:100%;box-sizing:border-box;font-family:\'EB Garamond\',Georgia,serif;font-size:16px;border:1px solid #B9A88F;border-radius:6px;padding:6px;margin-top:4px;background:#FFFDF8;color:#1C1814">' + (ws[key] ? String(ws[key]).replace(/&/g, '&amp;').replace(/</g, '&lt;') : '') + '</textarea></li>';
       }
       var go = ''; for (var g = 0; g < L.go.length; g++) { go += '<button type="button" class="vx-ghost" data-go="' + L.go[g][0] + '">' + L.go[g][1] + '</button>'; }
       h += '<details class="vac-card vas-lesson" id="vas-' + L.id + '"' + (i === 0 ? ' open' : '') + '><summary style="cursor:pointer;font-family:Cinzel,Georgia,serif;font-size:18px;color:#6E1F1F">' + (i + 1) + ' | ' + L.title + '</summary>' + L.body +
