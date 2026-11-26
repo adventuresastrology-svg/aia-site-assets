@@ -616,7 +616,7 @@ window.VAXCORE = VAXCORE;
       '<div class="vac-card"><h3>Times of the day</h3><div class="vx-grid">' +
       stat('Rahu Kalam', range(r.rahu), 'Traditionally avoided for starting new ventures.') +
       stat('Yamaganda', range(r.yama), 'Traditionally avoided for important beginnings.') +
-      stat('Gulika Kalam', range(r.gulika), 'Actions begun now are said to repeat, so it is avoided for anything you would not want to happen again.') +
+      stat('Gulika Kalam', range(r.gulika), 'Whatever begins now is said to repeat, so it is avoided for losses and favored for nothing that should not recur.') +
       stat('Abhijit Muhurta', range(r.abhijit), 'The eighth of fifteen daytime muhurtas, around local noon, traditionally favored for beginnings (often set aside on Wednesdays).') +
       '</div><p class="vx-note">Rahu Kalam, Yamaganda and Gulika Kalam each take one eighth of the time from sunrise to sunset, in an order set by the weekday. Lahiri ayanamsa; the tithi and karana use the Sun and Moon\'s distance, which is the same in either zodiac.</p></div>';
   }
@@ -683,7 +683,20 @@ window.VAXCORE = VAXCORE;
     var h = (location.hash || '').replace('#', '');
     if (h === 'panchanga' || h === 'sade-sati' || h === 'divisional-charts' || h === 'compatibility') {
       var map = { panchanga: 'vxpanch', 'sade-sati': 'vxsade', 'divisional-charts': 'vxvarga', compatibility: 'vxmatch' };
-      var tb = ROOT.querySelector('[data-tab="' + map[h] + '"]'); if (tb) { tb.click(); }
+      var want = map[h], n = 0;
+      var go = function () {
+        n++;
+        var tb = ROOT.querySelector('[data-tab="' + want + '"]');
+        if (tb && !/vac-on/.test(tb.className)) { tb.click(); }
+        if (tb && !/vac-on/.test(tb.className)) {
+          var bs = ROOT.querySelectorAll('.vac-tab'), ps = ROOT.querySelectorAll('.vac-panel'), i;
+          for (i = 0; i < bs.length; i++) { bs[i].className = 'vac-tab' + (bs[i].getAttribute('data-tab') === want ? ' vac-on' : ''); }
+          for (i = 0; i < ps.length; i++) { ps[i].className = 'vac-panel' + (ps[i].getAttribute('data-panel') === want ? ' vac-on' : ''); }
+          if (want !== 'vxpanch') { moveBirthTo(want); } else if (P_PLACE && !$('vx-panch-out').innerHTML) { renderPanch(); }
+        }
+        if (n < 6) { setTimeout(go, 500); }
+      };
+      setTimeout(go, 300);
     }
     return true;
   }
