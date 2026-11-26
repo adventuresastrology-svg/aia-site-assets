@@ -1,4 +1,4 @@
-/* Moon Phase Station widget | Adventures In Astrology | aia-moon 1.0
+/* Today's Moon widget | Lunar Station | Adventures In Astrology | aia-moon 1.0
    Paste on any website:
      <div class="aia-moon"></div>
      <script src="https://cdn.jsdelivr.net/gh/adventuresastrology-svg/aia-site-assets@main/moon/aia-moon.js" async></script>
@@ -8,7 +8,7 @@
 (function () {
   if (window.__aiaMoonLoaded) { return; }
   window.__aiaMoonLoaded = true;
-  var HOME = 'https://www.adventuresinastrology.com/moon-phase-station';
+  var HOME = 'https://www.adventuresinastrology.com/astrology-the-moon';
   var SIGNS = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
   var MOONSIGN = ['action and fresh starts', 'comfort and steadiness', 'conversation and curiosity', 'home and feelings', 'warmth and self-expression', 'routines and practical care', 'relationships and balance', 'depth and honesty', 'adventure and big ideas', 'goals and responsibility', 'friends and new ideas', 'rest and imagination'];
   var PHASES = [
@@ -112,14 +112,14 @@
     function draw() {
       var now = new Date().getTime(), s = state(now), ph = PHASES[s.phase], sg = Math.floor(s.moon / 30);
       var big = size ? 110 : 84;
-      sr.innerHTML = '<style>' + CSS + '</style><div class="c' + theme + size + '"><p class="k">Moon Phase Station</p><div class="body"><div>' +
+      sr.innerHTML = '<style>' + CSS + '</style><div class="c' + theme + size + '"><p class="k">Today\'s Moon</p><div class="body"><div>' +
         '<div class="top">' + moonSvg(s.el, big) + '<div><p class="ph">' + ph[0] + '</p><p class="sg">Moon in ' + SIGNS[sg] + ' ' + fmtDeg(s.moon).split(' ')[0] + '</p><p class="pc">' + Math.round(s.lit * 100) + '% illuminated</p></div></div>' +
         '<p class="mean">' + ph[1] + ' The Moon in ' + SIGNS[sg] + ' puts the focus on ' + MOONSIGN[sg] + '.</p></div>' +
         '<div class="rows">' +
         (s.ing ? '<div><span>Enters ' + SIGNS[s.ing.sign] + '</span><b>' + fmtWhen(s.ing.t) + '</b></div>' : '') +
         (s.nm ? '<div><span>Next New Moon</span><b>' + fmtWhen(s.nm) + '</b></div>' : '') +
         (s.fm ? '<div><span>Next Full Moon</span><b>' + fmtWhen(s.fm) + '</b></div>' : '') +
-        '</div></div><p class="ft"><a href="' + HOME + '" target="_blank" rel="noopener">Moon Phase Station | Adventures In Astrology</a></p></div>';
+        '</div></div><p class="ft"><a href="' + HOME + '" target="_blank" rel="noopener">Lunar Station | Adventures In Astrology</a></p></div>';
     }
     draw();
     setInterval(draw, 10 * 60000);
