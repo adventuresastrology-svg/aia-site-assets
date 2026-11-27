@@ -86,7 +86,7 @@
       '<div class="vx-stat"><b>Yogas and Divisional Charts</b><small>Classical yogas, the sixteen vargas and your Atmakaraka.</small><button type="button" class="vx-ghost" data-go="vxvarga" style="margin-top:8px">Open the vargas</button></div>' +
       '<div class="vx-stat"><b>Compatibility</b><small>The 36-point Ashtakoota match and Mangal dosha for two charts.</small><button type="button" class="vx-ghost" data-go="vxmatch" style="margin-top:8px">Compare two charts</button></div>' +
       '<div class="vx-stat"><b>Today\'s Panchanga</b><small>Tithi, nakshatra, yoga, karana and Rahu Kalam for any city.</small><button type="button" class="vx-ghost" data-go="vxpanch" style="margin-top:8px">See today</button></div>' +
-      '<div class="vx-stat"><b>Report</b><small>A free written summary of your Vedic chart.</small><button type="button" class="vx-ghost" data-go="report" style="margin-top:8px">Write my report</button></div>' +
+      '<div class="vx-stat"><b>Report</b><small>A free written summary of your Vedic chart, or the full personalized PDF report.</small><button type="button" class="vx-ghost" data-go="report" style="margin-top:8px">Write my report</button> <a class="vx-ghost" href="/store/p/adventures-in-vedic-astrology" style="margin-top:8px;display:inline-block;text-decoration:none">Full report | $23</a></div>' +
       '</div></div>' +
       '<div class="vac-card"><h3>Learn Jyotish step by step</h3><p>The six-level Learning Pathway, the Quick Check quizzes, an Ashtakavarga calculator and the Advanced Vedic Study lessons with worksheets are in the Adventures Member Zone. Joining is free.</p>' +
       '<div class="vx-row"><a class="vac-btn" href="' + MEMBER_URL + '" style="text-decoration:none">Open Advanced Vedic Study</a></div></div>';
