@@ -960,8 +960,9 @@ window.CDS_GLYPHS={"Aries":"M-4.2 43.8V-15.2Q-4.2 -25.3 -9.1 -30.9Q-14 -36.4 -22
   function status(msg, kind) { var s = $('cds-status'); if (s) { s.textContent = msg || ''; s.className = 'cds-status' + (kind ? ' cds-' + kind : ''); } }
 
   /* ---------- settings memory (design only, never birth data) ---------- */
+  var BRAND_KEYS = ['brand', 'brandTag', 'brandColor'];
   function saveSettings() {
-    try { var o = {}, i; for (i = 0; i < DESIGN_KEYS.length; i++) { o[DESIGN_KEYS[i]] = S[DESIGN_KEYS[i]]; } root.localStorage.setItem('cds-settings-v1', JSON.stringify(o)); } catch (e) { }
+    try { var o = {}, i; for (i = 0; i < DESIGN_KEYS.length; i++) { if (HOST.hosted && BRAND_KEYS.indexOf(DESIGN_KEYS[i]) >= 0) { continue; } o[DESIGN_KEYS[i]] = S[DESIGN_KEYS[i]]; } root.localStorage.setItem('cds-settings-v1', JSON.stringify(o)); } catch (e) { }
   }
   function loadSettings() {
     try { var o = JSON.parse(root.localStorage.getItem('cds-settings-v1') || 'null'), k; if (o) { for (k in o) { if (o.hasOwnProperty(k) && DESIGN_KEYS.indexOf(k) >= 0) { S[k] = o[k]; } } } } catch (e) { }
@@ -1717,12 +1718,18 @@ window.CDS_GLYPHS={"Aries":"M-4.2 43.8V-15.2Q-4.2 -25.3 -9.1 -30.9Q-14 -36.4 -22
     if (typeof b === 'string') { HOST.brand = b; } else { HOST.brand = b.name || ''; HOST.brandTag = b.tagline || ''; HOST.brandColor = b.color || ''; }
     HOST.current = o.current || null;
     if (o.charts) { HOST.charts = o.charts; }
+    if (o.practitionerId) {
+      HOST.hosted = true;
+      var key = 'cds-logo-v1:' + o.practitionerId;
+      if (LOGO_KEY !== key) { LOGO_KEY = key; try { logoData = root.localStorage.getItem(LOGO_KEY) || ''; } catch (e) { logoData = ''; } }
+    }
     if ($('cds-root') && $('cds-root').getAttribute('data-ready')) { fillClientPickers(); }
   }
   function clearAll() {
     stopPlay();
     places.p1 = null; places.p2 = null; places.ev = null;
     lastModel = null; lastSVG = ''; lastGrid = '';
+    S.brand = ''; S.brandTag = ''; S.brandColor = ''; logoData = ''; LOGO_KEY = 'cds-logo-v1'; HOST.hosted = false;
     HOST.clients = []; HOST.current = null; HOST.charts = null; HOST.p1Id = null; HOST.p2Id = null; fileCache = {};
   }
 
@@ -1966,9 +1973,12 @@ window.CDS_GLYPHS={"Aries":"M-4.2 43.8V-15.2Q-4.2 -25.3 -9.1 -30.9Q-14 -36.4 -22
     if (!E || !R || !root.Astronomy) { return false; }
     $('cds-root').setAttribute('data-ready', '1');
     loadSettings();
-    if (!S.brand && HOST.brand) { S.brand = HOST.brand.slice(0, 60); }
-    if (!S.brandTag && HOST.brandTag) { S.brandTag = HOST.brandTag.slice(0, 80); }
-    if (!S.brandColor && HOST.brandColor) { S.brandColor = HOST.brandColor; }
+    if (HOST.hosted) { S.brand = (HOST.brand || '').slice(0, 60); S.brandTag = (HOST.brandTag || '').slice(0, 80); S.brandColor = HOST.brandColor || ''; }
+    else {
+      if (!S.brand && HOST.brand) { S.brand = HOST.brand.slice(0, 60); }
+      if (!S.brandTag && HOST.brandTag) { S.brandTag = HOST.brandTag.slice(0, 80); }
+      if (!S.brandColor && HOST.brandColor) { S.brandColor = HOST.brandColor; }
+    }
     fillSelects(); wire(); syncTypeUI(); syncDesignUI(); fillClientPickers();
     setPlace('p1', null); setPlace('p2', null); setPlace('ev', null);
     if (HOST.current) { loadClient('p1', HOST.current); var m = buildModel(); draw(m.error ? skyNowModel() : m); }

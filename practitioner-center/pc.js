@@ -1933,7 +1933,7 @@ PcDemoStore.prototype = {
       loadCds(function(){
         if (S.cdsMounted || !S.cdsNode) return;
         S.cdsMounted = true;
-        window.CDS_MOUNT(S.cdsNode, {clients: S.clients, brand: {name: (S.profile.business_name || S.profile.display_name || ''), tagline: S.profile.tagline || '', color: S.profile.brand_color || ''}, current: S.cur, charts: cdsChartsHost()});
+        window.CDS_MOUNT(S.cdsNode, {clients: S.clients, brand: {name: (S.profile.business_name || S.profile.display_name || ''), tagline: S.profile.tagline || '', color: S.profile.brand_color || ''}, current: S.cur, charts: cdsChartsHost(), practitionerId: S.user && S.user.id});
       });
     } else if (window.CDS_STUDIO) window.CDS_STUDIO.configure({clients: S.clients, charts: cdsChartsHost(), brand: {name: (S.profile.business_name || S.profile.display_name || ''), tagline: S.profile.tagline || '', color: S.profile.brand_color || ''}});
   }
