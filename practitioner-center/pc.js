@@ -1838,6 +1838,7 @@ PcDemoStore.prototype = {
   function poke(){ if (!S.user) return; clearTimeout(idleTimer); idleTimer = setTimeout(function(){ lock('Locked after ' + IDLE_MIN + ' minutes of no activity, to keep client files private.'); }, IDLE_MIN * 60000); }
   ['click','keydown','scroll','touchstart'].forEach(function(ev){ root.addEventListener(ev, poke, true); });
   function lock(reason){
+    unmountCharts();
     S.store.signOut();
     S.user = null; S.profile = null; S.lib = null; S.clients = []; S.cur = null; S.sessions = []; S.reports = []; S.build = null; S.editing = null; S.step = 'home';
     S.msg = reason ? {ok: reason} : null; render();
@@ -1882,11 +1883,47 @@ PcDemoStore.prototype = {
     else if (S.step === 'settings') body = settingsView();
     else if (S.step === 'home') body = homeView();
     else if (S.step === 'reports') body = reportsView();
+    else if (S.step === 'charts') body = '<div class="pc-screen pc-cds-screen"><div id="pc-cds-slot"></div></div>';
     else if (S.step === 'build' && S.cur) body = buildView();
     else if (S.step === 'send' && S.cur && S.build) body = sendView();
     else body = clientsView();
     root.innerHTML = on ? '<div class="pc-shell">' + sideBar() + '<div class="pc-main">' + headBar() + body + '</div></div>' : headBar() + body;
     if (S.step === 'build' && S.build && S.user) renderPreview();
+    if (S.step === 'charts' && on) mountCharts();
+  }
+
+  /* ---------- Chart Design Station (loads cds.js beside this file, only after sign-in and approval) ---------- */
+  function cdsSrc(){
+    if (CFG.cdsSrc) return CFG.cdsSrc;
+    var ss = document.getElementsByTagName('script');
+    for (var i = 0; i < ss.length; i++) { var u = ss[i].src || ''; if (u.indexOf('/practitioner-center/pc.js') > 0) return u.replace(/pc\.js(\?.*)?$/, 'cds.js'); }
+    return 'https://cdn.jsdelivr.net/gh/adventuresastrology-svg/aia-site-assets@main/practitioner-center/cds.js';
+  }
+  function loadCds(cb){
+    if (window.CDS_MOUNT) return cb();
+    var s = document.getElementById('pc-cds-js');
+    if (!s) { s = document.createElement('script'); s.id = 'pc-cds-js'; s.src = cdsSrc(); s.async = true; document.head.appendChild(s); }
+    var tries = 0;
+    (function wait(){ if (window.CDS_MOUNT) return cb(); if (++tries > 200) { var sl = document.getElementById('pc-cds-slot'); if (sl) sl.innerHTML = '<div class="pc-err">The chart designer could not load. Please check your connection and try again.</div>'; return; } setTimeout(wait, 100); })();
+  }
+  function mountCharts(){
+    var slot = document.getElementById('pc-cds-slot');
+    if (!slot) return;
+    if (!S.cdsNode) { S.cdsNode = document.createElement('div'); S.cdsNode.id = 'cds-mount'; S.cdsNode.setAttribute('data-host', 'pc'); S.cdsMounted = false; }
+    slot.appendChild(S.cdsNode);
+    if (!S.cdsMounted) {
+      S.cdsNode.innerHTML = '<div class="pc-card pc-empty"><p>Opening the chart designer\u2026</p></div>';
+      loadCds(function(){
+        if (S.cdsMounted || !S.cdsNode) return;
+        S.cdsMounted = true;
+        window.CDS_MOUNT(S.cdsNode, {clients: S.clients, brand: (S.profile.business_name || S.profile.display_name || ''), current: S.cur});
+      });
+    } else if (window.CDS_STUDIO) window.CDS_STUDIO.configure({clients: S.clients, brand: (S.profile.business_name || S.profile.display_name || '')});
+  }
+  function unmountCharts(){
+    if (window.CDS_STUDIO) window.CDS_STUDIO.clear();
+    if (S.cdsNode && S.cdsNode.parentNode) S.cdsNode.parentNode.removeChild(S.cdsNode);
+    S.cdsNode = null; S.cdsMounted = false;
   }
   function msgHTML(){ if (!S.msg) return ''; return S.msg.err ? '<div class="pc-err">' + esc(S.msg.err) + '</div>' : '<div class="pc-ok">' + esc(S.msg.ok) + '</div>'; }
   function brandName(){ return (S.profile && S.profile.business_name) || 'Practitioner Center'; }
@@ -1896,13 +1933,13 @@ PcDemoStore.prototype = {
   }
   function sideBar(){
     return '<aside class="pc-side"><div class="pc-side-brand"><div class="pc-logo" style="background:' + esc(S.profile.brand_color || '#7b4fc9') + '">' + esc(brandName().charAt(0)) + '</div><div><b>' + esc(brandName()) + '</b><small>' + esc(S.profile.display_name || '') + '</small></div></div>' +
-      '<nav>' + navBtn('home', '\u2302', 'Dashboard') + navBtn('clients', '\u263A', 'Clients') +
+      '<nav>' + navBtn('home', '\u2302', 'Dashboard') + navBtn('clients', '\u263A', 'Clients') + navBtn('charts', '\u2609', 'Chart Design') +
       navBtn('build', '\u2726', 'Report Library' + (S.cur ? '<em>' + esc(S.cur.name.split(' ')[0]) + '</em>' : ''), !S.cur) +
       navBtn('reports', '\u2630', 'Saved Reports') + navBtn('settings', '\u2699', 'Settings & Branding') + '</nav>' +
       '<div class="pc-side-foot"><button class="pc-nav" data-act="lock"><span>\u2716</span>Lock &amp; sign out</button><small>Powered by Adventures In Astrology</small></div></aside>';
   }
   function headBar(){
-    var title = {home: 'Dashboard', clients: S.cur && !S.editing ? S.cur.name : 'Clients', build: 'Report Library', send: 'Deliver Report', reports: 'Saved Reports', settings: 'Settings & Branding'}[S.step] || 'Practitioner Center';
+    var title = {home: 'Dashboard', clients: S.cur && !S.editing ? S.cur.name : 'Clients', build: 'Report Library', send: 'Deliver Report', reports: 'Saved Reports', settings: 'Settings & Branding', charts: 'Chart Design'}[S.step] || 'Practitioner Center';
     if (!(S.user && S.profile && S.profile.approved && S.lib)) title = 'Practitioner Center';
     return '<div class="pc-top"><div class="pc-brand"><small>' + (CFG.demo ? 'Demo mode \u00B7 ' : '') + 'Professional Reading Suite</small>' + esc(title) + '</div><div class="pc-tools"><button class="pc-ic" data-act="font" data-v="-1" title="Smaller text">A\u2212</button><button class="pc-ic" data-act="font" data-v="1" title="Bigger text">A+</button></div></div>';
   }
