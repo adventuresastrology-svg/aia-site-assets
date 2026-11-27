@@ -1787,7 +1787,14 @@ PcSupaStore.prototype = {
   clearOwnLibrary: function(){ var s = this; return s.sb.from('pc_own_library').delete().eq('practitioner_id', s.user.id).then(function(r){ if (r.error) throw r.error; }); },
   allReports: function(){ return this.sb.from('pc_reports').select('id,client_id,title,sections,short_version,archetype_mode,plan,updated_at').order('updated_at', {ascending: false}).limit(30).then(function(r){ if (r.error) throw r.error; return r.data; }); },
   recentSessions: function(){ return this.sb.from('pc_sessions').select('id,client_id,session_date,topic').order('session_date', {ascending: false}).limit(8).then(function(r){ if (r.error) throw r.error; return r.data; }); },
-  deleteReport: function(id){ return this.sb.from('pc_reports').delete().eq('id', id).then(function(r){ if (r.error) throw r.error; }); }
+  deleteReport: function(id){ return this.sb.from('pc_reports').delete().eq('id', id).then(function(r){ if (r.error) throw r.error; }); },
+  charts: function(cid){ return this.sb.from('pc_charts').select('id,client_id,title,chart_type,settings,note,updated_at').eq('client_id', cid).order('updated_at', {ascending: false}).then(function(r){ if (r.error) throw r.error; return r.data; }); },
+  saveChart: function(x){
+    var row = {client_id: x.client_id, title: x.title, chart_type: x.chart_type, settings: x.settings, note: x.note || '', updated_at: new Date().toISOString()};
+    var q = x.id ? this.sb.from('pc_charts').update(row).eq('id', x.id) : this.sb.from('pc_charts').insert(row);
+    return q.select().single().then(function(r){ if (r.error) throw r.error; return r.data; });
+  },
+  deleteChart: function(id){ return this.sb.from('pc_charts').delete().eq('id', id).then(function(r){ if (r.error) throw r.error; }); }
 };
 
 /* Demo store: nothing leaves the page and nothing is kept after closing it. */
@@ -1818,7 +1825,10 @@ PcDemoStore.prototype = {
   clearOwnLibrary: function(){ this.own = {}; return pcP_(); },
   allReports: function(){ return pcP_(this.db.reports.slice(0).sort(function(a, b){ return a.updated_at < b.updated_at ? 1 : -1; })); },
   recentSessions: function(){ return pcP_(this.db.sessions.slice(0).sort(function(a, b){ return a.session_date < b.session_date ? 1 : -1; }).slice(0, 8)); },
-  deleteReport: function(id){ this.db.reports = this.db.reports.filter(function(s){ return s.id !== id; }); return pcP_(); }
+  deleteReport: function(id){ this.db.reports = this.db.reports.filter(function(s){ return s.id !== id; }); return pcP_(); },
+  charts: function(cid){ return pcP_((this.db.charts || []).filter(function(x){ return x.client_id === cid; }).sort(function(a, b){ return a.updated_at < b.updated_at ? 1 : -1; })); },
+  saveChart: function(x){ var c = JSON.parse(JSON.stringify(x)); c.updated_at = new Date().toISOString(); this.db.charts = this.db.charts || []; if (!c.id) { c.id = pcId(); this.db.charts.unshift(c); } else { for (var i = 0; i < this.db.charts.length; i++) if (this.db.charts[i].id === c.id) this.db.charts[i] = c; } return pcP_(c); },
+  deleteChart: function(id){ this.db.charts = (this.db.charts || []).filter(function(x){ return x.id !== id; }); return pcP_(); }
 };
 
 /* ===== pc app (ES5) ===== */
@@ -1906,6 +1916,13 @@ PcDemoStore.prototype = {
     var tries = 0;
     (function wait(){ if (window.CDS_MOUNT) return cb(); if (++tries > 200) { var sl = document.getElementById('pc-cds-slot'); if (sl) sl.innerHTML = '<div class="pc-err">The chart designer could not load. Please check your connection and try again.</div>'; return; } setTimeout(wait, 100); })();
   }
+  function cdsChartsHost(){
+    return {
+      list: function(cid){ return S.store.charts(cid); },
+      save: function(rec){ return S.store.saveChart(rec); },
+      remove: function(id){ return S.store.deleteChart(id); }
+    };
+  }
   function mountCharts(){
     var slot = document.getElementById('pc-cds-slot');
     if (!slot) return;
@@ -1916,9 +1933,9 @@ PcDemoStore.prototype = {
       loadCds(function(){
         if (S.cdsMounted || !S.cdsNode) return;
         S.cdsMounted = true;
-        window.CDS_MOUNT(S.cdsNode, {clients: S.clients, brand: {name: (S.profile.business_name || S.profile.display_name || ''), tagline: S.profile.tagline || '', color: S.profile.brand_color || ''}, current: S.cur});
+        window.CDS_MOUNT(S.cdsNode, {clients: S.clients, brand: {name: (S.profile.business_name || S.profile.display_name || ''), tagline: S.profile.tagline || '', color: S.profile.brand_color || ''}, current: S.cur, charts: cdsChartsHost()});
       });
-    } else if (window.CDS_STUDIO) window.CDS_STUDIO.configure({clients: S.clients, brand: {name: (S.profile.business_name || S.profile.display_name || ''), tagline: S.profile.tagline || '', color: S.profile.brand_color || ''}});
+    } else if (window.CDS_STUDIO) window.CDS_STUDIO.configure({clients: S.clients, charts: cdsChartsHost(), brand: {name: (S.profile.business_name || S.profile.display_name || ''), tagline: S.profile.tagline || '', color: S.profile.brand_color || ''}});
   }
   function unmountCharts(){
     if (window.CDS_STUDIO) window.CDS_STUDIO.clear();
